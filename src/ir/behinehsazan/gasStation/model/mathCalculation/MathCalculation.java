@@ -34,4 +34,12 @@ public class MathCalculation {
         return sum;
 
     }
+    public static Double listSum(Double[] sumlist) {
+        Double sum = 0.0;
+        for (Double d : sumlist) {
+            sum += d;
+        }
+        return sum;
+
+    }
 }

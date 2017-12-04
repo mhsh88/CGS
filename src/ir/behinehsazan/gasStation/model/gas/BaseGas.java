@@ -3,6 +3,7 @@ package ir.behinehsazan.gasStation.model.gas;
 import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
 import org.apache.commons.math.util.MathUtils;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import org.apache.commons.math.util.MathUtils;
@@ -335,7 +336,7 @@ public class BaseGas {
         Q = MathCalculation.dotProduct(Q_i, getComponent());
         double temp = 0;
         for(int i=0; i<20; i++){
-            for(int j=1; j<21; j++){
+            for(int j=i+1; j<21; j++){
                 temp += Xi[i] * Xi[j] * (G_star_ij[i][j] - 1) * (G_i[i] + G_i[j]);
 
             }
@@ -343,26 +344,30 @@ public class BaseGas {
 
         G = MathCalculation.dotProduct(G_i, getComponent()) + temp;
 
-
-        temp = 0;
+        ArrayList<Double> __V = new ArrayList<Double>();
+        __V.clear();
+        ArrayList<Double> _V = new ArrayList<Double>();
+        _V.clear();
         for(int i=0; i<20; i++){
-            for(int j=1; j<21; j++){
-                temp += Xi[i] * Xi[j] * (Math.pow(V_ij[i][j],  5) - 1) * Math.pow((E_i[i] * E_i[j]) , (5 / 2));
+            for(int j=i+1; j<21; j++){
+                __V.add(Xi[i] * Xi[j] * (Math.pow(V_ij[i][j] , 5) - 1) * (Math.pow((E_i[i] * E_i[j]) , (5.0/ 2))));
+
+            }
+            _V.add(MathCalculation.listSum(__V));
+            __V.clear();
+        }
+        V = Math.pow(Math.pow(MathCalculation.dotProduct(MathCalculation.powProduct(E_i , 5.0 / 2), getComponent()),2) + 2 * MathCalculation.listSum(_V), 1.0/5);
+
+
+         temp = 0;
+        for(int i=0; i<20; i++){
+            for(int j=i+1; j<21; j++){
+                temp += Xi[i] * Xi[j] * (Math.pow(K_ij[i][j],  5) - 1) * Math.pow((K_i[i] * K_i[j]) , (5.0 / 2));
 
             }
         }
-        V = Math.pow(Math.pow(MathCalculation.dotProduct(MathCalculation.powProduct(E_i , 5 / 2), getComponent()),2) + 2 * temp, 1/5);
 
-
-        temp = 0;
-        for(int i=0; i<20; i++){
-            for(int j=1; j<21; j++){
-                temp += Xi[i] * Xi[j] * (Math.pow(K_ij[i][j],  5) - 1) * Math.pow((K_i[i] * K_i[j]) , (5 / 2));
-
-            }
-        }
-
-        K = Math.pow(Math.pow(MathCalculation.dotProduct(MathCalculation.powProduct(K_i , 5 / 2), getComponent()),2) + 2 * temp, 1/5);
+        K = Math.pow(Math.pow(MathCalculation.dotProduct(MathCalculation.powProduct(K_i , 5.0 / 2), getComponent()),2) + 2 * temp, 1.0/5);
 
 
         ArrayList<Double> B_star_n = new ArrayList<Double>();
@@ -383,7 +388,7 @@ public class BaseGas {
                             Math.pow(Math.pow(F_i[i] * F_i[j], 0.5) + 1 - f_n[n] , f_n[n]) * Math.pow(
                             S_i[i] * S_i[j] + 1 - s_n[n],  s_n[n]) *
                             Math.pow(W_i[i] * W_i[j] + 1 - w_n[n] , w_n[n]);
-                    b_star_n = a_n[n] * Xi[i] * Xi[j] * B_star_nij * Math.pow(e_ij , u_n[n]) * Math.pow((K_i[i] * K_i[j]) , (3 / 2));
+                    b_star_n = a_n[n] * Xi[i] * Xi[j] * B_star_nij * Math.pow(e_ij , u_n[n]) * Math.pow((K_i[i] * K_i[j]) , (3.0 / 2));
                     B_star_n2.add(b_star_n);
                 }
                 B_star_n1.add(MathCalculation.listSum(B_star_n2));
@@ -396,22 +401,24 @@ public class BaseGas {
 
         ArrayList<Double> p11 = new ArrayList<Double>();
         p11.clear();
-        Double C_n;
+        Double _C_n;
         for(int n = 12; n<18; n++) {
-            C_n = a_n[n] * Math.pow((G + 1 - g_n[n]) , g_n[n]) * Math.pow((Math.pow(Q , 2) + 1 - q_n[n]) , q_n[n]) * Math.pow(
+            _C_n = a_n[n] * Math.pow((G + 1 - g_n[n]) , g_n[n]) * Math.pow((Math.pow(Q , 2) + 1 - q_n[n]) , q_n[n]) * Math.pow(
                     (F + 1 - f_n[n]) , f_n[n]) * Math.pow(V , u_n[n]);
-            p11.add(C_n * Math.pow(tau , u_n[n]));
+            p11.add(_C_n * Math.pow(tau , u_n[n]));
         }
         Double p1 = MathCalculation.listSum(p11);
 
-        C_n = 0.0;
+        ArrayList<Double> C_n = new ArrayList<Double>();
+        C_n.clear();
 
         for(int m=12; m<58; m++) {
-            C_n += a_n[m] * Math.pow((G + 1 - g_n[m]), g_n[m]) * Math.pow(Math.pow(Q, 2) + 1 - q_n[m], q_n[m]) * Math.pow(
-                    (F + 1 - f_n[m]), f_n[m]) * Math.pow(V, u_n[m]);
+            C_n.add(a_n[m] * Math.pow((G + 1 - g_n[m]), g_n[m]) * Math.pow(Math.pow(Q, 2) + 1 - q_n[m], q_n[m]) * Math.pow(
+                    (F + 1 - f_n[m]), f_n[m]) * Math.pow(V, u_n[m]));
         }
 
         System.out.println(C_n);
+
 
 
 
