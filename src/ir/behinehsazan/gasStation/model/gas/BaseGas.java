@@ -1,12 +1,12 @@
 package ir.behinehsazan.gasStation.model.gas;
 
+import ir.behinehsazan.gasStation.model.mathCalculation.FindRoot;
 import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
-import jdk.nashorn.internal.runtime.ListAdapter;
 
 import java.util.ArrayList;
 
 
-public class BaseGas {
+public class BaseGas implements FindRoot {
 
     protected Double D;
     protected Double rou ;
@@ -22,6 +22,7 @@ public class BaseGas {
     protected Double P;
     protected Double[] component;
     protected Double[] Xi;
+
     protected Double M;
     protected Double F;
     protected Double Q;
@@ -339,13 +340,16 @@ public class BaseGas {
         this.Xi = component;
     }
 
-    protected Double[] getComponent() {
+    public Double[] getComponent() {
         return this.Xi;
     }
 
 
+    public void calculate(double P, double T){
+        calculate(P, T, getComponent());
 
-    protected void calculate(double P, double T, Double[] component) {
+    }
+    public void calculate(double P, double T, Double[] component) {
         this.P = P;
         setComponent(component);
         tau = 1 / T;
@@ -436,7 +440,7 @@ public class BaseGas {
                     (F + 1 - f_n[m]), f_n[m]) * Math.pow(V, u_n[m]));
         }
 
-        double soldelta  = rootFind();
+        double soldelta = rootFind();
 
         Z = (P * tau * Math.pow(K , 3)) / (soldelta * R * 1);
 
@@ -590,30 +594,9 @@ public class BaseGas {
 
     }
 
-    protected double rootFind(){
-        double x = 0, del = 1e-12, a = -10000    , b = 10000;
-        double dx = b-a;
-        int k = 0;
-        while (Math.abs(dx) > del) {
-            x = (a+b)/2;
-            if ((deltaFunction(a)*deltaFunction(x)) < 0) {
-                b  = x;
-                dx = b-a;
-            }
-            else {
-                a = x;
-                dx = b-a;
-            }
-            k++;
-        }
-        System.out.println("Iteration number: " + k);
-        System.out.println("Root obtained: " + x);
-        System.out.println("Estimated error: " + dx);
-        return x;
 
-    }
-
-    protected double deltaFunction(double delta){
+    @Override
+    public double function(double delta){
 
     ArrayList<Double> _C_n = new ArrayList<Double>();
     _C_n.clear();

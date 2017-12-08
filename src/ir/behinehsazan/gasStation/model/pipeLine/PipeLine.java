@@ -4,7 +4,7 @@ import ir.behinehsazan.gasStation.model.base.Base;
 
 public class PipeLine implements Base{
     @Override
-    public void calculate(Object... objects) {
+    public void calculate() {
 
     }
 }

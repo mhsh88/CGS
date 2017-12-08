@@ -40,6 +40,22 @@ public class MathCalculation {
         return product;
 
     }
+    public static Double[] multiply(Double[] vector1, double[] vector2) {
+        Double[] product = new Double[vector1.length];
+        for (int i = 0; i < vector1.length; i++) {
+            product[i] = vector1[i] * vector2[i];
+        }
+
+        return product;
+    }
+    public static Double[] matrixDevide(Double[] vector1, double division) {
+        Double[] product = new Double[vector1.length];
+        for (int i = 0; i < vector1.length; i++) {
+            product[i] = vector1[i] / division;
+        }
+
+        return product;
+    }
 
 
     public static Double[] powProduct(double[] vector, double power) {
@@ -67,4 +83,5 @@ public class MathCalculation {
         return sum;
 
     }
+
 }

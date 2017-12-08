@@ -1,0 +1,32 @@
+package ir.behinehsazan.gasStation.model.burner;
+
+import ir.behinehsazan.gasStation.model.gas.BaseGas;
+import ir.behinehsazan.gasStation.model.gas.Gas;
+import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
+
+public class BurnerTest {
+    public static void main(String[] args){
+//        Burner burner = new Burner();
+//        System.out.println(burner.Cp_H2O.value(200));
+//        System.out.println(burner.Cp_Co2.value(200));
+//        System.out.println(burner.Cp_N2.value(200));
+//        System.out.println(burner.Cp_O2.value(200));
+        BaseGas gas = new Gas();
+
+        Double P = 5000.0;
+        Double T = 300.0;
+        Double[] component = {0.057, 0.076, 0.812, 0.043, 0.009, 0.0015, 0.0015, 0., 0., 0.
+                , 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.
+                , 0.};
+        for(int i=0; i<component.length; i++){
+            component[i] = component[i]/ MathCalculation.listSum(component);
+        }
+
+
+        gas.calculate(P, T, component);
+
+        Burner burner = new Burner((Gas) gas, 7, 30, 250);
+        burner.calculate();
+        System.out.println(burner.getEfficiency());
+    }
+}
