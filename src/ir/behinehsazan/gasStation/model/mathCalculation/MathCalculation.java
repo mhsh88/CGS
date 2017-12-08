@@ -16,6 +16,31 @@ public class MathCalculation {
         return product;
 
     }
+    public static Double dotProduct(Double[] a, double[] b) {
+        Double product = 0.0;
+        if (a.length != b.length) {
+            throw new IllegalArgumentException();
+        }
+        for (int i = 0; i < a.length; i++) {
+            product += a[i] * b[i];
+        }
+
+        return product;
+
+    }
+    public static Double dotProduct(double[] a, double[] b) {
+        Double product = 0.0;
+        if (a.length != b.length) {
+            throw new IllegalArgumentException();
+        }
+        for (int i = 0; i < a.length; i++) {
+            product += a[i] * b[i];
+        }
+
+        return product;
+
+    }
+
 
     public static Double[] powProduct(double[] vector, double power) {
         Double[] product = new Double[vector.length];

@@ -1,15 +1,25 @@
 package ir.behinehsazan.gasStation.model.gas;
 
 import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
-import org.apache.commons.math.util.MathUtils;
+import jdk.nashorn.internal.runtime.ListAdapter;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import org.apache.commons.math.util.MathUtils;
 
 public class BaseGas {
 
+    protected Double D;
+    protected Double rou ;
+    protected Double U ;
+    protected Double H ;
+    protected Double S ;
+    protected Double C_v ;
+    protected Double C_p ;
+    protected Double mu ;
+    protected Double kappa ;
+    protected Double w ;
+    protected Double Z;
+    protected Double P;
     protected Double[] component;
     protected Double[] Xi;
     protected Double M;
@@ -20,6 +30,14 @@ public class BaseGas {
     protected Double K;
     protected Double tau;
     protected Double B;
+    protected ArrayList<Double> C_n = new ArrayList<Double>();
+    protected Double p1;
+    public static final Double R = 8.314510;
+    protected static final Double T_theta = 298.15;
+    protected static final Double tau_theta = 1 / T_theta;
+    protected static final Double p_theta = 0.101325 * 1000;
+    protected static final Double rou_theta = p_theta / (R * T_theta);
+    protected Double delta_theta;
 
 
 
@@ -328,6 +346,7 @@ public class BaseGas {
 
 
     protected void calculate(double P, double T, Double[] component) {
+        this.P = P;
         setComponent(component);
         tau = 1 / T;
 
@@ -407,9 +426,9 @@ public class BaseGas {
                     (F + 1 - f_n[n]) , f_n[n]) * Math.pow(V , u_n[n]);
             p11.add(_C_n * Math.pow(tau , u_n[n]));
         }
-        Double p1 = MathCalculation.listSum(p11);
+        p1 = MathCalculation.listSum(p11);
 
-        ArrayList<Double> C_n = new ArrayList<Double>();
+
         C_n.clear();
 
         for(int m=12; m<58; m++) {
@@ -417,7 +436,147 @@ public class BaseGas {
                     (F + 1 - f_n[m]), f_n[m]) * Math.pow(V, u_n[m]));
         }
 
-        System.out.println(C_n);
+        double soldelta  = rootFind();
+
+        Z = (P * tau * Math.pow(K , 3)) / (soldelta * R * 1);
+
+        delta_theta = rou_theta * Math.pow(K, 3);
+
+
+        ArrayList<Double> cop_i_R = new ArrayList<Double>();
+        ArrayList<Double> phi_o_i = new ArrayList<Double>();
+        ArrayList<Double> phi_o_tau_i = new ArrayList<Double>();
+
+        for(int i = 0; i<21; i++) {
+            try {
+                cop_i_R.add(Bo_i[i] + // cop_i_R = cop_i_R / R
+                        Co_i[i] * Math.pow((Do_i[i] * tau / Math.sinh(Do_i[i] * tau)), 2) +
+                        Eo_i[i] * Math.pow((Fo_i[i] * tau / Math.cosh(Fo_i[i] * tau)), 2) +
+                        Go_i[i] * Math.pow((Ho_i[i] * tau / Math.sinh(Ho_i[i] * tau)), 2) +
+                        Io_i[i] * Math.pow((Jo_i[i] * tau / Math.cosh(Jo_i[i] * tau)), 2));
+                if(Double.isNaN(cop_i_R.get(i))){
+                    cop_i_R.set(i,0.0);
+                }
+            }
+
+            catch (Exception e) {
+                cop_i_R.add(0.0);
+            }
+
+            try {
+                phi_o_i.add(Xi[i] * (Ao1_i[i] + Ao2_i[i] * tau + Bo_i[i] * Math.log(tau) +
+                        Co_i[i] * Math.log(Math.sinh(Do_i[i] * tau)) -
+                        Eo_i[i] * Math.log(Math.cosh(Fo_i[i] * tau)) +
+                        Go_i[i] * Math.log(Math.sinh(Ho_i[i] * tau)) -
+                        Io_i[i] * Math.log(Math.cosh(Jo_i[i] * tau)) + Math.log(Xi[i])));
+                if(Double.isNaN(phi_o_i.get(i))) phi_o_i.set(i, 0.0);
+            }
+            catch (Exception e) {
+                phi_o_i.add(0.0);
+            }
+            try {
+                phi_o_tau_i.add(Xi[i] * (Ao2_i[i] + (Bo_i[i] - 1) / tau +
+                        Co_i[i] * Do_i[i] * ((Math.cosh(Do_i[i] * tau)) / Math.sinh(Do_i[i] * tau)) -
+                        Eo_i[i] * Fo_i[i] * ((Math.sinh(Fo_i[i] * tau)) / Math.cosh(Fo_i[i] * tau)) +
+                        Go_i[i] * Ho_i[i] * ((Math.cosh(Ho_i[i] * tau)) / Math.sinh(Ho_i[i] * tau)) -
+                        Io_i[i] * Jo_i[i] * ((Math.sinh(Jo_i[i] * tau)) / Math.cosh(Jo_i[i] * tau))));
+                if(Double.isNaN(phi_o_tau_i.get(i)))
+                phi_o_tau_i.set(i, 0.0);
+            }
+            catch (Exception e) {
+                phi_o_tau_i.add(0.0);
+            }
+        }
+
+//       double[] c = cop_i_R.stream().mapToDouble(D -> D).toArray();
+//       Double[] arr = ListAdapter.adapt(cop_i_R).asLazy().collectDouble(each -> each).toArray();
+//        (Double[]) cop_i_R.stream().mapToDouble(Double::doubleValue).toArray());
+        Double cop_R = MathCalculation.dotProduct(Xi, cop_i_R.stream().mapToDouble(Double::doubleValue).toArray());
+        Double phi_o = MathCalculation.listSum(phi_o_i) + Math.log(soldelta / delta_theta) + Math.log(tau_theta / tau);
+        Double phi_o_tau = MathCalculation.listSum(phi_o_tau_i);
+        Double phi_o_tau_tau = -Math.pow(tau , (-2.0)) * (cop_R - 1);
+
+
+        ArrayList<Double> tauphi_tau_1 =new ArrayList<>() ;
+
+        ArrayList<Double> tau2_phi_tautau_1 = new ArrayList<>();
+        ArrayList<Double> phi_2_1 = new ArrayList<>();
+
+        tauphi_tau_1.clear();
+        tau2_phi_tautau_1.clear();
+        phi_2_1.clear();
+
+        for(int i=0; i<18; i++) {
+            tauphi_tau_1.add(u_n[i] * B_star_n.get(i) * Math.pow(tau , u_n[i]));
+            tau2_phi_tautau_1.add(((Math.pow(u_n[i] , 2) - u_n[i]) * (B_star_n.get(i)) * (Math.pow(tau , u_n[i]))));
+            phi_2_1.add((1 - u_n[i]) * B_star_n.get(i) * Math.pow(tau , u_n[i]));
+        }
+
+
+        ArrayList<Double> phi1 = new ArrayList<>();
+        ArrayList<Double> tauphi_tau_2 = new ArrayList<>();
+        ArrayList<Double> tau2_phi_tautau_2 = new ArrayList<>();
+        ArrayList<Double> delta_phi_delta_1 = new ArrayList<>();
+        ArrayList<Double> phi_1_1 = new ArrayList<>();
+        ArrayList<Double> phi_2_2 = new ArrayList<>();
+        for(int i = 12; i<18; i++) {
+            phi1.add(C_n.get(i - 12) * Math.pow(tau , u_n[i]));
+            tauphi_tau_2.add(u_n[i] * C_n.get(i - 12) * Math.pow(tau , u_n[i]));
+            tau2_phi_tautau_2.add((Math.pow(u_n[i] , 2) - u_n[i]) * C_n.get(i - 12) * Math.pow(tau , u_n[i]));
+            delta_phi_delta_1.add(C_n.get(i - 12) * Math.pow(tau , u_n[i]));
+            phi_1_1.add(C_n.get(i - 12) * Math.pow(tau , u_n[i]));
+            phi_2_2.add((1 - u_n[i]) * C_n.get(i - 12) * Math.pow(tau , u_n[i]));
+        }
+
+
+        ArrayList<Double> phi2 = new ArrayList<>();
+        ArrayList<Double> tauphi_tau_3 = new ArrayList<>();
+        ArrayList<Double> tau2_phi_tautau_3 = new ArrayList<>();
+        ArrayList<Double> delta_phi_delta_2 = new ArrayList<>();
+        ArrayList<Double> phi_1_2 = new ArrayList<>();
+        ArrayList<Double> phi_2_3 = new ArrayList<>();
+        for(int i = 12; i<58; i++) {
+            phi2.add(C_n.get(i-12) * (Math.pow(tau , u_n[i])) * (Math.pow(soldelta , b_n[i])) *Math.exp(-c_n[i] * Math.pow(soldelta , k_n[i])));
+            tauphi_tau_3.add(u_n[i] *C_n.get(i - 12) *
+                    Math.pow(tau , u_n[i]) * (Math.pow(soldelta , b_n[i])) *
+            Math.exp(-c_n[i] * Math.pow(soldelta , k_n[i])));
+            tau2_phi_tautau_3.add((Math.pow(u_n[i] , 2) - u_n[i]) *C_n.get(i - 12) *
+                    (Math.pow(tau , u_n[i])) *(Math.pow(soldelta , b_n[i])) *
+            Math.exp(-c_n[i] * Math.pow(soldelta , k_n[i])));
+            delta_phi_delta_2.add((C_n.get(i - 12) * (Math.pow(tau , u_n[i]))) * Math.pow(soldelta ,b_n[i]) *
+                    (b_n[i] - c_n[i] * k_n[i] * (Math.pow(soldelta , k_n[i]))) *
+            Math.exp(-c_n[i] * (Math.pow(soldelta , k_n[i]))));
+
+            phi_1_2.add(C_n.get(i - 12) * Math.pow(tau , u_n[i]) * Math.pow(soldelta ,b_n[i]) *
+                    (b_n[i] - (1 + k_n[i]) * c_n[i] * k_n[i] * Math.pow(soldelta , k_n[i]) +
+                    Math.pow((b_n[i] - c_n[i] * k_n[i] * Math.pow(soldelta , k_n[i])),2)) *
+            Math.exp(-c_n[i] * (Math.pow(soldelta , k_n[i]))));
+
+            phi_2_3.add((1 - u_n[i]) *C_n.get(i - 12) * Math.pow(tau , u_n[i]) * Math.pow(soldelta ,b_n[i]) *
+                    (b_n[i] - c_n[i] * k_n[i] * Math.pow(soldelta , k_n[i])) *
+            Math.exp(-c_n[i] * (Math.pow(soldelta , k_n[i]))));
+
+        }
+
+        Double phi = phi_o + B * soldelta / Math.pow(K , 3) - soldelta * MathCalculation.listSum(phi1) + MathCalculation.listSum(phi2);
+        Double tau_phi_tau = tau * phi_o_tau + (soldelta / Math.pow(K , 3)) * MathCalculation.listSum(tauphi_tau_1) - soldelta * MathCalculation.listSum(
+                tauphi_tau_2) + MathCalculation.listSum(tauphi_tau_3);
+        Double tau2_phi_tautau = Math.pow(tau , 2) * phi_o_tau_tau + (soldelta / Math.pow(K , 3)) * MathCalculation.listSum(tau2_phi_tautau_1) - soldelta * MathCalculation.listSum(tau2_phi_tautau_2) + MathCalculation.listSum(tau2_phi_tautau_3);
+        Double delta_phi_delta = 1 + B * soldelta / (Math.pow(K , 3)) - soldelta * MathCalculation.listSum(delta_phi_delta_1) + MathCalculation.listSum(delta_phi_delta_2);
+        Double phi_1 = 1 + 2 * B * (soldelta / (Math.pow(K , 3))) - 2 * soldelta * MathCalculation.listSum(phi_1_1) + MathCalculation.listSum(phi_1_2);
+        Double phi_2 = 1 + (soldelta / Math.pow(K , 3)) * MathCalculation.listSum(phi_2_1) - soldelta * MathCalculation.listSum(phi_2_2) + MathCalculation.listSum(phi_2_3);
+
+
+        D = M * soldelta / Math.pow(K , 3);
+        rou = soldelta / Math.pow(K , 3);
+        U = R * T / M * tau_phi_tau;
+        H = R * T / M * (tau_phi_tau + delta_phi_delta);
+        S = (tau_phi_tau - phi) * R / M;
+        C_v = R / M * (-tau2_phi_tautau);
+        C_p = R / M * (-tau2_phi_tautau + Math.pow(phi_2 , 2) / phi_1);
+        mu = (phi_2 / phi_1 - 1) / C_p / M / rou * 1000;
+        kappa = phi_1 / Z * C_p / C_v;
+        w = Math.sqrt(phi_1 * C_p / C_v * R * T / M * 1000);
 
 
 
@@ -426,6 +585,46 @@ public class BaseGas {
 
 
 
+
+
+
+    }
+
+    protected double rootFind(){
+        double x = 0, del = 1e-12, a = -10000    , b = 10000;
+        double dx = b-a;
+        int k = 0;
+        while (Math.abs(dx) > del) {
+            x = (a+b)/2;
+            if ((deltaFunction(a)*deltaFunction(x)) < 0) {
+                b  = x;
+                dx = b-a;
+            }
+            else {
+                a = x;
+                dx = b-a;
+            }
+            k++;
+        }
+        System.out.println("Iteration number: " + k);
+        System.out.println("Root obtained: " + x);
+        System.out.println("Estimated error: " + dx);
+        return x;
+
+    }
+
+    protected double deltaFunction(double delta){
+
+    ArrayList<Double> _C_n = new ArrayList<Double>();
+    _C_n.clear();
+    for(int n = 12; n<58; n++){
+        _C_n.add(C_n.get(n - 12) * Math.pow(tau , u_n[n]) * Math.pow(delta , b_n[n]) * (b_n[n] - c_n[n] * k_n[n] * Math.pow(delta , k_n[n]))
+            * Math.exp(-c_n[n] * Math.pow(delta, k_n[n])));
+
+    }
+        double __C_n = MathCalculation.listSum(_C_n);
+
+            return (delta * R) / (tau * Math.pow(K , 3)) * (1 + B * delta / Math.pow(K, 3) - delta * p1 + __C_n) - P;
     }
 
 
