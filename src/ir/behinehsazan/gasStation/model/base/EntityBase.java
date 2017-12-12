@@ -1,9 +1,31 @@
 package ir.behinehsazan.gasStation.model.base;
 
-public class Consumption {
+public abstract class EntityBase implements Base{
+
+    protected static Double Tenv;
+    protected static Double Vair;
     protected double constumption;
     protected double efficiency;
     protected double debi;
+
+    public static Double getVair() {
+        return Vair;
+    }
+
+    public static void setVair(Double vair) {
+        Vair = vair;
+    }
+
+    public static Double getTenv() {
+        return Tenv;
+    }
+
+    public static void setTenv(Double tenv) {
+        Tenv = tenv;
+    }
+
+
+
 
     public double getDebi() {
         return debi;

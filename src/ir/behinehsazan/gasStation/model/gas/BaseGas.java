@@ -20,6 +20,7 @@ public class BaseGas implements FindRoot {
     protected Double w ;
     protected Double Z;
     protected Double P;
+    protected Double T;
     protected Double[] component;
     protected Double[] Xi;
 
@@ -34,6 +35,35 @@ public class BaseGas implements FindRoot {
     protected ArrayList<Double> C_n = new ArrayList<Double>();
     protected Double p1;
     public static final Double R = 8.314510;
+
+    public Double getZ() {
+        return Z;
+    }
+
+    public Double getP() {
+        return P;
+    }
+
+    public void setP(Double p) {
+        P = p;
+    }
+
+    public Double getT() {
+        return T;
+    }
+
+    public void setT(Double t) {
+        T = t;
+    }
+
+    public static Double getT_theta() {
+        return T_theta;
+    }
+
+    public static Double getP_theta() {
+        return p_theta;
+    }
+
     protected static final Double T_theta = 298.15;
     protected static final Double tau_theta = 1 / T_theta;
     protected static final Double p_theta = 0.101325 * 1000;
@@ -350,9 +380,10 @@ public class BaseGas implements FindRoot {
 
     }
     public void calculate(double P, double T, Double[] component) {
-        this.P = P;
+        setP(P);
+        setT(T);
         setComponent(component);
-        tau = 1 / T;
+        tau = 1 / getT();
 
         M = MathCalculation.dotProduct(M_i, getComponent());
         F = MathCalculation.dotProduct(F_i, getComponent());

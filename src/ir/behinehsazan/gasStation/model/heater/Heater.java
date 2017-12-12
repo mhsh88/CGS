@@ -1,10 +1,9 @@
 package ir.behinehsazan.gasStation.model.heater;
 
-import ir.behinehsazan.gasStation.model.base.Base;
-import ir.behinehsazan.gasStation.model.base.Consumption;
+import ir.behinehsazan.gasStation.model.base.GasConsumer;
 import ir.behinehsazan.gasStation.model.burner.Burner;
 
-public class Heater extends Consumption implements Base{
+public class Heater extends GasConsumer{
     private Burner[] burners = new Burner[3];
 
 
