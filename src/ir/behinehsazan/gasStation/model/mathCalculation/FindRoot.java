@@ -2,7 +2,7 @@ package ir.behinehsazan.gasStation.model.mathCalculation;
 
 public interface FindRoot {
     default double rootFind(){
-        double x = 0, del = 1e-12, a = -10000    , b = 10000;
+        double x = 0, del = 1e-10, a = -100000    , b = 100000;
         double dx = b-a;
         int k = 0;
         while (Math.abs(dx) > del) {

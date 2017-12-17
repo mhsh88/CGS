@@ -69,6 +69,7 @@ public class BaseBurner extends EntityBase {
     }
 
     public BaseBurner(Gas gas, double oxygen,  double tamb, double tstack) {
+        super();
         this.gas = gas;
         this.oxygen = oxygen;
         this.Tstack = tstack;

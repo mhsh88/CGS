@@ -11,4 +11,9 @@ public class Gas extends BaseGas {
     }
 
     public Double getH(){return H;}
+
+    public double getC_p() {
+        return C_p;
+    }
+
 }

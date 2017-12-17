@@ -84,4 +84,8 @@ public class MathCalculation {
 
     }
 
+    public static double logN(double x, double base){
+        return (Math.log(x) / Math.log(base));
+    }
+
 }
