@@ -7,6 +7,8 @@ import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.interpolation.SplineInterpolator;
 import org.apache.commons.math3.analysis.interpolation.UnivariateInterpolator;
+import org.apache.commons.math3.analysis.solvers.BrentSolver;
+import org.apache.commons.math3.analysis.solvers.UnivariateSolver;
 
 public class BasePipe extends GasConsumer implements FindRoot {
     private double length;
@@ -17,6 +19,10 @@ public class BasePipe extends GasConsumer implements FindRoot {
     private double insulationFactor;
     private double R;
     private boolean Inverse = false;
+
+    private double pmean;
+    private double tmean;
+
 
     public BasePipe(){
     }
@@ -122,6 +128,22 @@ public class BasePipe extends GasConsumer implements FindRoot {
         return this.Inverse;
     }
 
+    public double getPmean() {
+        return pmean;
+    }
+
+    public void setPmean(double pmean) {
+        this.pmean = pmean;
+    }
+
+    public double getTmean() {
+        return tmean;
+    }
+
+    public void setTmean(double tmean) {
+        this.tmean = tmean;
+    }
+
     @Override
     public void calculate() {
 
@@ -138,9 +160,9 @@ public class BasePipe extends GasConsumer implements FindRoot {
         double hair;
         while (Math.abs((t1 - t2) / t2) > Math.pow(10, -5)) {
             if(isInverse())
-                g.calculate(g.getP(), (t1 + t2) / 2);
+                g.calculate(getPout(), (t1 + t2) / 2);
             else
-                g.calculate(g.getP(), (t1 + t2) / 2);
+                g.calculate(getPin(), (t1 + t2) / 2);
             double mdot = getQdot() * g.getD();
             t1 = t2;
             double rou = g.getD() * 0.001;
@@ -165,8 +187,17 @@ public class BasePipe extends GasConsumer implements FindRoot {
 
             double k_steel = 52;  //# thermal conductivity of steel is 45 W/m.K
 
-            double friction = rootFind();
-            friction = Math.abs(friction);
+
+            UnivariateFunction function = new MyFunction();
+            final double relativeAccuracy = 1.0e-12;
+            final double absoluteAccuracy = 1.0e-8;
+            final int maxOrder = 5;
+            UnivariateSolver nonBracketing = new BrentSolver(relativeAccuracy, absoluteAccuracy);
+            double baseRoot = nonBracketing.solve(100, function, -1000000.0, 1000000.0);
+
+
+//            double friction = rootFind();
+            double friction = Math.abs(baseRoot);
             double deltaP = friction * g.getD() * (Math.pow(V , 2) / (2 * getInterDiameter())) * getLength();
             if(isInverse())
                 setPin(getPout() - deltaP);
@@ -237,6 +268,17 @@ public class BasePipe extends GasConsumer implements FindRoot {
 
         return 1 / Math.sqrt(f) + 2 * MathCalculation.logN(0.01 / (0.4 * 3.7) + 2.57 / (R * Math.sqrt(f)),2);
 
+
+    }
+
+    class MyFunction implements UnivariateFunction {
+        public double value(double x) {
+            double y = function(x);
+// if (somethingBadHappens) {
+// throw new LocalException(x);
+// }
+            return y;
+        }
 
     }
 }

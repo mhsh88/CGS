@@ -4,7 +4,7 @@ import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
 
 public class BaseGasTest {
     public static void main(String[] args) {
-        BaseGas gas = new BaseGas();
+        BaseGas gas = new Gas();
 
         Double P = 5000.0;
         Double T = 300.0;

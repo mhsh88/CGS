@@ -18,7 +18,13 @@ public abstract class GasConsumer extends EntityBase {
     }
 
     public double getPin() {
-        return Pin;
+        double P;
+        if(Math.abs(Pin - 0.001) < 0.01){
+            P  = Pout;}
+        else{
+            P =  Pin;}
+
+            return P;
     }
 
     public void setPin(double pin) {
@@ -34,7 +40,13 @@ public abstract class GasConsumer extends EntityBase {
     }
 
     public double getTin() {
-        return Tin;
+        double T;
+        if(Math.abs(Tin - 0.001) < 0.01){
+            T  = Tout;}
+        else{
+            T =  Tin;}
+
+        return T;
     }
 
     public void setTin(double tin) {

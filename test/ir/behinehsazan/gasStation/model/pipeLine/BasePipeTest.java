@@ -23,11 +23,13 @@ public class BasePipeTest {
         gas.calculate(P, T, component);
 
         BasePipe pipe = new BasePipe();
-        pipe.setTenv(30 + 273.15);
+        pipe.setTenv(10 + 273.15);
         pipe.setVair(10.0);
 
-        pipe.setTout(273.15 + 20);
-        pipe.setPout(7000.0);
+//        pipe.setTout(273.15 + 20);
+//        pipe.setPout(7000.0);
+        pipe.setTin(273.15 + 20);
+        pipe.setPin(7000.0);
         pipe.setGas(gas);
         pipe.setOuterDiameter(.4);
         pipe.setInterDiameter(0.38);
@@ -35,10 +37,10 @@ public class BasePipeTest {
         pipe.setLength(20);
         pipe.setInsulationThickness(.05);
         pipe.setInsulationFactor(100);
-        pipe.setInverse(true);
+        pipe.setInverse(false);
         pipe.calculate();
 
-
+        System.out.println(pipe.getTin());
         System.out.println(pipe.getTout());
 
 

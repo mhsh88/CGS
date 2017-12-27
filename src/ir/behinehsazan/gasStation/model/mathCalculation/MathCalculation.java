@@ -1,5 +1,8 @@
 package ir.behinehsazan.gasStation.model.mathCalculation;
 
+import org.apache.commons.math3.analysis.differentiation.UnivariateDifferentiableFunction;
+import org.apache.commons.math3.analysis.solvers.NewtonRaphsonSolver;
+
 import java.util.List;
 
 public class MathCalculation {
@@ -86,6 +89,15 @@ public class MathCalculation {
 
     public static double logN(double x, double base){
         return (Math.log(x) / Math.log(base));
+    }
+
+    public static double solving(UnivariateDifferentiableFunction f){
+        double result;
+
+        NewtonRaphsonSolver solver = new NewtonRaphsonSolver();
+        result = solver.solve(100, f, -10000, 10000);
+
+        return result;
     }
 
 }
