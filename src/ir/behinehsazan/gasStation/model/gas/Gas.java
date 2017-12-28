@@ -16,4 +16,13 @@ public class Gas extends BaseGas {
         return C_p;
     }
 
+    public Double getMu() {
+        return mu;
+    }
+
+    public void setMu(Double mu) {
+        this.mu = mu;
+    }
+
+
 }

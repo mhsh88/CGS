@@ -18,7 +18,7 @@ public class BasePipe extends GasConsumer implements FindRoot {
     private double insulationThickness;
     private double insulationFactor;
     private double R;
-    private boolean Inverse = false;
+//    private boolean Inverse = false;
 
     private double pmean;
     private double tmean;
@@ -120,13 +120,13 @@ public class BasePipe extends GasConsumer implements FindRoot {
     public void setLength(double length) {
         this.length = length;
     }
-    public void setInverse(boolean bool){
-        this.Inverse = bool;
-
-    }
-    public boolean isInverse(){
-        return this.Inverse;
-    }
+//    public void setInverse(boolean bool){
+//        this.Inverse = bool;
+//
+//    }
+//    public boolean isInverse(){
+//        return this.Inverse;
+//    }
 
     public double getPmean() {
         return pmean;

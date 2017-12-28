@@ -1,8 +1,67 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<GridPane fx:controller="sample.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="center" hgap="10" stylesheets="/sample/sample.css" vgap="10"
+          xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="sample.SampleController">
+
+    <Button onAction="#sayHelloWorld" text="بگو سلام" GridPane.columnIndex="3" fx:id="btn1"/>
+    <Button fx:id="btn" onAction="#changIcon" text="None" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+    <Label fx:id="helloWorld" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+    <Pane prefHeight="468.0" prefWidth="741.0" styleClass="pane">
+        <children>
+            <Button layoutX="14.0" layoutY="76.0" mnemonicParsing="false" text="Before Heater pipeline"
+                    fx:id="beforeHeaterPipeLine" styleClass="gagePipe"/>
+            <Button layoutX="76.0" layoutY="76.0" mnemonicParsing="false" text="Heater" fx:id="heater"
+                    styleClass="heater"/>
+            <Button layoutX="138.0" layoutY="76.0" mnemonicParsing="false" text="After Heater pipeline"
+                    styleClass="gagePipe"/>
+            <Button layoutX="200.0" layoutY="50.0" mnemonicParsing="false" text="Knee up left" styleClass="knee"/>
+            <Button layoutX="200.0" layoutY="76.0" mnemonicParsing="false" text="left 4 way" fx:id="leftFourWay"
+                    styleClass="fourWay"/>
+            <Button layoutX="200.0" layoutY="102.0" mnemonicParsing="false" text="knee down left" styleClass="knee"/>
+
+            <Button layoutX="262.0" layoutY="50.0" mnemonicParsing="false" text="counter 1" styleClass="counter"/>
+            <Button layoutX="262.0" layoutY="76.0" mnemonicParsing="false" text="conunter 2" styleClass="counter"/>
+            <Button layoutX="262.0" layoutY="102.0" mnemonicParsing="false" text="counter 3" styleClass="counter"/>
+
+            <Button layoutX="324.0" layoutY="50.0" mnemonicParsing="false" text="pipe 1" fx:id="pipe1"
+                    styleClass="pipe"/>
+            <Button layoutX="324.0" layoutY="76.0" mnemonicParsing="false" text="pipe 2" fx:id="pipe2"
+                    styleClass="pipe"/>
+            <Button layoutX="324.0" layoutY="102.0" mnemonicParsing="false" text="pipe 3" fx:id="pipe3"
+                    styleClass="pipe"/>
+
+            <Button layoutX="386.0" layoutY="50.0" mnemonicParsing="false" text="regulator 1" styleClass="regulator"/>
+            <Button layoutX="386.0" layoutY="76.0" mnemonicParsing="false" text="regulator 2" styleClass="regulator"/>
+            <Button layoutX="386.0" layoutY="102.0" mnemonicParsing="false" text="regulator 3" styleClass="regulator"/>
+
+
+            <Button layoutX="448.0" layoutY="50.0" mnemonicParsing="false" text="Knee up right" styleClass="knee"/>
+            <Button layoutX="448.0" layoutY="76.0" mnemonicParsing="false" text="4 way right" fx:id="rightFourWay"
+                    styleClass="fourWay"/>
+            <Button layoutX="448.0" layoutY="102.0" mnemonicParsing="false" text="Knee down right" styleClass="knee"/>
+
+            <Button layoutX="510.0" layoutY="76.0" mnemonicParsing="false" text="Station Exit" styleClass="gagePipe"/>
+
+        </children>
+    </Pane>
+    <columnConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+    </rowConstraints>
 </GridPane>

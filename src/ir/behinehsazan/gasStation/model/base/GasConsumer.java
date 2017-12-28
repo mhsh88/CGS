@@ -7,6 +7,7 @@ public abstract class GasConsumer extends EntityBase {
     double Tout;
     double Pin;
     double Pout;
+    boolean Inverse = false;
     Gas gas;
 
     public Gas getGas() {
@@ -59,6 +60,14 @@ public abstract class GasConsumer extends EntityBase {
 
     public void setTout(double tout) {
         Tout = tout;
+    }
+
+    public boolean isInverse() {
+        return Inverse;
+    }
+
+    public void setInverse(boolean inverse) {
+        Inverse = inverse;
     }
 
     public double getQdot(){
