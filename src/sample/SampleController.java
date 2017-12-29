@@ -2,10 +2,8 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 
 public class SampleController {
-    public Label helloWorld;
     public Button btn = new Button();
     public Button btn1 = new Button();
     public Button heater = new Button();
@@ -26,7 +24,6 @@ public class SampleController {
 
 
     public void sayHelloWorld(ActionEvent actionEvent) {
-        helloWorld.setText("سلام عمو");
     }
 
     public void changIcon(ActionEvent actionEvent) {
