@@ -2,8 +2,12 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import sample.view.beforHeater.BeforeHeaterFrame;
+
+import java.io.IOException;
 
 public class SampleController {
+    BeforeHeaterFrame beforeHeaterFrame = new BeforeHeaterFrame();
     public Button btn = new Button();
     public Button btn1 = new Button();
     public Button heater = new Button();
@@ -15,7 +19,7 @@ public class SampleController {
     public Button rightFourWay = new Button();
 
 
-    public SampleController(){
+    public SampleController() throws IOException {
         btn.getStyleClass().add("icon-button");
         btn.setPickOnBounds(true);
     }
@@ -41,5 +45,10 @@ public class SampleController {
 //        pipe2.setPickOnBounds(true);
 //        pipe3.setPickOnBounds(true);
 
+    }
+
+    public void beforeHeaterWindows(ActionEvent actionEvent) throws IOException {
+
+        beforeHeaterFrame.show();
     }
 }

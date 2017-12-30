@@ -10,7 +10,7 @@
 <GridPane alignment="center" hgap="10" stylesheets="/sample/sample.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SampleController">
     <Pane prefHeight="500.0" prefWidth="1000.0" styleClass="pane">
         <children>
-            <Button fx:id="beforeHeaterPipeLine" layoutX="25.0" layoutY="225.0" mnemonicParsing="false" styleClass="gagePipe" text="Before Heater pipeline" >
+            <Button onAction="#beforeHeaterWindows" fx:id="beforeHeaterPipeLine" layoutX="25.0" layoutY="225.0" mnemonicParsing="false" styleClass="gagePipe" text="Before Heater pipeline" >
 
             </Button>
             <Button fx:id="heater" layoutX="95.0" layoutY="200.0" mnemonicParsing="false" styleClass="heater" text="Heater" />
