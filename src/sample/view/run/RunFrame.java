@@ -1,4 +1,4 @@
-package sample.view.heater;
+package sample.view.run;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,23 +8,23 @@ import sample.view.base.BaseFrame;
 
 import java.io.IOException;
 
-public class HeaterFrame implements BaseFrame {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("heater.fxml"));
+public class RunFrame  implements BaseFrame{
+
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("run.fxml"));
     Parent root1 = (Parent) fxmlLoader.load();
     Stage stage = new Stage();
 
-    public HeaterFrame() throws IOException {
+    public RunFrame() throws IOException {
         stage.setScene(new Scene(root1, 500, 400));
-        stage.setTitle("اطلاعات گرم کن");
+        stage.setTitle("اطلاعات ران ها");
     }
 
-
-    public void show() throws IOException {
-            stage.show();
-        }
-
     @Override
-    public void close() throws IOException {
+    public void show() throws IOException {
+        stage.show();
+    }
+    @Override
+    public void close() {
         stage.close();
     }
 }

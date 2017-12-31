@@ -2,14 +2,18 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import sample.view.afterHeater.AfterHeaterFrame;
 import sample.view.beforHeater.BeforeHeaterFrame;
 import sample.view.heater.HeaterFrame;
+import sample.view.run.RunFrame;
 
 import java.io.IOException;
 
 public class SampleController {
     BeforeHeaterFrame beforeHeaterFrame = new BeforeHeaterFrame();
     HeaterFrame heaterFrame = new HeaterFrame();
+    AfterHeaterFrame afterHeaterFrame = new AfterHeaterFrame();
+    RunFrame runFrame = new RunFrame();
     public Button btn = new Button();
     public Button btn1 = new Button();
     public Button heater = new Button();
@@ -50,10 +54,21 @@ public class SampleController {
     }
 
     public void beforeHeaterWindows(ActionEvent actionEvent) throws IOException {
-
+        beforeHeaterFrame.close();
         beforeHeaterFrame.show();
     }
     public void heaterWindows(ActionEvent actionEvent) throws  IOException{
+        heaterFrame.close();
         heaterFrame.show();
+    }
+
+    public void afterWindows(ActionEvent actionEvent) throws IOException {
+        afterHeaterFrame.close();
+        afterHeaterFrame.show();
+    }
+
+    public void runWindows(ActionEvent actionEvent) throws IOException{
+        runFrame.close();
+        runFrame.show();
     }
 }
