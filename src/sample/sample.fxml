@@ -13,7 +13,7 @@
             <Button onAction="#beforeHeaterWindows" fx:id="beforeHeaterPipeLine" layoutX="25.0" layoutY="225.0" mnemonicParsing="false" styleClass="gagePipe" text="Before Heater pipeline" >
 
             </Button>
-            <Button fx:id="heater" layoutX="95.0" layoutY="200.0" mnemonicParsing="false" styleClass="heater" text="Heater" />
+            <Button fx:id="heater" layoutX="95.0" layoutY="200.0" mnemonicParsing="false" styleClass="heater" text="Heater" onAction="#heaterWindows"/>
             <Button layoutX="195.0" layoutY="225.0" mnemonicParsing="false" styleClass="gagePipe" text="After Heater pipeline" />
 
 

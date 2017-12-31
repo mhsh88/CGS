@@ -14,7 +14,7 @@ public class HeaterFrame {
 
     public HeaterFrame() throws IOException {
         stage.setScene(new Scene(root1, 500, 400));
-        stage.setTitle("خط لوله قبل از گرم کن");
+        stage.setTitle("اطلاعات گرم کن");
     }
 
 

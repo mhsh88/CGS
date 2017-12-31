@@ -3,11 +3,13 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import sample.view.beforHeater.BeforeHeaterFrame;
+import sample.view.heater.HeaterFrame;
 
 import java.io.IOException;
 
 public class SampleController {
     BeforeHeaterFrame beforeHeaterFrame = new BeforeHeaterFrame();
+    HeaterFrame heaterFrame = new HeaterFrame();
     public Button btn = new Button();
     public Button btn1 = new Button();
     public Button heater = new Button();
@@ -50,5 +52,8 @@ public class SampleController {
     public void beforeHeaterWindows(ActionEvent actionEvent) throws IOException {
 
         beforeHeaterFrame.show();
+    }
+    public void heaterWindows(ActionEvent actionEvent) throws  IOException{
+        heaterFrame.show();
     }
 }
