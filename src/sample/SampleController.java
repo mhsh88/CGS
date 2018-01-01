@@ -6,6 +6,8 @@ import sample.view.afterHeater.AfterHeaterFrame;
 import sample.view.beforHeater.BeforeHeaterFrame;
 import sample.view.heater.HeaterFrame;
 import sample.view.run.RunFrame;
+import sample.view.showResult.ShowResultsFrame;
+import sample.view.stationProperty.StationPropertyFrame;
 
 import java.io.IOException;
 
@@ -14,6 +16,8 @@ public class SampleController {
     HeaterFrame heaterFrame = new HeaterFrame();
     AfterHeaterFrame afterHeaterFrame = new AfterHeaterFrame();
     RunFrame runFrame = new RunFrame();
+    StationPropertyFrame stationPropertyFrame = new StationPropertyFrame();
+    ShowResultsFrame showResultsFrame = new ShowResultsFrame();
     public Button btn = new Button();
     public Button btn1 = new Button();
     public Button heater = new Button();
@@ -70,5 +74,17 @@ public class SampleController {
     public void runWindows(ActionEvent actionEvent) throws IOException{
         runFrame.close();
         runFrame.show();
+    }
+
+    public void stationPropertyWindows(ActionEvent actionEvent) throws IOException {
+
+        stationPropertyFrame.close();
+        stationPropertyFrame.show();
+
+    }
+
+    public void showResultsWindows(ActionEvent actionEvent) throws IOException {
+        showResultsFrame.close();
+        showResultsFrame.show();
     }
 }
