@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import sample.view.afterHeater.AfterHeaterFrame;
 import sample.view.beforHeater.BeforeHeaterFrame;
+import sample.view.calculate.CalculateButtonFrame;
 import sample.view.heater.HeaterFrame;
 import sample.view.run.RunFrame;
 import sample.view.showResult.ShowResultsFrame;
@@ -18,6 +19,7 @@ public class SampleController {
     RunFrame runFrame = new RunFrame();
     StationPropertyFrame stationPropertyFrame = new StationPropertyFrame();
     ShowResultsFrame showResultsFrame = new ShowResultsFrame();
+    CalculateButtonFrame calculateButtonFrame = new CalculateButtonFrame();
     public Button btn = new Button();
     public Button btn1 = new Button();
     public Button heater = new Button();
@@ -86,5 +88,13 @@ public class SampleController {
     public void showResultsWindows(ActionEvent actionEvent) throws IOException {
         showResultsFrame.close();
         showResultsFrame.show();
+    }
+
+    public void calculateButton(ActionEvent actionEvent) throws IOException {
+        calculateButtonFrame.close();
+        calculateButtonFrame.show();
+
+
+
     }
 }
