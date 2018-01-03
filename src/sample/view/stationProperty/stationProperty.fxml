@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" stylesheets="/sample/view/stationProperty/stationProperty.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.stationProperty.StationPropertyController">
+<GridPane alignment="center" hgap="10" prefHeight="755.0" prefWidth="472.0" stylesheets="/sample/view/stationProperty/stationProperty.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.stationProperty.StationPropertyController">
    <columnConstraints>
+      <ColumnConstraints />
       <ColumnConstraints />
       <ColumnConstraints />
    </columnConstraints>
@@ -34,49 +36,75 @@
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />
+      <RowConstraints />
    </rowConstraints>
    <children>
-      <Label fx:id="nitrogenLabel" text="Nitrogen" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-      <TextField fx:id="nitrogenTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Label fx:id="carbonDioxideLabel" text="Carbon Dioxide" GridPane.rowIndex="2" />
-      <TextField fx:id="carbonDioxideTextField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-      <Label text="Methan" GridPane.rowIndex="3" />
-      <TextField fx:id="methanTextField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-      <Label text="Ethane" GridPane.rowIndex="4" />
-      <TextField fx:id="ethaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-      <Label text="Propane" GridPane.rowIndex="5" />
-      <TextField fx:id="propaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-      <Label text="n-Butane" GridPane.rowIndex="6" />
-      <TextField fx:id="nButaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-      <Label text="iso-Butane" GridPane.rowIndex="7" />
-      <TextField fx:id="isoButaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
-      <Label text="n-Pentane" GridPane.rowIndex="8" />
-      <TextField fx:id="nPentaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
-      <Label text="iso-Pentane" GridPane.rowIndex="9" />
-      <TextField fx:id="isoPentaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
-      <Label text="Hexane" GridPane.rowIndex="10" />
-      <TextField fx:id="hexaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="10"/>
-      <Label text="Heptane" GridPane.rowIndex="11" />
-      <TextField fx:id="heptaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="11"/>
-      <Label text="Octane" GridPane.rowIndex="12" />
-      <TextField fx:id="octaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="12"/>
-      <Label text="Nonane" GridPane.rowIndex="13" />
-      <TextField fx:id="nonaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="13"/>
-      <Label text="Decane" GridPane.rowIndex="14" />
-      <TextField fx:id="decaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="14"/>
-      <Label text="Hydrogen" GridPane.rowIndex="15" />
-      <TextField fx:id="hydrogenTextField" GridPane.columnIndex="1" GridPane.rowIndex="15"/>
-      <Label text="Oxygen" GridPane.rowIndex="16" />
-      <TextField fx:id="oxygenTextField" GridPane.columnIndex="1" GridPane.rowIndex="16"/>
-      <Label text="Carbon Monoxide" GridPane.rowIndex="17" />
-      <TextField fx:id="carbonTextField" GridPane.columnIndex="1" GridPane.rowIndex="17"/>
-      <Label text="Water" GridPane.rowIndex="18" />
-      <TextField fx:id="waterTextField" GridPane.columnIndex="1" GridPane.rowIndex="18"/>
-      <Label text="Hydrogen Sulfide" GridPane.rowIndex="19" />
-      <TextField fx:id="hydrogenSulfideTextField" GridPane.columnIndex="1" GridPane.rowIndex="19"/>
-      <Label text="Helium" GridPane.rowIndex="20" />
-      <TextField fx:id="heliumTextField" GridPane.columnIndex="1" GridPane.rowIndex="20"/>
-      <Label text="Argon" GridPane.rowIndex="21" />
-      <TextField fx:id="argonTextField" GridPane.columnIndex="1" GridPane.rowIndex="21"/>
+      <Label fx:id="nitrogenLabel" text="Nitrogen" GridPane.rowIndex="2" />
+      <TextField fx:id="nitrogenTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+      <Label fx:id="carbonDioxideLabel" text="Carbon Dioxide" GridPane.rowIndex="3" />
+      <TextField fx:id="carbonDioxideTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+      <Label fx:id="methanLabel" text="Methan" GridPane.rowIndex="4" />
+      <TextField fx:id="methanTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+      <Label fx:id="ethaneLabel" text="Ethane" GridPane.rowIndex="5" />
+      <TextField fx:id="ethaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+      <Label  fx:id="propaneLabel" text="Propane" GridPane.rowIndex="6" />
+      <TextField fx:id="propaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+      <Label fx:id="nButanelabel" text="n-Butane" GridPane.rowIndex="7" />
+      <TextField fx:id="nButaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
+      <Label fx:id="isoButaneLabel" text="iso-Butane" GridPane.rowIndex="8" />
+      <TextField fx:id="isoButaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+
+      <Label fx:id="nPentaneLabel" text="n-Pentane" GridPane.rowIndex="9" />
+      <TextField fx:id="nPentaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+
+      <Label fx:id="isoPentaneLabel" text="iso-Pentane" GridPane.rowIndex="10" />
+      <TextField fx:id="isoPentaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+
+      <Label fx:id="hexaneLabel" text="Hexane" GridPane.rowIndex="11" />
+      <TextField fx:id="hexaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+
+      <Label fx:id="heptaneLabel" text="Heptane" GridPane.rowIndex="12" />
+      <TextField fx:id="heptaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+
+      <Label fx:id="octaneLabel" text="Octane" GridPane.rowIndex="13" />
+      <TextField fx:id="octaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+
+      <Label fx:id="noneneLabel" text="Nonane" GridPane.rowIndex="14" />
+      <TextField fx:id="nonaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+
+      <Label fx:id="decaneLabel" text="Decane" GridPane.rowIndex="15" />
+      <TextField fx:id="decaneTextField" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+
+      <Label fx:id="hydrogenLabel" text="Hydrogen" GridPane.rowIndex="16" />
+      <TextField fx:id="hydrogenTextField" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+
+      <Label fx:id="oxygenLabel" text="Oxygen" GridPane.rowIndex="17" />
+      <TextField fx:id="oxygenTextField" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+
+      <Label fx:id="carbonMonoxideLabel" text="Carbon Monoxide" GridPane.rowIndex="18" />
+      <TextField fx:id="carbonMonoxideTextField" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+
+      <Label fx:id="waterLabel" text="Water" GridPane.rowIndex="19" />
+      <TextField fx:id="waterTextField" GridPane.columnIndex="1" GridPane.rowIndex="19" />
+
+      <Label fx:id="hydrogenSulfideLabel" text="Hydrogen Sulfide" GridPane.rowIndex="20" />
+      <TextField fx:id="hydrogenSulfideTextField" GridPane.columnIndex="1" GridPane.rowIndex="20" />
+
+      <Label fx:id="heliumLabel" text="Helium" GridPane.rowIndex="21" />
+      <TextField fx:id="heliumTextField" GridPane.columnIndex="1" GridPane.rowIndex="21" />
+
+      <Label fx:id="argonLabel" text="Argon" GridPane.rowIndex="22" />
+      <TextField fx:id="argonTextField" GridPane.columnIndex="1" GridPane.rowIndex="22" />
+
+      <Label text="ترکیب گاز:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <ComboBox fx:id="gasPercentType" prefWidth="150.0" GridPane.rowIndex="1">
+
+      </ComboBox>
    </children>
 </GridPane>
