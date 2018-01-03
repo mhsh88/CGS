@@ -15,7 +15,7 @@ public class StationPropertyFrame implements BaseFrame{
     Stage stage = new Stage();
 
     public StationPropertyFrame() throws IOException {
-        stage.setScene(new Scene(root1, 500, 400));
+        stage.setScene(new Scene(root1, 500, 700));
         stage.setTitle("اطلاعات ایستگاه گاز");
     }
 
