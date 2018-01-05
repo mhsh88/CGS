@@ -2,6 +2,7 @@ package sample.controller.stationProperty;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import sample.controller.stationController.StationController;
@@ -10,7 +11,8 @@ import sample.view.stationProperty.StationPropertyFrame;
 import java.io.IOException;
 
 public class StationPropertyController {
-    StationController stationController = StationController.getInstance();
+    StationController stationController;
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/view/stationProperty/stationProperty.fxml"));
     @FXML
     public TextField nitrogenTextField = new TextField();
     public ComboBox inputGasTempComboBox = new ComboBox();
@@ -73,6 +75,7 @@ public class StationPropertyController {
     }
 
     public void cancelButton(ActionEvent actionEvent) throws IOException {
+        stationController = fxmlLoader.<StationController>getController();
         StationPropertyFrame stationPropertyFrame = stationController.getStationPropertyFrame();
         stationPropertyFrame.close();
     }

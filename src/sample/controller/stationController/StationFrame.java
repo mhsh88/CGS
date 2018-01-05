@@ -1,4 +1,4 @@
-package sample.view.station;
+package sample.controller.stationController;
 
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -20,7 +20,7 @@ public class StationFrame extends Application implements BaseFrame {
         return instance;
     }
 
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/station/sample.fxml"));
     Parent root1;
     Stage stage;
     @FXML
@@ -28,10 +28,7 @@ public class StationFrame extends Application implements BaseFrame {
 
     private StationFrame() {
         try {
-            root1 = (Parent) fxmlLoader.load();
-            stage = new Stage();
-            stage.setScene(new Scene(root1, 1000, 700));
-            stage.setTitle("اطلاعات ایستگاه گاز");
+
         }
         catch (Exception e){
             e.printStackTrace();
@@ -56,6 +53,14 @@ public class StationFrame extends Application implements BaseFrame {
     @Override
     public void close() throws IOException {
         stage.close();
+
+    }
+
+    public void run(Stage stage) throws IOException {
+        root1 = (Parent) fxmlLoader.load();
+        stage = new Stage();
+        stage.setScene(new Scene(root1, 1000, 700));
+        stage.setTitle("نرم افزار محاسبه مصرف گاز ایستگاه تقلیل فشار گاز");
 
     }
 

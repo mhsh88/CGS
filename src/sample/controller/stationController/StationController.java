@@ -1,6 +1,8 @@
 package sample.controller.stationController;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -17,6 +19,8 @@ import java.io.IOException;
 public class StationController {
     Stage stage;
     Scene scene;
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/view/station/sample.fxml"));
+    Parent root1;
     private static final StationController instance = new StationController();
     BeforeHeaterFrame beforeHeaterFrame = new BeforeHeaterFrame();
     HeaterFrame heaterFrame = new HeaterFrame();
@@ -40,7 +44,7 @@ public class StationController {
     }
 
 
-    private StationController(){
+    public StationController(){
 //        btn.getStyleClass().add("icon-button");
 //        btn.setPickOnBounds(true);
     }
@@ -59,22 +63,16 @@ public class StationController {
 
         btn.getStyleClass().add("icon-button");
         btn.setPickOnBounds(true);
-//        pipe1.getStyleClass().add("pipe");
-//        pipe2.getStyleClass().add("pipe");
-//        pipe3.getStyleClass().add("pipe");
-//        leftFourWay.getStyleClass().add("fourWay");
-//        rightFourWay.getStyleClass().add("fourWay");
-//        rightFourWay.setPickOnBounds(true);
-//        leftFourWay.setPickOnBounds(true);
-//        pipe1.setPickOnBounds(true);
-//        pipe2.setPickOnBounds(true);
-//        pipe3.setPickOnBounds(true);
-
     }
-    public void launchLogingController(Stage stage) {
+
+    public void launchLogingController(Stage stage) throws IOException {
         this.stage = stage;
-        stage.setTitle("User Login");
-        stage.setScene(scene);
+        root1 = (Parent) fxmlLoader.load();
+//        stage = new Stage();
+        stage.setScene(new Scene(root1, 1000, 700));
+        stage.setTitle("نرم افزار محاسبه مصرف گاز ایستگاه تقلیل فشار گاز");
+//        stage.setTitle("User Login");
+//        stage.setScene(scene);
         stage.setResizable(true);
         stage.hide();
         stage.show();

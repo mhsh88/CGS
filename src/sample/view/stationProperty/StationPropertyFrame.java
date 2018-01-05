@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.controller.stationController.StationController;
 import sample.view.base.BaseFrame;
 
 import java.awt.*;
@@ -21,6 +22,7 @@ public class StationPropertyFrame extends Application implements BaseFrame {
     }
 
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("stationProperty.fxml"));
+    StationController controller = fxmlLoader.<StationController>getController();
     Parent root1;
     Stage stage;
     @FXML
