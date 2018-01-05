@@ -10,12 +10,18 @@ import java.io.IOException;
 
 public class HeaterFrame implements BaseFrame {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("heater.fxml"));
-    Parent root1 = (Parent) fxmlLoader.load();
-    Stage stage = new Stage();
+    Parent root1;
+    Stage stage;
 
-    public HeaterFrame() throws IOException {
+    public HeaterFrame() {
+        try{
+            root1 = (Parent) fxmlLoader.load();
+              stage = new Stage();
         stage.setScene(new Scene(root1, 500, 400));
-        stage.setTitle("اطلاعات گرم کن");
+        stage.setTitle("اطلاعات گرم کن");}
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

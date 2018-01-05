@@ -1,4 +1,4 @@
-package sample.view.stationProperty;
+package sample.view.station;
 
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -11,22 +11,22 @@ import sample.view.base.BaseFrame;
 import java.awt.*;
 import java.io.IOException;
 
-public class StationPropertyFrame extends Application implements BaseFrame {
-    private static final StationPropertyFrame instance = new StationPropertyFrame();
+public class StationFrame extends Application implements BaseFrame {
+    private static final StationFrame instance = new StationFrame();
 
     //private constructor to avoid client applications to use constructor
 
-    public static StationPropertyFrame getInstance(){
+    public static StationFrame getInstance(){
         return instance;
     }
 
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("stationProperty.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample.fxml"));
     Parent root1;
     Stage stage;
     @FXML
     TextField nitrogenTextField = new TextField();
 
-    private StationPropertyFrame() {
+    private StationFrame() {
         try {
             root1 = (Parent) fxmlLoader.load();
             stage = new Stage();

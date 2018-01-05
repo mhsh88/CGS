@@ -10,12 +10,19 @@ import java.io.IOException;
 
 public class BeforeHeaterFrame implements BaseFrame {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("beforeHeater.fxml"));
-    Parent root1 = (Parent) fxmlLoader.load();
-    Stage stage = new Stage();
+    Parent root1;
+    Stage stage;
 
-    public BeforeHeaterFrame() throws IOException {
-        stage.setScene(new Scene(root1, 500, 400));
-        stage.setTitle("خط لوله قبل از گرم کن");
+    public BeforeHeaterFrame(){
+        try {
+            root1 = (Parent) fxmlLoader.load();
+            stage  = new Stage();
+            stage.setScene(new Scene(root1, 500, 400));
+            stage.setTitle("خط لوله قبل از گرم کن");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

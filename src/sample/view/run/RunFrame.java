@@ -11,12 +11,17 @@ import java.io.IOException;
 public class RunFrame  implements BaseFrame{
 
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("run.fxml"));
-    Parent root1 = (Parent) fxmlLoader.load();
-    Stage stage = new Stage();
+    Parent root1;
+    Stage stage;
 
-    public RunFrame() throws IOException {
+    public RunFrame()  {
+        try{root1  = (Parent) fxmlLoader.load();
+         stage = new Stage();
         stage.setScene(new Scene(root1, 500, 400));
-        stage.setTitle("اطلاعات ران ها");
+        stage.setTitle("اطلاعات ران ها");}
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

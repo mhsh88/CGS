@@ -1,7 +1,9 @@
-package sample;
+package sample.controller.stationController;
 
 import javafx.event.ActionEvent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 import sample.view.afterHeater.AfterHeaterFrame;
 import sample.view.beforHeater.BeforeHeaterFrame;
 import sample.view.calculate.CalculateButtonFrame;
@@ -12,8 +14,10 @@ import sample.view.stationProperty.StationPropertyFrame;
 
 import java.io.IOException;
 
-public class SampleController {
-    private static final SampleController instance = new SampleController();
+public class StationController {
+    Stage stage;
+    Scene scene;
+    private static final StationController instance = new StationController();
     BeforeHeaterFrame beforeHeaterFrame = new BeforeHeaterFrame();
     HeaterFrame heaterFrame = new HeaterFrame();
     AfterHeaterFrame afterHeaterFrame = new AfterHeaterFrame();
@@ -36,12 +40,12 @@ public class SampleController {
     }
 
 
-    private SampleController(){
+    private StationController(){
 //        btn.getStyleClass().add("icon-button");
 //        btn.setPickOnBounds(true);
     }
 
-    public static SampleController getInstance(){
+    public static StationController getInstance(){
         return instance;
     }
 
@@ -66,6 +70,14 @@ public class SampleController {
 //        pipe2.setPickOnBounds(true);
 //        pipe3.setPickOnBounds(true);
 
+    }
+    public void launchLogingController(Stage stage) {
+        this.stage = stage;
+        stage.setTitle("User Login");
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.hide();
+        stage.show();
     }
 
     public void beforeHeaterWindows(ActionEvent actionEvent) throws IOException {
@@ -107,3 +119,5 @@ public class SampleController {
 
     }
 }
+
+
