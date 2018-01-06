@@ -8,7 +8,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        StationController staionConroller = StationController.getInstance();
+        StationController staionConroller = new StationController();
         staionConroller.launchLogingController(primaryStage);
 //        Parent root = FXMLLoader.load(getClass().getResource("view/station/sample.fxml"));
 //        primaryStage.setTitle("نرم افزار محاسبه مصرف گاز ایستگاه تقلیل فشار گاز");

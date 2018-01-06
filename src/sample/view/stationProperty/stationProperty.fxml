@@ -143,7 +143,7 @@
         <GridPane alignment="CENTER_RIGHT" vgap="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <Label text="استان:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="provinceTextField" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
@@ -155,7 +155,7 @@
         </GridPane>
         <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="2">
             <Label text="شهر" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="cityTextField" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
@@ -168,7 +168,7 @@
 
         <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="3">
             <Label text="منطقه" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="areaTextField" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
@@ -180,7 +180,7 @@
         </GridPane>
         <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="4">
             <Label text="ظرفیت اسمی" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="nominalCapacityTextField" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
@@ -192,14 +192,15 @@
         </GridPane>
 
 
-        <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="5"><Label text="آدرس" />
+        <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <Label text="آدرس" />
             <columnConstraints>
                <ColumnConstraints />
             </columnConstraints>
             <rowConstraints>
                <RowConstraints />
             </rowConstraints></GridPane>
-        <TextArea GridPane.columnIndex="2" GridPane.rowIndex="6" />
+        <TextArea fx:id="addressTextArea" GridPane.columnIndex="2" GridPane.rowIndex="6" />
         <Separator GridPane.columnIndex="2" GridPane.rowIndex="7" />
 
 
@@ -226,7 +227,7 @@
         <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="10">
             <Label text="دمای گاز ورودی به ایستگاه: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <ComboBox fx:id="inputGasTempComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="inputGasTempTextField" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
@@ -240,7 +241,7 @@
         <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="11">
             <Label text="فشار گاز ورودی به ایستگاه: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <ComboBox fx:id="inputGasPressureComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="inputGasPressureTextField" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
@@ -254,7 +255,7 @@
         <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="12">
             <Label text="دمای گاز خروجی به ایستگاه: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <ComboBox fx:id="outputGasTempComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="outputGasTempTextField" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
@@ -268,7 +269,7 @@
         <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="13">
             <Label text="فشار گاز ورودی به ایستگاه: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <ComboBox fx:id="outputGasPressureComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="outputGasPressureTextField" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
@@ -285,7 +286,7 @@
         <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="15">
             <Label text="دمای محیط: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <ComboBox fx:id="environmentTempComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="environmentTempTextField" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
@@ -299,7 +300,7 @@
 
         <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="16">
             <Label text="سرعت باد (m/s):" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="windSpeedTextField" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
@@ -314,7 +315,7 @@
 
         <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="18">
             <Label text="دبی گاز عبوری از ایستگاه (متر مکعب بر ساعت):" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="stationDebiTextField" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
@@ -327,13 +328,13 @@
 
         <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="22">
             <HBox GridPane.columnIndex="2" GridPane.rowIndex="1">
-                <Button minWidth="70" onAction="#okButton" text="Ok" />
+                <Button fx:id="okButton" minWidth="70" onAction="#okButton" text="Ok" />
             </HBox>
             <HBox minWidth="70" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                <Button minWidth="70" onAction="#clearButton" text="Clear" />
+                <Button fx:id="clearButton" minWidth="70" onAction="#clearButton" text="Clear" />
             </HBox>
             <HBox minWidth="70" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                <Button minWidth="70" onAction="#cancelButton" text="Cancel" />
+                <Button fx:id="cancelButton" minWidth="70" onAction="#cancelButton" text="Cancel" />
             </HBox>
             <columnConstraints>
                <ColumnConstraints />

@@ -1,35 +1,73 @@
 package sample.controller.stationProperty;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import sample.controller.stationController.StationController;
-import sample.view.stationProperty.StationPropertyFrame;
 
 import java.io.IOException;
 
 public class StationPropertyController {
-    StationController stationController;
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/view/stationProperty/stationProperty.fxml"));
-    @FXML
-    public TextField nitrogenTextField = new TextField();
     public ComboBox inputGasTempComboBox = new ComboBox();
     public ComboBox inputGasPressureComboBox= new ComboBox();
     public ComboBox outputGasTempComboBox= new ComboBox();
     public ComboBox outputGasPressureComboBox= new ComboBox();
     public ComboBox environmentTempComboBox= new ComboBox();
+    public TextField carbonDioxideTextField = new TextField();
+    public TextField methanTextField = new TextField();
+    public TextField ethaneTextField = new TextField();
+    public TextField propaneTextField = new TextField();
+    public TextField nButaneTextField = new TextField();
+    public TextField isoButaneTextField = new TextField();
+    public TextField nPentaneTextField = new TextField();
+    public TextField isoPentaneTextField = new TextField();
+    public TextField hexaneTextField = new TextField();
+    public TextField heptaneTextField = new TextField();
+    public TextField octaneTextField = new TextField();
+    public TextField nonaneTextField = new TextField();
+    public TextField decaneTextField = new TextField();
+    public TextField hydrogenTextField = new TextField();
+    public TextField oxygenTextField = new TextField();
+    public TextField carbonMonoxideTextField = new TextField();
+    public TextField waterTextField = new TextField();
+    public TextField hydrogenSulfideTextField = new TextField();
+    public TextField heliumTextField = new TextField();
+    public TextField argonTextField = new TextField();
+    public TextField provinceTextField = new TextField();
+    public TextField cityTextField = new TextField();
+    public TextField areaTextField = new TextField();
+    public TextField nominalCapacityTextField = new TextField();
+    public TextArea addressTextArea = new TextArea();
+    public TextField inputGasTempTextField = new TextField();
+    public TextField inputGasPressureTextField = new TextField();
+    public TextField outputGasTempTextField = new TextField();
+    public TextField outputGasPressureTextField = new TextField();
+    public TextField environmentTempTextField = new TextField();
+    public TextField windSpeedTextField = new TextField();
+    public TextField stationDebiTextField = new TextField();
+    public Button clearButton = new Button();
+    public Button okButton  = new Button();
     @FXML
     ComboBox gasPercentType = new ComboBox();
     @FXML
     TextField textField = new TextField();
+    @FXML
+    private Button cancelButton = new Button();
+    @FXML
+    TextField nitrogenTextField = new TextField();
+    
+    
 
-    public StationPropertyController() throws IOException {
+    public StationPropertyController() {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         gasPercentType.getItems().removeAll(gasPercentType.getItems());
         gasPercentType.getItems().addAll("درصد مولی", "درصد جرمی");
         gasPercentType.getSelectionModel().select("درصد مولی");
@@ -49,6 +87,23 @@ public class StationPropertyController {
         environmentTempComboBox.getItems().addAll("°C", "°F");
         environmentTempComboBox.getSelectionModel().select("°C");
 
+        nitrogenTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                                String oldValue, String newValue) {
+                try {
+                    Integer.parseInt(newValue);
+                    if (newValue.endsWith("f") || newValue.endsWith("d")) {
+                        carbonDioxideTextField.setText(newValue.substring(0, newValue.length()-1));
+                    }
+                }
+                catch (Exception e) {
+                    nitrogenTextField.setText(oldValue);
+                }
+            }
+        });
+
+
 
 
 
@@ -67,16 +122,98 @@ public class StationPropertyController {
     }
 
 
+
+
     public void okButton(ActionEvent actionEvent) {
+        nitrogenTextField.getText();
+        carbonDioxideTextField.getText();
+        methanTextField.getText();
+        ethaneTextField.getText();
+        propaneTextField.getText();
+        nButaneTextField.getText();
+        isoButaneTextField.getText();
+        nPentaneTextField.getText();
+        isoPentaneTextField.getText();
+        hexaneTextField.getText();
+        heptaneTextField.getText();
+        octaneTextField.getText();
+        nonaneTextField.getText();
+        decaneTextField.getText();
+        hydrogenTextField.getText();
+        oxygenTextField.getText();
+        carbonMonoxideTextField.getText();
+        waterTextField.getText();
+        hydrogenSulfideTextField.getText();
+        heliumTextField.getText();
+        argonTextField.getText();
+        provinceTextField.getText();
+        cityTextField.getText();
+        areaTextField.getText();
+        nominalCapacityTextField.getText();
+        addressTextArea.getText();
+        inputGasTempTextField.getText();
+        inputGasPressureTextField.getText();
+        outputGasTempTextField.getText();
+        outputGasPressureTextField.getText();
+        environmentTempTextField.getText();
+        windSpeedTextField.getText();
+        stationDebiTextField.getText();
+
 
     }
 
     public void clearButton(ActionEvent actionEvent) {
+
+        nitrogenTextField.clear();
+        carbonDioxideTextField.clear();
+        methanTextField.clear();
+        ethaneTextField.clear();
+        propaneTextField.clear();
+        nButaneTextField.clear();
+        isoButaneTextField.clear();
+        nPentaneTextField.clear();
+        isoPentaneTextField.clear();
+        hexaneTextField.clear();
+        heptaneTextField.clear();
+        octaneTextField.clear();
+        nonaneTextField.clear();
+        decaneTextField.clear();
+        hydrogenTextField.clear();
+        oxygenTextField.clear();
+        carbonMonoxideTextField.clear();
+        waterTextField.clear();
+        hydrogenSulfideTextField.clear();
+        heliumTextField.clear();
+        argonTextField.clear();
+        provinceTextField.clear();
+        cityTextField.clear();
+        areaTextField.clear();
+        nominalCapacityTextField.clear();
+        addressTextArea.clear();
+        inputGasTempTextField.clear();
+        inputGasPressureTextField.clear();
+        outputGasTempTextField.clear();
+        outputGasPressureTextField.clear();
+        environmentTempTextField.clear();
+        windSpeedTextField.clear();
+        stationDebiTextField.clear();
+
+
+
+
+
+
+    }
+    @FXML
+    private void cancelButton(ActionEvent actionEvent)  {
+        ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
+//        Platform.exit();
+        // get a handle to the stage
+//        System.exit(0);
+//        Stage stage = (Stage) cancelButton.getScene().getWindow();
+////        // do what you have to do
+//        stage.close();
+
     }
 
-    public void cancelButton(ActionEvent actionEvent) throws IOException {
-        stationController = fxmlLoader.<StationController>getController();
-        StationPropertyFrame stationPropertyFrame = stationController.getStationPropertyFrame();
-        stationPropertyFrame.close();
-    }
 }

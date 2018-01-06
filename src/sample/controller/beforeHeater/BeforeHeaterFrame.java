@@ -1,5 +1,6 @@
-package sample.view.beforHeater;
+package sample.controller.beforeHeater;
 
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,8 +9,8 @@ import sample.view.base.BaseFrame;
 
 import java.io.IOException;
 
-public class BeforeHeaterFrame implements BaseFrame {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("beforeHeater.fxml"));
+public class BeforeHeaterFrame extends Application implements BaseFrame {
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/view/beforHeater/beforeHeater.fxml"));
     Parent root1;
     Stage stage;
 
@@ -25,8 +26,14 @@ public class BeforeHeaterFrame implements BaseFrame {
         }
     }
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        show();
+    }
+
 
     public void show() throws IOException {
+        stage.close();
             stage.show();
         }
         public void close() throws IOException{

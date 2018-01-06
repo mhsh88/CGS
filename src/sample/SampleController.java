@@ -3,12 +3,12 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import sample.view.afterHeater.AfterHeaterFrame;
-import sample.view.beforHeater.BeforeHeaterFrame;
+import sample.controller.beforeHeater.BeforeHeaterFrame;
 import sample.view.calculate.CalculateButtonFrame;
 import sample.view.heater.HeaterFrame;
 import sample.view.run.RunFrame;
 import sample.view.showResult.ShowResultsFrame;
-import sample.view.stationProperty.StationPropertyFrame;
+import sample.controller.stationProperty.StationPropertyFrame;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ public class SampleController {
     HeaterFrame heaterFrame = new HeaterFrame();
     AfterHeaterFrame afterHeaterFrame = new AfterHeaterFrame();
     RunFrame runFrame = new RunFrame();
-    StationPropertyFrame stationPropertyFrame = StationPropertyFrame.getInstance();
+    StationPropertyFrame stationPropertyFrame = new StationPropertyFrame();
     ShowResultsFrame showResultsFrame = new ShowResultsFrame();
     CalculateButtonFrame calculateButtonFrame = new CalculateButtonFrame();
     public Button btn = new Button();
