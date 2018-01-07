@@ -9,7 +9,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" stylesheets="/sample/view/beforHeater/beforeHeater.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.beforeHeater.BeforeHeaterController">
+<GridPane alignment="center" hgap="10" stylesheets="/sample/view/beforHeater/beforeHeater.css" vgap="10"
+          minWidth="500" minHeight="400" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="sample.controller.beforeHeater.BeforeHeaterController">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -21,7 +23,7 @@
    <children>
       <GridPane vgap="5">
          <Label alignment="CENTER_RIGHT" text="طول خط لوله " GridPane.columnIndex="2" GridPane.rowIndex="1" />
-         <ComboBox fx:id="lineLengthComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         <Label text="متر (m)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          <TextField fx:id="lineLengthTextField" GridPane.columnIndex="0" GridPane.rowIndex="1" />
           <Label alignment="CENTER_RIGHT" text="سایز لوله:‌ " GridPane.columnIndex="2" GridPane.rowIndex="2" />
           <ComboBox fx:id="mmOrInchComboBox" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -35,13 +37,18 @@
           <Label text="ضخامت دیواره" GridPane.columnIndex="0" GridPane.rowIndex="4" />
           <ComboBox fx:id="wallThicknessComboBox" GridPane.columnIndex="0" GridPane.rowIndex="5" />
 
+
+
           <RadioButton fx:id="insulationRadioButton" text="عایق" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-          <Label text="ضخامت عایق " GridPane.columnIndex="2" GridPane.rowIndex="7" />
-          <ComboBox fx:id="insulationThicknessComboBox" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-          <TextField fx:id="insulationThicknessTextField" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-          <Label text="ضریب انتقال حرارت" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-          <Label text="(W/m°K)" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-          <TextField fx:id="insulationFactorTextField" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+          <Label fx:id="insulationThicknessLabel" text="ضخامت عایق " GridPane.columnIndex="2" GridPane.rowIndex="7" disable="true"/>
+          <ComboBox fx:id="insulationThicknessComboBox" GridPane.columnIndex="1" GridPane.rowIndex="7" disable="true" />
+          <TextField fx:id="insulationThicknessTextField" GridPane.columnIndex="0" GridPane.rowIndex="7" disable="true" />
+          <Label fx:id="insulationFactorLabel" text="ضریب انتقال حرارت" GridPane.columnIndex="2" GridPane.rowIndex="8" disable="true" />
+          <Label fx:id="insulationFactorDimensionLabel" text="(W/m°K)" GridPane.columnIndex="1" GridPane.rowIndex="8" disable="true" />
+          <TextField fx:id="insulationFactorTextField" GridPane.columnIndex="0" GridPane.rowIndex="8" disable="true"/>
+
+
+
           <Label text="" GridPane.rowIndex="9" GridPane.columnIndex="2"/>
           <Button fx:id="okButton" text="OK" GridPane.columnIndex="2" GridPane.rowIndex="10" onAction="#okAction"/>
           <Button fx:id="clearButton" text="Clear" GridPane.columnIndex="1" GridPane.rowIndex="10" onAction="#clearButton"/>
