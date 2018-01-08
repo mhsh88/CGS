@@ -14,14 +14,13 @@ public class BeforeHeaterFrame extends Application implements BaseFrame {
     Parent root1;
     Stage stage;
 
-    public BeforeHeaterFrame(){
+    public BeforeHeaterFrame() {
         try {
             root1 = (Parent) fxmlLoader.load();
-            stage  = new Stage();
+            stage = new Stage();
             stage.setScene(new Scene(root1, 500, 400));
             stage.setTitle("خط لوله قبل از گرم کن");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -34,9 +33,10 @@ public class BeforeHeaterFrame extends Application implements BaseFrame {
 
     public void show() throws IOException {
         stage.close();
-            stage.show();
-        }
-        public void close() throws IOException{
+        stage.show();
+    }
+
+    public void close() throws IOException {
         stage.close();
-        }
+    }
 }

@@ -64,4 +64,11 @@ public class StationFrame extends Application implements BaseFrame {
         return stage;
     }
 
+//    @Override
+//    public void stop(){
+//
+//        System.out.println("Stage is closing");
+//        // Save file
+//    }
+
 }
