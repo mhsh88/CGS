@@ -51,14 +51,15 @@ public class BeforeHeaterController {
     @FXML
     public void initialize() throws IOException {
         insulationThicknessComboBox.getItems().removeAll(wallThicknessComboBox.getItems());
-        insulationThicknessComboBox.getItems().addAll("متر (m)", "اینچ (inch)");
-        insulationThicknessComboBox.getSelectionModel().select("متر (m)");
+        insulationThicknessComboBox.getItems().addAll("سانتی متر (cm)", "اینچ (inch)");
+        insulationThicknessComboBox.getSelectionModel().select("سانتی متر (cm)");
 
 
         mmOrInchComboBox.getItems().removeAll(wallThicknessComboBox.getItems());
-        mmOrInchComboBox.getItems().addAll("1/8", "¼", "3/8", "½", "¾", "1", "1 ¼", "1 ½", "2", "2 ½", "3", "3 ½", "4", "5", "6", "8", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40"
-                , "42", "44", "46", "48");
-        mmOrInchComboBox.getSelectionModel().select("1/8");
+//        mmOrInchComboBox.getItems().addAll("1/8", "¼", "3/8", "½", "¾", "1", "1 ¼", "1 ½", "2", "2 ½", "3", "3 ½", "4", "5", "6", "8", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40"
+//                , "42", "44", "46", "48");
+        mmOrInchComboBox.getItems().addAll( "½", "¾", "1", "1 ½", "2",  "3", "4");
+        mmOrInchComboBox.getSelectionModel().select("1");
 
         //        {"1/8","¼","3/8","½","¾","1","1 ¼","1 ½","2","2 ½","3","3 ½","4","5","6","8","10","12","14","16","18","20","22","24","26","28","30","32","34","36","38","40"
 //                ,"42","44","46","48"}
@@ -109,14 +110,26 @@ public class BeforeHeaterController {
         double wallthickness = pipesize.getWallThickness();
         if (insulationRadioButton.isSelected()) {
             if(!insulationThicknessTextField.getAlignment().equals("")) {
-                insulationThickness = Double.parseDouble(insulationThicknessTextField.getText());
+                double factor = 0.01;
+                if(insulationThicknessComboBox.getValue().toString().equals("سانتی متر (cm)"))
+                    factor = 0.01;
+                else if(insulationThicknessComboBox.getValue().toString().equals("اینچ (inch)"))
+                    factor = 0.0254;
+                insulationThickness = factor * Double.parseDouble(insulationThicknessTextField.getText());
+                System.out.println(insulationThickness);
             }
             else{
                 return;
             }
 
             if(!insulationFactorTextField.getText().equals("")) {
+
+
+
+
                 insulationFactor = Double.parseDouble(insulationFactorTextField.getText());
+
+
             }
             else{
 
