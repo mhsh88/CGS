@@ -1,4 +1,4 @@
-package sample.view.afterHeater;
+package sample.controller.afterHeater;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class AfterHeaterFrame extends Application implements BaseFrame {
 
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("afterHeater.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/view/afterHeater/afterHeater.fxml"));
     Parent root1;
     Stage stage;
 
@@ -20,7 +20,7 @@ public class AfterHeaterFrame extends Application implements BaseFrame {
         stage = new Stage();
 
         stage.setScene(new Scene(root1, 500, 400));
-        stage.setTitle("خط لوله بعد از گرم کن");}
+        stage.setTitle("خط لوله قبل از گرم کن");}
         catch (Exception e){
             e.printStackTrace();
         }

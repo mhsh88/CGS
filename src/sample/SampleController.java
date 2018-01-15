@@ -2,9 +2,9 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import sample.view.afterHeater.AfterHeaterFrame;
+import sample.controller.afterHeater.AfterHeaterFrame;
 import sample.controller.beforeHeater.BeforeHeaterFrame;
-import sample.view.calculate.CalculateButtonFrame;
+import sample.controller.calculate.CalculateButtonFrame;
 import sample.view.heater.HeaterFrame;
 import sample.view.run.RunFrame;
 import sample.view.showResult.ShowResultsFrame;
