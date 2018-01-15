@@ -4,7 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
+import sample.model.Station;
+import sample.model.base.BaseModel;
+import sample.model.pipeLine.PipeLine;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,6 +14,9 @@ import java.util.Map;
 
 
 public class BeforeHeaterController {
+
+    
+
     public Button okButton;
     public Button clearButton;
     public Button cancelButton;
@@ -31,16 +36,22 @@ public class BeforeHeaterController {
 
     public final static Map<String, PipeSize> sizeSelection = new HashMap<String, PipeSize>() {
         {
-            put("½", new PipeSize(2.8, 21.3));
-            put("¾", new PipeSize(2.9, 27.6));
-            put("1", new PipeSize(2.9, 33.4));
 
-            put("1 ½", new PipeSize(3.7, 48.3));
             put("2", new PipeSize(3.9, 60.3));
 
             put("3", new PipeSize(5.5, 88.9));
 
-            put("4", new PipeSize(6.0, 114.3));
+            put("4", new PipeSize(6.02, 114.3));
+            put("6", new PipeSize(7.11, 168.30));
+            put("8", new PipeSize(8.18, 219.10));
+            put("10", new PipeSize(9.27, 273.10));
+            put("12", new PipeSize(9.53, 323.90));
+            put("16", new PipeSize(9.53, 406.40));
+            put("20", new PipeSize(9.53, 508));
+            put("24", new PipeSize(9.53, 610));
+            put("30", new PipeSize(9.53, 762));
+
+
         }
     };
 
@@ -53,13 +64,11 @@ public class BeforeHeaterController {
         insulationThicknessComboBox.getItems().removeAll(wallThicknessComboBox.getItems());
         insulationThicknessComboBox.getItems().addAll("سانتی متر (cm)", "اینچ (inch)");
         insulationThicknessComboBox.getSelectionModel().select("سانتی متر (cm)");
-
-
         mmOrInchComboBox.getItems().removeAll(wallThicknessComboBox.getItems());
 //        mmOrInchComboBox.getItems().addAll("1/8", "¼", "3/8", "½", "¾", "1", "1 ¼", "1 ½", "2", "2 ½", "3", "3 ½", "4", "5", "6", "8", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40"
 //                , "42", "44", "46", "48");
-        mmOrInchComboBox.getItems().addAll( "½", "¾", "1", "1 ½", "2",  "3", "4");
-        mmOrInchComboBox.getSelectionModel().select("1");
+        mmOrInchComboBox.getItems().addAll( "2","4","6","8","10","12","16","20","24","30");
+        mmOrInchComboBox.getSelectionModel().select("8");
 
         //        {"1/8","¼","3/8","½","¾","1","1 ¼","1 ½","2","2 ½","3","3 ½","4","5","6","8","10","12","14","16","18","20","22","24","26","28","30","32","34","36","38","40"
 //                ,"42","44","46","48"}
@@ -94,8 +103,8 @@ public class BeforeHeaterController {
     }
 
     public void okAction(ActionEvent actionEvent) {
-        double insulationThickness;
-        double insulationFactor;
+        double insulationThickness = 0;
+        double insulationFactor = 0;
         if(!lineLengthTextField.getText().equals("")) {
             double pipelineLength = Double.parseDouble(lineLengthTextField.getText());
         }
@@ -136,6 +145,10 @@ public class BeforeHeaterController {
                 return;
             }
         }
+        
+        PipeLine pipeLine = new PipeLine(outerDiameter, pipesize.getInnerDiameter(), wallthickness, insulationThickness, insulationFactor);
+        Map<String, BaseModel> map = Station.getInstance().getList();
+        map.put("beforeHeaterPipeLine", pipeLine);
 
     }
 
@@ -152,7 +165,7 @@ public class BeforeHeaterController {
     }
 
     public void showAlert(String title, String info, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(info);
         alert.setContentText(message);

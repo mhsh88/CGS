@@ -1,8 +1,10 @@
 package sample.model.pipeLine;
 
+import sample.model.base.BaseModel;
+
 import java.util.Objects;
 
-public class PipeLine {
+public class PipeLine extends BaseModel{
 
     Double OD;
     Double ID;
