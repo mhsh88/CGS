@@ -6,9 +6,9 @@ import javafx.scene.control.TextField;
 
 public class HeaterController {
 
+    public TextField heaterNumberInput;
     @FXML
-    TextField textField = new TextField();
     public void okAction(ActionEvent actionEvent) {
-        System.out.println(textField.getText());
+        System.out.println(heaterNumberInput.getText());
     }
 }
