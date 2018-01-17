@@ -142,6 +142,7 @@ public class HeaterController {
                 burnerTab.setContent(childHBox);
                 burnerTabPane.getTabs().add(burnerTab);
                 burnerTabPane.setMinSize(300, 200);
+                burnerTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
             }
             HBox hbox = new HBox();

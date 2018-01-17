@@ -11,7 +11,7 @@ import sample.controller.stationProperty.StationPropertyController;
 import sample.controller.afterHeater.AfterHeaterFrame;
 import sample.controller.beforeHeater.BeforeHeaterFrame;
 import sample.controller.heaterController.HeaterFrame;
-import sample.view.run.RunFrame;
+import sample.controller.run.RunFrame;
 import sample.view.showResult.ShowResultsFrame;
 import sample.controller.stationProperty.StationPropertyFrame;
 

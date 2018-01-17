@@ -8,6 +8,7 @@ public class ShowResultsController {
 
     @FXML
     TextField textField = new TextField();
+
     public void okAction(ActionEvent actionEvent) {
         System.out.println(textField.getText());
     }
