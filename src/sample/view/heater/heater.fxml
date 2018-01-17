@@ -15,6 +15,7 @@
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
+      <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints />
@@ -26,12 +27,10 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#okAction" text="ok" textAlignment="JUSTIFY" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <ComboBox fx:id="heaterNumberComboBox" GridPane.rowIndex="1" />
-      <Label text="گرم کن" GridPane.columnIndex="1" />
-      <Label text="تعداد گرم کن" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TextField fx:id="heaterNumberInput" accessibleText="تعداد گرم کن را وارد کنید" />
-      <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="3" styleClass="tabPane">
+      <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#okAction" text="ok" textAlignment="JUSTIFY" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <Label text="تعداد گرم کن" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+      <TextField fx:id="heaterNumberInput" accessibleText="تعداد گرم کن را وارد کنید" onKeyReleased="#textInput" />
+      <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" styleClass="tabPane" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="3">
         <tabs>
           <Tab text="Untitled Tab 1">
             <content>
@@ -45,5 +44,7 @@
           </Tab>
         </tabs>
       </TabPane>
+      <Button mnemonicParsing="false" text="Cancel" GridPane.columnIndex="0" GridPane.rowIndex="4" onAction="#cancelButton"></Button>
+      <Button mnemonicParsing="false" text="Clear" GridPane.columnIndex="1" GridPane.rowIndex="4" onAction="#clearButton"/>
    </children>
 </GridPane>

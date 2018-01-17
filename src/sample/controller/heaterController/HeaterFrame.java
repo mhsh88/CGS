@@ -18,7 +18,7 @@ public class HeaterFrame extends Application implements BaseFrame {
         try {
             root1 = (Parent) fxmlLoader.load();
             stage = new Stage();
-            stage.setScene(new Scene(root1, 500, 400));
+            stage.setScene(new Scene(root1, 600, 400));
             stage.setTitle("اطلاعات گرم کن");
         } catch (Exception e) {
             e.printStackTrace();
