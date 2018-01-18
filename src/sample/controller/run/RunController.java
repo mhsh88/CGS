@@ -1,14 +1,23 @@
 package sample.controller.run;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import sample.model.Station;
+import sample.model.run.Collector;
+import sample.model.run.Run;
+import sample.model.run.Runs;
 
+import javax.xml.soap.Text;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Observable;
 
 public class RunController {
 
@@ -17,6 +26,9 @@ public class RunController {
     public TextField runColectorLengthInput;
     public TabPane runTapPane;
     public ComboBox collectorComboBox;
+    public Button okButton;
+    public Button clearButton;
+    public Button cancelButton;
 
     @FXML
     public void initialize() throws IOException {
@@ -26,8 +38,6 @@ public class RunController {
     }
 
 
-    public void okAction(ActionEvent actionEvent) {
-    }
 
     public void runNumInput(KeyEvent keyEvent) {
         runTapPane.getTabs().clear();
@@ -76,5 +86,54 @@ public class RunController {
 
 
 
+    }
+
+
+    public void ok(ActionEvent actionEvent) {
+        if(runNumberInput.getText().equals("") ||
+                runColectorLengthInput.getText().equals("") ||
+                runLengthInput.getText().equals("")){return;}
+
+        int runNumber = Integer.parseInt(runNumberInput.getText());
+        ArrayList<Run> runs = new ArrayList<Run>();
+        Collector collector = new Collector(collectorComboBox.getValue().toString().toString(),
+                Double.parseDouble(runColectorLengthInput.getText()));
+
+        double runLength = Double.parseDouble(runLengthInput.getText());
+
+        ObservableList<Tab> tabs = runTapPane.getTabs();
+        for(Tab t : tabs){
+            HBox hBox = (HBox) t.getContent();
+            ObservableList<Node> obj = hBox.getChildren();
+//            System.out.println(obj.get(0));
+            GridPane gridPane = (GridPane) obj.get(0);
+
+            ObservableList<Node> tabObject = gridPane.getChildren();
+
+            TextField rundebi = (TextField) tabObject.get(1);
+            ComboBox runsize = (ComboBox) tabObject.get(3);
+
+
+//            System.out.println(rundebi.getText() + " " + runsize.getValue().toString());
+            runs.add(new Run(runsize.getValue().toString(),runLength, Double.parseDouble(rundebi.getText()) ));
+
+
+        }
+
+        Runs allRun = new Runs(runs, collector);
+        Station.getInstance().getList().put("Runs", allRun);
+//        System.out.println(Station.getInstance().getList().get("Runs"));
+    }
+
+    public void clear(ActionEvent actionEvent) {
+        runNumberInput.clear();
+        runColectorLengthInput.clear();
+        runLengthInput.clear();
+        runTapPane.getTabs().clear();
+
+    }
+
+    public void cancel(ActionEvent actionEvent) {
+        ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
     }
 }

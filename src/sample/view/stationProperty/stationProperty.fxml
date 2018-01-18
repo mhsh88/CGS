@@ -44,7 +44,7 @@
     </rowConstraints>
     <children>
         <GridPane vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="1">
-        <Label fx:id="nitrogenLabel" text="Nitrogen" GridPane.rowIndex="2" />
+        <Label fx:id="nitrogenLabel" text="Nitrogen" GridPane.rowIndex="2"  />
         <TextField fx:id="nitrogenTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
         <Label fx:id="carbonDioxideLabel" text="Carbon Dioxide" GridPane.rowIndex="3" />

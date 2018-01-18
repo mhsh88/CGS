@@ -114,8 +114,8 @@ public class StationController {
     }
 
     public void calculateButton(ActionEvent actionEvent) throws IOException {
-        calculateController.calculate();
-        showResultsFrame.show();
+        if(calculateController.calculate()){
+        showResultsFrame.show();}
 //        calculateButtonFrame.close();
 
 

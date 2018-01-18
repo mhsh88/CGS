@@ -30,6 +30,9 @@ public class Heater extends GasConsumer{
 
     @Override
     public void calculate() {
+        for(int i = 0; i < burners.length ; i++){
+            burners[i].calculate();
+        }
 
     }
 }

@@ -65,7 +65,7 @@ public class StationPropertyController {
     public TextField stationDebiTextField = new TextField();
     public Button clearButton = new Button();
     public Button okButton  = new Button();
-    private double[] component = new double[21];
+    private Double[] component = new Double[21];
     @FXML
     ComboBox gasPercentType = new ComboBox();
     @FXML

@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class StationPropertice extends BaseModel {
-    private double[] component = new double[21];
+    private Double[] component = new Double[21];
     private String city;
     private String province;
     private String area;
@@ -20,11 +20,11 @@ public class StationPropertice extends BaseModel {
     private double windVelocity;
     private double debi;
 
-    public double[] getComponent() {
+    public Double[] getComponent() {
         return component;
     }
 
-    public void setComponent(double[] component) {
+    public void setComponent(Double[] component) {
         this.component = component;
     }
 

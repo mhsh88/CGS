@@ -4,16 +4,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import sample.controller.base.BaseController;
 import sample.controller.beforeHeater.BeforeHeaterController;
 import sample.model.Station;
 import sample.model.base.BaseModel;
 import sample.model.pipeLine.PipeLine;
+import sample.model.pipeLine.PipeSize;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AfterHeaterController{
+public class AfterHeaterController extends BaseController{
 
 
 
@@ -34,26 +36,26 @@ public class AfterHeaterController{
     public Label insulationFactorDimensionLabel;
     public Label insulationThicknessLabel;
 
-    public final static Map<String, PipeSize> sizeSelection = new HashMap<String, PipeSize>() {
-        {
-
-            put("2", new PipeSize(3.9, 60.3));
-
-            put("3", new PipeSize(5.5, 88.9));
-
-            put("4", new PipeSize(6.02, 114.3));
-            put("6", new PipeSize(7.11, 168.30));
-            put("8", new PipeSize(8.18, 219.10));
-            put("10", new PipeSize(9.27, 273.10));
-            put("12", new PipeSize(9.53, 323.90));
-            put("16", new PipeSize(9.53, 406.40));
-            put("20", new PipeSize(9.53, 508));
-            put("24", new PipeSize(9.53, 610));
-            put("30", new PipeSize(9.53, 762));
-
-
-        }
-    };
+//    public final static Map<String, PipeSize> sizeSelection = new HashMap<String, PipeSize>() {
+//        {
+//
+//            put("2", new PipeSize(3.9, 60.3));
+//
+//            put("3", new PipeSize(5.5, 88.9));
+//
+//            put("4", new PipeSize(6.02, 114.3));
+//            put("6", new PipeSize(7.11, 168.30));
+//            put("8", new PipeSize(8.18, 219.10));
+//            put("10", new PipeSize(9.27, 273.10));
+//            put("12", new PipeSize(9.53, 323.90));
+//            put("16", new PipeSize(9.53, 406.40));
+//            put("20", new PipeSize(9.53, 508));
+//            put("24", new PipeSize(9.53, 610));
+//            put("30", new PipeSize(9.53, 762));
+//
+//
+//        }
+//    };
 
     @FXML
     TextField textField = new TextField();
@@ -113,11 +115,11 @@ public class AfterHeaterController{
             double pipelineLength = Double.parseDouble(lineLengthTextField.getText());
         }
         else{
-            showAlert("خطا","لطفا اطلاعات درست وارد کنید", "طول خط لوله به درستی وارد نشده است");
+            showAlert("خطا","لطفا اطلاعات درست وارد کنید", "طول خط لوله به درستی وارد نشده است", Alert.AlertType.ERROR);
 
             return;
         }
-        PipeSize pipesize = sizeSelection.get(mmOrInchComboBox.getValue().toString());
+        PipeSize pipesize = PipeLine.getSizeSelection().get(mmOrInchComboBox.getValue().toString());
         System.out.println(pipesize);
         double outerDiameter = pipesize.getOuterDiameter();
         double wallthickness = pipesize.getWallThickness();
@@ -169,43 +171,4 @@ public class AfterHeaterController{
         ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
     }
 
-    public void showAlert(String title, String info, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(info);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-
-    static class PipeSize {
-        double wallThickness;
-        double outerDiameter;
-
-        @Override
-        public String toString() {
-            return "PipeSize{" +
-                    "wallThickness=" + wallThickness +
-                    ", outerDiameter=" + outerDiameter +
-                    ", innerDiameter=" + getInnerDiameter() +
-                    '}';
-        }
-
-        public PipeSize(double wallThickness, double outerDiameter) {
-            this.wallThickness = wallThickness;
-            this.outerDiameter = outerDiameter;
-        }
-
-        public double getWallThickness() {
-            return wallThickness;
-        }
-
-        public double getOuterDiameter() {
-            return outerDiameter;
-        }
-        public double getInnerDiameter(){
-
-            return outerDiameter - 2 * wallThickness;
-        }
-    }
 }

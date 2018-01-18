@@ -2,3 +2,8 @@
     -fx-background-color: #5eebd4;
 
 }
+.button{
+    -fx-min-height: 5;
+    -fx-min-width: 50;
+
+}

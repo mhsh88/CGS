@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import javafx.scene.layout.HBox?>
 <GridPane alignment="center" hgap="10" prefHeight="62.0" prefWidth="265.0" stylesheets="/sample/view/run/run.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.run.RunController">
    <columnConstraints>
       <ColumnConstraints />
@@ -38,7 +39,14 @@
        <TabPane fx:id="runTapPane" minHeight="100" minWidth="200" GridPane.columnIndex="0" GridPane.rowIndex="4" maxWidth="300">
        </TabPane>
 
-      <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#okAction" text="ok" textAlignment="JUSTIFY" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <TextField fx:id="textField" GridPane.rowIndex="6" />
+       <HBox GridPane.columnIndex="0" GridPane.rowIndex="5">
+           <children>
+               <Button fx:id="okButton" text="Ok" onAction="#ok" styleClass="button"/>
+               <Button fx:id="clearButton" text="Clear" onAction="#clear" styleClass="button"/>
+               <Button fx:id="cancelButton" text="Cancel" onAction="#cancel" styleClass="button"/>
+
+           </children>
+
+       </HBox>
    </children>
 </GridPane>

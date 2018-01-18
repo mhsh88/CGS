@@ -73,7 +73,7 @@ public class BaseBurner extends EntityBase {
         this.gas = gas;
         this.oxygen = oxygen;
         this.Tstack = tstack;
-        this.Tamb = tamb;
+        this.Tamb = getTenv();
         setEfficiency(0.8);
         calculate();
     }
