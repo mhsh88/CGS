@@ -31,7 +31,7 @@
        <TextField fx:id="runLengthInput" GridPane.columnIndex="0" GridPane.rowIndex="1" />
        <Label text="طول کلکتور " GridPane.columnIndex="1" GridPane.rowIndex="2" />
        <TextField fx:id="runColectorLengthInput" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-       <Label text="سایز کلکتور " GridPane.columnIndex="1" GridPane.rowIndex="3" />
+       <Label text="سایز کلکتور (اینچ) " GridPane.columnIndex="1" GridPane.rowIndex="3" />
        <ComboBox fx:id="collectorComboBox" GridPane.columnIndex="0" GridPane.rowIndex="3" />
 
 

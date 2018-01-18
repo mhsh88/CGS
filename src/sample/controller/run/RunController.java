@@ -55,7 +55,7 @@ public class RunController {
             GridPane runContainer = new GridPane();
             runContainer.add(new Label("دبی گاز عبوری "), 1, 0);
             runContainer.add(new TextField(), 0, 0);
-            runContainer.add(new Label("سایز "), 1, 1);
+            runContainer.add(new Label("سایز (اینچ) "), 1, 1);
             ComboBox comboBox = new ComboBox();
             comboBox.getItems().removeAll();
             comboBox.getItems().addAll( "2","4","6","8","10","12","16","20","24","30");
