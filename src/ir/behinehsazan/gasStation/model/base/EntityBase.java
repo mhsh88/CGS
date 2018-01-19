@@ -4,7 +4,7 @@ public abstract class EntityBase implements Base{
 
     protected static Double Tenv;
     protected static Double Vair;
-    protected double constumption;
+    protected double consumption;
     protected double efficiency;
     protected double debi;
 
@@ -47,11 +47,11 @@ public abstract class EntityBase implements Base{
 
 
     public double getConsumption() {
-        return constumption * getEfficiency();
+        return consumption * getEfficiency();
     }
 
-    public void setConstumption(double constumption) {
-        this.constumption = constumption ;
+    public void setConsumption(double constumption) {
+        this.consumption = constumption ;
     }
 
 

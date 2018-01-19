@@ -8,6 +8,14 @@ public class Heaters extends GasConsumer{
 
     ArrayList<Heater> heaters = new ArrayList<Heater>();
 
+    public ArrayList<Heater> getHeaters() {
+        return heaters;
+    }
+
+    public void setHeaters(ArrayList<Heater> heaters) {
+        this.heaters = heaters;
+    }
+
     @Override
     public void calculate() {
         for(Heater h : heaters){

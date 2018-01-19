@@ -7,7 +7,7 @@ import sample.controller.beforeHeater.BeforeHeaterFrame;
 import sample.controller.calculate.CalculateController;
 import sample.controller.heaterController.HeaterFrame;
 import sample.controller.run.RunFrame;
-import sample.view.showResult.ShowResultsFrame;
+import sample.controller.showResults.ShowResultsFrame;
 import sample.controller.stationProperty.StationPropertyFrame;
 
 import java.io.IOException;

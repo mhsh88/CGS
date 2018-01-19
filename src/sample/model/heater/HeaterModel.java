@@ -5,17 +5,17 @@ import sample.model.burner.Burner;
 
 import java.util.ArrayList;
 
-public class Heater extends BaseModel{
+public class HeaterModel extends BaseModel{
     private double efficiency = 0.8;
     private ArrayList<Burner> burners = new ArrayList<Burner>();
 
 
 
-    public Heater(ArrayList<Burner> burners) {
+    public HeaterModel(ArrayList<Burner> burners) {
         this.burners = burners;
     }
 
-    public Heater(double efficiency, ArrayList<Burner> burners) {
+    public HeaterModel(double efficiency, ArrayList<Burner> burners) {
         this.efficiency = efficiency;
         this.burners = burners;
     }

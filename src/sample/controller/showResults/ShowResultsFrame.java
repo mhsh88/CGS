@@ -1,4 +1,4 @@
-package sample.view.showResult;
+package sample.controller.showResults;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,7 @@ import java.io.IOException;
 public class ShowResultsFrame extends Application implements BaseFrame {
 
 
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("showResults.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/view/showResult/showResults.fxml"));
     Parent root1;
     Stage stage;
 

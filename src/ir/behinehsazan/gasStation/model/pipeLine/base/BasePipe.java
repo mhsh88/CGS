@@ -225,7 +225,7 @@ public class BasePipe extends GasConsumer implements FindRoot {
                         -Math.PI * getInterDiameter() * getLength() * h_Total / (mdot * g.getC_p() * 1000)) + getTenv());
             }
 
-            setConstumption(mdot * g.getC_p() * (getTin() - getTout()));
+            setConsumption(mdot * g.getC_p() * (getTin() - getTout()));
             double outter_A = Math.PI * getOuterDiameter() * getOuterDiameter() / 4;
             double deltaT = getConsumption() * 1000 / (hair * outter_A);
             Ts = getTenv() + deltaT;

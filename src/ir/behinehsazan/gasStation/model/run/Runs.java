@@ -16,6 +16,10 @@ public class Runs extends GasConsumer{
         return consumption;
     }
 
+    public ArrayList<BaseRun> getRuns() {
+        return runs;
+    }
+
     @Override
     public void calculate() {
     for(BaseRun run : runs){

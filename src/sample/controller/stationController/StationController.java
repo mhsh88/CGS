@@ -12,7 +12,7 @@ import sample.controller.afterHeater.AfterHeaterFrame;
 import sample.controller.beforeHeater.BeforeHeaterFrame;
 import sample.controller.heaterController.HeaterFrame;
 import sample.controller.run.RunFrame;
-import sample.view.showResult.ShowResultsFrame;
+import sample.controller.showResults.ShowResultsFrame;
 import sample.controller.stationProperty.StationPropertyFrame;
 
 import java.io.IOException;
@@ -115,7 +115,8 @@ public class StationController {
 
     public void calculateButton(ActionEvent actionEvent) throws IOException {
         if(calculateController.calculate()){
-        showResultsFrame.show();}
+        showResultsFrame.show();
+        }
 //        calculateButtonFrame.close();
 
 

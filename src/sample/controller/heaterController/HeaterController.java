@@ -15,8 +15,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import sample.model.Station;
 import sample.model.burner.Burner;
-import sample.model.heater.Heater;
-import sample.model.heaters.Heaters;
+import sample.model.heater.HeaterModel;
+import sample.model.heaters.HeatersModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,8 +35,8 @@ public class HeaterController {
 
     @FXML
     public void okAction(ActionEvent actionEvent) {
-        Heaters stationHeaters = new Heaters();
-        ArrayList<Heater> heaters = new ArrayList<Heater>();
+        HeatersModel stationHeatersModel = new HeatersModel();
+        ArrayList<HeaterModel> heaterModels = new ArrayList<HeaterModel>();
 
         ObservableList<Tab> Tabs = tabPane.getTabs();
         int heaterNumber = Tabs.size();
@@ -70,14 +70,14 @@ public class HeaterController {
                 burners.add(new Burner(Double.parseDouble(oxygenTextField.getText()), Double.parseDouble(flueGasTempTextField.getText())));
 
             }
-            heaters.add(new Heater(Double.parseDouble(heaterRandeman.getText()), burners));
+            heaterModels.add(new HeaterModel(Double.parseDouble(heaterRandeman.getText()), burners));
 
 
         }
-        stationHeaters.setHeaters(heaters);
+        stationHeatersModel.setHeaterModels(heaterModels);
 
-        Station.getInstance().getList().put("Heaters", stationHeaters);
-        System.out.println(Station.getInstance().getList().get("Heaters"));
+        Station.getInstance().getList().put("HeatersModel", stationHeatersModel);
+        System.out.println(Station.getInstance().getList().get("HeatersModel"));
 
 //        StationLogic station = StationLogic.getInstance();
 //        station.getList().put();

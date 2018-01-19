@@ -3,8 +3,10 @@ package ir.behinehsazan.gasStation.model.heater;
 import ir.behinehsazan.gasStation.model.base.GasConsumer;
 import ir.behinehsazan.gasStation.model.burner.Burner;
 
+import java.util.ArrayList;
+
 public class Heater extends GasConsumer{
-    private Burner[] burners = new Burner[3];
+    private ArrayList<Burner> burners = new ArrayList<>();
 
 
     public Heater(){
@@ -13,15 +15,15 @@ public class Heater extends GasConsumer{
 
 
 
-    public Burner[] getBurners() {
+    public ArrayList<Burner> getBurners() {
         return burners;
     }
-    public Burner getBurner(int index){
-        return burners[index];
+    public ArrayList<Burner> getBurner(){
+        return burners;
     }
 
-    public void setBurners(Burner burner, int i) {
-        this.burners[i] = burner;
+    public void setBurners(Burner burner) {
+        this.burners.add(burner);
     }
 
 
@@ -30,8 +32,8 @@ public class Heater extends GasConsumer{
 
     @Override
     public void calculate() {
-        for(int i = 0; i < burners.length ; i++){
-            burners[i].calculate();
+        for(Burner burner : burners){
+            burner.calculate();
         }
 
     }

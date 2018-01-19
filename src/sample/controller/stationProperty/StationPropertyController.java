@@ -89,18 +89,46 @@ public class StationPropertyController {
         inputGasTempComboBox.getItems().addAll("°C", "°F");
         inputGasTempComboBox.getSelectionModel().select("°C");
         inputGasPressureComboBox.getItems().removeAll(inputGasTempComboBox.getItems());
-        inputGasPressureComboBox.getItems().addAll("kPa", "Psi");
+        inputGasPressureComboBox.getItems().addAll("kPa", "MPa","Psi");
         inputGasPressureComboBox.getSelectionModel().select("kPa");
         outputGasTempComboBox.getItems().removeAll(inputGasTempComboBox.getItems());
         outputGasTempComboBox.getItems().addAll("°C", "°F");
         outputGasTempComboBox.getSelectionModel().select("°C");
         outputGasPressureComboBox.getItems().removeAll(inputGasTempComboBox.getItems());
-        outputGasPressureComboBox.getItems().addAll("kPa", "Psi");
+        outputGasPressureComboBox.getItems().addAll("kPa","MPa", "Psi");
         outputGasPressureComboBox.getSelectionModel().select("kPa");
         environmentTempComboBox.getItems().removeAll(inputGasTempComboBox.getItems());
         environmentTempComboBox.getItems().addAll("°C", "°F");
         environmentTempComboBox.getSelectionModel().select("°C");
         methanTextField.setText("100");
+        nitrogenTextField.setText("0");
+        carbonDioxideTextField.setText("0");
+        ethaneTextField.setText("0");
+        propaneTextField.setText("0");
+        nButaneTextField.setText("0");
+        isoButaneTextField.setText("0");
+        nPentaneTextField.setText("0");
+        isoPentaneTextField.setText("0");
+        hexaneTextField.setText("0");
+        heptaneTextField.setText("0");
+        octaneTextField.setText("0");
+        nonaneTextField.setText("0");
+        decaneTextField.setText("0");
+        hydrogenTextField.setText("0");
+        oxygenTextField.setText("0");
+        carbonMonoxideTextField.setText("0");
+        waterTextField.setText("0");
+        hydrogenSulfideTextField.setText("0");
+        heliumTextField.setText("0");
+        argonTextField.setText("0");
+        inputGasTempTextField.setText("0");
+        inputGasPressureTextField.setText("8000");
+        outputGasPressureTextField.setText("3000");
+        outputGasTempTextField.setText("0");
+        environmentTempTextField.setText("30");
+        windSpeedTextField.setText("10");
+        stationDebiTextField.setText("3000");
+
 
         nitrogenTextField.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -184,6 +212,7 @@ public class StationPropertyController {
         Station station = Station.getInstance();
         Map<String, BaseModel> tempMap = station.getList();
         tempMap.put("stationPropertice",stationPropertice);
+        ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
 
 
     }
