@@ -1,6 +1,5 @@
 package sample.model.pipeLine;
 
-import sample.controller.afterHeater.AfterHeaterController;
 import sample.model.base.BaseModel;
 
 import java.util.HashMap;
@@ -46,6 +45,9 @@ public class PipeLine extends BaseModel{
 
     }
 
+    public Double getLength() {
+        return length;
+    }
 
     public PipeLine(Double OD, Double ID, Double lineThickness, Double insulationThickness, Double insulationFactor) {
         this.OD = OD;

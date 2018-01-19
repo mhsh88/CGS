@@ -154,7 +154,7 @@ public class StationPropertice extends BaseModel {
 
     @Override
     public String toString() {
-        return "Station Propertis{" +
+        return "StationLogic Propertis{" +
                 "component=" + Arrays.toString(component) +
                 ", city='" + city + '\'' +
                 ", province='" + province + '\'' +

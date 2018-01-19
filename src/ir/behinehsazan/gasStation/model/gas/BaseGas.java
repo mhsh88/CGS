@@ -367,7 +367,7 @@ public class BaseGas implements FindRoot {
             1671.69, 0., 0., 0., 0., 0., 0.};
 
 
-    protected void setComponent(Double[] component) {
+    public void setComponent(Double[] component) {
 
         this.Xi = component;
     }

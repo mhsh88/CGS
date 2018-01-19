@@ -122,7 +122,7 @@ public class RunController {
 
         Runs allRun = new Runs(runs, collector);
         Station.getInstance().getList().put("Runs", allRun);
-//        System.out.println(Station.getInstance().getList().get("Runs"));
+//        System.out.println(StationLogic.getInstance().getList().get("Runs"));
     }
 
     public void clear(ActionEvent actionEvent) {

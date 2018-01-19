@@ -79,7 +79,7 @@ public class HeaterController {
         Station.getInstance().getList().put("Heaters", stationHeaters);
         System.out.println(Station.getInstance().getList().get("Heaters"));
 
-//        Station station = Station.getInstance();
+//        StationLogic station = StationLogic.getInstance();
 //        station.getList().put();
 
 
