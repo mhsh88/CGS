@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import sample.controller.calculate.CalculateController;
+import sample.controller.showResults.ShowResultsController;
 import sample.controller.stationProperty.StationPropertyController;
 import sample.controller.afterHeater.AfterHeaterFrame;
 import sample.controller.beforeHeater.BeforeHeaterFrame;
@@ -115,6 +116,7 @@ public class StationController {
 
     public void calculateButton(ActionEvent actionEvent) throws IOException {
         if(calculateController.calculate()){
+            ShowResultsController.showResult(showResultsFrame);
         showResultsFrame.show();
         }
 //        calculateButtonFrame.close();
