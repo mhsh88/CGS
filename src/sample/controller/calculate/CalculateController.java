@@ -28,6 +28,7 @@ public class CalculateController extends BaseController{
         else{
 
 
+
             StationLogic stationLogic = new StationLogic();
             Gas gas = new Gas();
             gas.setComponent(stationPropertice.getComponent());
@@ -49,6 +50,8 @@ public class CalculateController extends BaseController{
             stationLogic.setAfterHeater(afterHeaterPipeLine);
 
             stationLogic.setHeaters(heatersModel);
+
+            station.setStationLogic(stationLogic);
             state = true;
 
 
