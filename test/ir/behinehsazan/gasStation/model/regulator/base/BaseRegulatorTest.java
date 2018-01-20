@@ -35,7 +35,7 @@ public class BaseRegulatorTest {
         System.out.println(baseRegulator1.getTout());
 
         System.out.println(baseRegulator.getEfficiency());
-        System.out.println(baseRegulator.getConstumption());
+        System.out.println(baseRegulator.getConsumption());
 
 
     }
