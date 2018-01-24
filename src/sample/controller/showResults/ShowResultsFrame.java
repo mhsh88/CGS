@@ -17,10 +17,12 @@ public class ShowResultsFrame extends Application implements BaseFrame {
     Stage stage;
 
     public ShowResultsFrame() {
-        try{root1 = (Parent) fxmlLoader.load();
+        try{
+            root1 = (Parent) fxmlLoader.load();
          stage = new Stage();
         stage.setScene(new Scene(root1, 500, 400));
-        stage.setTitle("نتایج محاسبات");}
+        stage.setTitle("نتایج محاسبات");
+        }
         catch (Exception e){
             e.printStackTrace();
         }
@@ -28,6 +30,9 @@ public class ShowResultsFrame extends Application implements BaseFrame {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        stage = primaryStage;
+        stage.setScene(new Scene(root1, 500, 400));
+        stage.setTitle("نتایج محاسبات");
         show();
     }
 
