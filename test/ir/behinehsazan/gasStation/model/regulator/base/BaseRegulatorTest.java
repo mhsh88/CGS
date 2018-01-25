@@ -9,9 +9,12 @@ public class BaseRegulatorTest {
 
         Gas gas = new Gas();
 
-        Double P = 5000.0;
-        Double T = 300.0;
-        Double[] component = {0.057, 0.076, 0.812, 0.043, 0.009, 0.0015, 0.0015, 0., 0., 0.
+        Double P = 3000.0;
+        Double T = 273.15 + 8;
+//        Double[] component = {0.057, 0.076, 0.812, 0.043, 0.009, 0.0015, 0.0015, 0., 0., 0.
+//                , 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.
+//                , 0.};
+        Double[] component = {0., 0., 100.0, 0., 0., 0., 0., 0., 0., 0.
                 , 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.
                 , 0.};
         for (int i = 0; i < component.length; i++) {
@@ -22,7 +25,7 @@ public class BaseRegulatorTest {
         gas.calculate(P, T, component);
 
 
-        BaseRegulator baseRegulator = new BaseRegulator(7000.0, 273.15+15,2000.0, gas,true);
+        BaseRegulator baseRegulator = new BaseRegulator(8000.0, 273.15+8,3000.0, gas,false);
         baseRegulator.calculate();
 
         System.out.println(baseRegulator.getTin());

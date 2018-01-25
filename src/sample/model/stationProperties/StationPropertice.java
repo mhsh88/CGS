@@ -69,7 +69,7 @@ public class StationPropertice extends BaseModel {
     }
 
     public double getInputTemp() {
-        return inputTemp;
+        return inputTemp + 273.15;
     }
 
     public void setInputTemp(double inputTemp) {
@@ -77,7 +77,7 @@ public class StationPropertice extends BaseModel {
     }
 
     public double getInputPressure() {
-        return inputPressure;
+        return inputPressure + 101.325;
     }
 
     public void setInputPressure(double inputPressure) {
@@ -85,7 +85,7 @@ public class StationPropertice extends BaseModel {
     }
 
     public double getOutputTemp() {
-        return outputTemp;
+        return outputTemp + 273.15;
     }
 
     public void setOutputTemp(double outputTemp) {
@@ -93,7 +93,7 @@ public class StationPropertice extends BaseModel {
     }
 
     public double getOutputPressure() {
-        return outputPressure;
+        return outputPressure + 101.325;
     }
 
     public void setOutputPressure(double outputPressure) {
@@ -101,7 +101,7 @@ public class StationPropertice extends BaseModel {
     }
 
     public double getEnvironmentTemp() {
-        return environmentTemp;
+        return environmentTemp + 273.15;
     }
 
     public void setEnvironmentTemp(double environmentTemp) {

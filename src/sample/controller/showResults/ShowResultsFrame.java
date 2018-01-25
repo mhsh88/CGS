@@ -30,9 +30,9 @@ public class ShowResultsFrame extends Application implements BaseFrame {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        stage = primaryStage;
-        stage.setScene(new Scene(root1, 500, 400));
-        stage.setTitle("نتایج محاسبات");
+//        stage = primaryStage;
+//        stage.setScene(new Scene(root1, 500, 400));
+//        stage.setTitle("نتایج محاسبات");
         show();
     }
 
@@ -40,6 +40,7 @@ public class ShowResultsFrame extends Application implements BaseFrame {
     public void show() throws IOException {
 
         stage.close();
+        ShowResultsController.showResult();
         stage.show();
 
     }

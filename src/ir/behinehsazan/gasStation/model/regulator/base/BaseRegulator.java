@@ -50,6 +50,13 @@ public class BaseRegulator extends GasConsumer implements FindRoot {
             }
             muuu = (getTout() - getTin()) / (getPout() - getPin()) * 1000;
             g.calculate(getPin(), getTin());
+
+
+            System.out.println(getTin());
+            System.out.println(getPin());
+            System.out.println(getTout());
+            System.out.println(getPout());
+
         }
 
     }

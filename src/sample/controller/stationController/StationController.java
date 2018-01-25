@@ -6,14 +6,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import sample.controller.calculate.CalculateController;
-import sample.controller.showResults.ShowResultsController;
-import sample.controller.stationProperty.StationPropertyController;
 import sample.controller.afterHeater.AfterHeaterFrame;
 import sample.controller.beforeHeater.BeforeHeaterFrame;
+import sample.controller.calculate.CalculateController;
 import sample.controller.heaterController.HeaterFrame;
 import sample.controller.run.RunFrame;
+import sample.controller.showResults.ShowResultsController;
 import sample.controller.showResults.ShowResultsFrame;
+import sample.controller.stationProperty.StationPropertyController;
 import sample.controller.stationProperty.StationPropertyFrame;
 
 import java.io.IOException;
@@ -116,7 +116,7 @@ public class StationController {
 
     public void calculateButton(ActionEvent actionEvent) throws IOException {
         if(calculateController.calculate()){
-            ShowResultsController.showResult(showResultsFrame);
+            ShowResultsController.showResult();
         showResultsFrame.show();
         }
 //        calculateButtonFrame.close();

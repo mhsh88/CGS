@@ -4,8 +4,6 @@ import ir.behinehsazan.gasStation.model.mathCalculation.FindRoot;
 import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.solvers.BisectionSolver;
-import org.apache.commons.math3.analysis.solvers.BrentSolver;
-import org.apache.commons.math3.analysis.solvers.UnivariateSolver;
 
 import java.util.ArrayList;
 
@@ -478,17 +476,17 @@ public class BaseGas implements FindRoot {
         final double relativeAccuracy = 1.0e-12;
         final double absoluteAccuracy = 1.0e-8;
         final int maxOrder = 5;
-        UnivariateSolver nonBracketing = new BrentSolver(relativeAccuracy, absoluteAccuracy);
-        double baseRoot = nonBracketing.solve(100, function, 0.0, 1000000.0);
+//        UnivariateSolver nonBracketing = new BrentSolver(relativeAccuracy, absoluteAccuracy);
+//        double baseRoot = nonBracketing.solve(100, function, 0.0, 1000.0);
 
         BisectionSolver bSolver = new BisectionSolver(relativeAccuracy, absoluteAccuracy);
-        double res = bSolver.solve(100, function, 0.0, 1000000.0, 1.0);
+        double res = bSolver.solve(100, function, 0.0, 1000.0, 1.0);
 
 //        UnivariateSolver solver = new BracketingNthOrderBrentSolver(relativeAccuracy, absoluteAccuracy, maxOrder);
 //        double c = solver.solve(100, function, -1000000.0, 1000000.0, 100.0);
 
 //        double soldelta = rootFind();
-        double soldelta = baseRoot;
+        double soldelta = res;
 
 //        double result = instanceFun()
 

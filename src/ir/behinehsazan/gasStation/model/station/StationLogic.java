@@ -11,7 +11,6 @@ import sample.model.burner.Burner;
 import sample.model.heater.HeaterModel;
 import sample.model.heaters.HeatersModel;
 import sample.model.pipeLine.PipeLine;
-import sample.model.run.Run;
 
 import java.util.ArrayList;
 
@@ -204,12 +203,14 @@ public class StationLogic extends GasConsumer {
     }
 
     public void setRegulator() {
-        this.regulator.setGas(getGas());
-        this.regulator.setPin(getPin());
-        this.regulator.setTout(getTout());
-        this.regulator.setPout(getPout());
-        this.regulator.setInverse(true);
+        this.regulator = new Regulator(getPin(),getTout(),getPout(),getGas(), false);
         this.regulator.calculate();
+//        this.regulator.setGas(getGas());
+//        this.regulator.setPin(getPin());
+//        this.regulator.setTout(getTout());
+//        this.regulator.setPout(getPout());
+//        this.regulator.setInverse(true);
+//        this.regulator.calculate();
 
     }
     //    private ArrayList<EntityBase> allComponent = new ArrayList<EntityBase>(){{

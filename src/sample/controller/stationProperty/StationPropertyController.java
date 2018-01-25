@@ -121,13 +121,13 @@ public class StationPropertyController {
         hydrogenSulfideTextField.setText("0");
         heliumTextField.setText("0");
         argonTextField.setText("0");
-        inputGasTempTextField.setText("0");
+        inputGasTempTextField.setText("15");
         inputGasPressureTextField.setText("8000");
         outputGasPressureTextField.setText("3000");
-        outputGasTempTextField.setText("0");
+        outputGasTempTextField.setText("8");
         environmentTempTextField.setText("30");
         windSpeedTextField.setText("10");
-        stationDebiTextField.setText("3000");
+        stationDebiTextField.setText("40000");
 
 
         nitrogenTextField.textProperty().addListener(new ChangeListener<String>() {
@@ -202,8 +202,8 @@ public class StationPropertyController {
 
         stationPropertice.setInputTemp(Double.parseDouble(inputGasTempTextField.getText()));
         stationPropertice.setInputPressure(Double.parseDouble(inputGasPressureTextField.getText()));
-        stationPropertice.setOutputPressure(Double.parseDouble(outputGasTempTextField.getText()));
-        stationPropertice.setOutputTemp(Double.parseDouble(outputGasPressureTextField.getText()));
+        stationPropertice.setOutputPressure(Double.parseDouble(outputGasPressureTextField.getText()));
+        stationPropertice.setOutputTemp(Double.parseDouble(outputGasTempTextField.getText()));
         stationPropertice.setEnvironmentTemp(Double.parseDouble(environmentTempTextField.getText()));
         stationPropertice.setWindVelocity(Double.parseDouble(windSpeedTextField.getText()));
         stationPropertice.setDebi(Double.parseDouble(stationDebiTextField.getText()));
