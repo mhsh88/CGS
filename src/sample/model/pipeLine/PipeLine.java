@@ -42,6 +42,9 @@ public class PipeLine extends BaseModel{
         this.insulationFactor = 0.0;
         this.insulationThickness = 0.0;
         this.pipeSize = sizeSelection.get(getSize());
+        this.OD = this.pipeSize.getOuterDiameter() * .001;
+        this.ID = this.pipeSize.getInnerDiameter() * .001;
+        this.lineThickness = this.pipeSize.getWallThickness() * 0.001;
 
     }
 

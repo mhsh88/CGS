@@ -253,7 +253,7 @@
             </rowConstraints>
         </GridPane>
         <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="12">
-            <Label text="دمای گاز خروجی به ایستگاه: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text="دمای گاز خروجی از ایستگاه: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <ComboBox fx:id="outputGasTempComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="outputGasTempTextField" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <columnConstraints>
@@ -267,7 +267,7 @@
             </rowConstraints>
         </GridPane>
         <GridPane alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="13">
-            <Label text="فشار گاز ورودی به ایستگاه: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text="فشار گاز خروجی از ایستگاه: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <ComboBox fx:id="outputGasPressureComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="outputGasPressureTextField" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <columnConstraints>

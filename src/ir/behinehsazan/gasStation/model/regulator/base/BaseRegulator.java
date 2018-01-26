@@ -43,19 +43,22 @@ public class BaseRegulator extends GasConsumer implements FindRoot {
 //        double res = bSolver.solve(100, function, 0.0, 1000000.0, 1.0);
         while( Math.abs((muuu - g.getMu()) / g.getMu()) > 10e-7) {
             if(isInverse()){
-                setTin(nonBracketing.solve(100, function, 0.0, 1000000.0));
+                this.setTin(nonBracketing.solve(100, function, 0.0, 5000.0));
+                double t1 = this.getTin();
+                double t2 = this.getTout();
+                double p1 = this.getPin();
+                double p2 = this.getPout();
             }
             else{
-                setTout(nonBracketing.solve(100, function, 0.0, 1000000.0));
+                setTout(nonBracketing.solve(100, function, 0.0, 5000.0));
+                double t1 = this.getTin();
+                double t2 = this.getTout();
+                double p1 = this.getPin();
+                double p2 = this.getPout();
             }
             muuu = (getTout() - getTin()) / (getPout() - getPin()) * 1000;
             g.calculate(getPin(), getTin());
 
-
-            System.out.println(getTin());
-            System.out.println(getPin());
-            System.out.println(getTout());
-            System.out.println(getPout());
 
         }
 
@@ -66,6 +69,7 @@ public class BaseRegulator extends GasConsumer implements FindRoot {
         Gas g = getGas();
         double result;
         if(isInverse()){
+
             result = (getTout() - T2) / (getPout() - getPin()) * 1000 - g.getMu();
         }
         else

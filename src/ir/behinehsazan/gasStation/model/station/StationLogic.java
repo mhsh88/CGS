@@ -47,15 +47,25 @@ public class StationLogic extends GasConsumer {
 
     public void setBeforeHeater(PipeLine beforeHeater) {
         if(beforeHeater != null) {
+            double od = beforeHeater.getOD();
+            double id = beforeHeater.getID();
+            double thic = beforeHeater.getLineThickness();
+            double iff = beforeHeater.getInsulationFactor();
+            double it = beforeHeater.getInsulationThickness();
+            double l = beforeHeater.getLength();
+            double debi = getDebi();
+            double tin = getTin();
+            double pin = getPin();
             this.beforeHeater.setOuterDiameter(beforeHeater.getOD());
             this.beforeHeater.setInterDiameter(beforeHeater.getID());
             this.beforeHeater.setInsulationFactor(beforeHeater.getInsulationFactor());
             this.beforeHeater.setInsulationThickness(beforeHeater.getInsulationThickness());
             this.beforeHeater.setLength(beforeHeater.getLength());
             this.beforeHeater.setDebi(this.getDebi());
-            this.beforeHeater.setTin(this.getTin());
+            this.beforeHeater.setTin(getTin());
             this.beforeHeater.setPin(this.getPin());
             this.beforeHeater.setInverse(false);
+            this.beforeHeater.setGas(getGas());
             this.beforeHeater.calculate();
         }
         else{
@@ -199,12 +209,24 @@ public class StationLogic extends GasConsumer {
     }
 
     public Regulator getRegulator() {
-        return regulator;
+        return this.regulator;
     }
 
     public void setRegulator() {
-        this.regulator = new Regulator(getPin(),getTout(),getPout(),getGas(), false);
+        double P1 = getPin();
+        double p2 = getPout();
+        double t1 = getTin();
+        double t2 = getTout();
+        this.regulator = new Regulator(getPin(),getTout(),getPout(),getGas(), true);
+        double p3 = this.regulator.getPin();
+        double p4 = this.regulator.getPout();
+        double t3 = this.regulator.getTin();
+        double t4 = this.regulator.getTout();
         this.regulator.calculate();
+        double p5 = this.regulator.getPin();
+        double p6 = this.regulator.getPout();
+        double t5 = this.regulator.getTin();
+        double t6 = this.regulator.getTout();
 //        this.regulator.setGas(getGas());
 //        this.regulator.setPin(getPin());
 //        this.regulator.setTout(getTout());

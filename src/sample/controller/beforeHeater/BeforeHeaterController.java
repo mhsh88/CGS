@@ -11,7 +11,6 @@ import sample.model.pipeLine.PipeLine;
 import sample.model.pipeLine.PipeSize;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -91,8 +90,9 @@ public class BeforeHeaterController extends BaseController{
     public void okAction(ActionEvent actionEvent) {
         double insulationThickness = 0;
         double insulationFactor = 0;
+        double pipelineLength = 0;
         if(!lineLengthTextField.getText().equals("")) {
-            double pipelineLength = Double.parseDouble(lineLengthTextField.getText());
+            pipelineLength = Double.parseDouble(lineLengthTextField.getText());
         }
         else{
             showAlert("خطا","لطفا اطلاعات درست وارد کنید", "طول خط لوله به درستی وارد نشده است", Alert.AlertType.ERROR);
@@ -132,7 +132,11 @@ public class BeforeHeaterController extends BaseController{
             }
         }
         
-        PipeLine pipeLine = new PipeLine(outerDiameter, pipesize.getInnerDiameter(), wallthickness, insulationThickness, insulationFactor);
+//        PipeLine pipeLine = new PipeLine(outerDiameter, pipesize.getInnerDiameter(), wallthickness, insulationThickness, insulationFactor);
+        PipeLine pipeLine = new PipeLine(mmOrInchComboBox.getValue().toString() , pipelineLength);
+        pipeLine.setInsulationFactor(insulationFactor);
+        pipeLine.setInsulationThickness(insulationThickness);
+
         Map<String, BaseModel> map = Station.getInstance().getList();
         map.put("beforeHeaterPipeLine", pipeLine);
         ((Node) (actionEvent.getSource())).getScene().getWindow().hide();

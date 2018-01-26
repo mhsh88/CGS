@@ -137,6 +137,7 @@ public class ShowResultsController implements Initializable{
         }
         if(stationLogic != null) {
             if(stationLogic.getBeforeHeater() != null) {
+
                 BasePipe beforeHeater = stationLogic.getBeforeHeater();
                 data.add(new Table("خط لوله قبل از گرم کن", ""));
 

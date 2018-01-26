@@ -1,7 +1,6 @@
 package sample.controller.calculate;
 
 import ir.behinehsazan.gasStation.model.gas.Gas;
-import ir.behinehsazan.gasStation.model.pipeLine.base.BasePipe;
 import ir.behinehsazan.gasStation.model.station.StationLogic;
 import javafx.scene.control.Alert;
 import sample.controller.base.BaseController;
@@ -31,15 +30,19 @@ public class CalculateController extends BaseController{
 
             StationLogic stationLogic = new StationLogic();
             Gas gas = new Gas();
-            gas.setComponent(stationPropertice.getComponent());
+            Double[] component = stationPropertice.getComponent();
+            gas.setComponent(component);
             stationLogic.setGas(gas);
             stationLogic.setTenv(stationPropertice.getEnvironmentTemp());
+            stationLogic.setVair(stationPropertice.getWindVelocity());
+            stationLogic.setDebi(stationPropertice.getDebi());
             stationLogic.setTin(stationPropertice.getInputTemp());
             stationLogic.setPin(stationPropertice.getInputPressure());
             stationLogic.setTout(stationPropertice.getOutputTemp());
             stationLogic.setPout(stationPropertice.getOutputPressure());
 
             stationLogic.setRegulator();
+
 
             stationLogic.setRuns(runs);
             stationLogic.setCollector(runs);
@@ -50,7 +53,7 @@ public class CalculateController extends BaseController{
             stationLogic.setAfterHeater(afterHeaterPipeLine);
 
             stationLogic.setHeaters(heatersModel);
-
+//
             station.setStationLogic(stationLogic);
             state = true;
 

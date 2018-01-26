@@ -7,8 +7,7 @@ import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.interpolation.SplineInterpolator;
 import org.apache.commons.math3.analysis.interpolation.UnivariateInterpolator;
-import org.apache.commons.math3.analysis.solvers.BrentSolver;
-import org.apache.commons.math3.analysis.solvers.UnivariateSolver;
+import org.apache.commons.math3.analysis.solvers.BisectionSolver;
 
 public class BasePipe extends GasConsumer implements FindRoot {
     private double length;
@@ -158,6 +157,9 @@ public class BasePipe extends GasConsumer implements FindRoot {
         double Ts = getTenv() + 5;
         Gas g = getGas();
         double hair;
+        double deltaP = .0;
+        double pin = getPin();
+        double pout = getPout();
         while (Math.abs((t1 - t2) / t2) > Math.pow(10, -5)) {
             if(isInverse())
                 g.calculate(getPout(), (t1 + t2) / 2);
@@ -192,17 +194,22 @@ public class BasePipe extends GasConsumer implements FindRoot {
             final double relativeAccuracy = 1.0e-12;
             final double absoluteAccuracy = 1.0e-8;
             final int maxOrder = 5;
-            UnivariateSolver nonBracketing = new BrentSolver(relativeAccuracy, absoluteAccuracy);
-            double baseRoot = nonBracketing.solve(100, function, -1000000.0, 1000000.0);
+//            UnivariateSolver nonBracketing = new BrentSolver(relativeAccuracy, absoluteAccuracy);
+//            double baseRoot = nonBracketing.solve(100, function, 0.0, 1000000.0);
+
+            BisectionSolver bSolver = new BisectionSolver(relativeAccuracy, absoluteAccuracy);
+            double baseRoot = bSolver.solve(100, function, 0.0, 1000.0, 1.0);
 
 
 //            double friction = rootFind();
             double friction = Math.abs(baseRoot);
-            double deltaP = friction * g.getD() * (Math.pow(V , 2) / (2 * getInterDiameter())) * getLength();
+            deltaP = friction * g.getD() * (Math.pow(V , 2) / (2 * getInterDiameter())) * getLength();
             if(isInverse())
-                setPin(getPout() - deltaP);
+                pin = (getPout() - deltaP);
+//                setPin(getPout() - deltaP);
             else
-                setPout(getPin() - deltaP);
+                pout = (getPin() - deltaP);
+//                setPout(getPin() - deltaP);
 
             double Power = deltaP * getQdot();
 
@@ -236,6 +243,12 @@ public class BasePipe extends GasConsumer implements FindRoot {
 
 
         }
+        if(isInverse())
+            setPin(pin);
+        else
+            setPout(pout);
+
+
 
     }
 

@@ -366,6 +366,12 @@ public class BaseGas implements FindRoot {
 
 
     public void setComponent(Double[] component) {
+        double sum = MathCalculation.listSum(component);
+        // TODO chech sum is not zero
+        for (int i = 0; i < component.length; i++) {
+            component[i] = component[i] / sum;
+
+        }
 
         this.Xi = component;
     }
