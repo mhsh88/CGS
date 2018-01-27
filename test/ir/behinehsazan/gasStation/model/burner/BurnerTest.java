@@ -15,7 +15,7 @@ public class BurnerTest {
 
         Double P = 5000.0;
         Double T = 300.0;
-        Double[] component = {0.057, 0.076, 0.812, 0.043, 0.009, 0.0015, 0.0015, 0., 0., 0.
+        Double[] component = {.0, .0, 1.0, .0, .0, .0, .0, 0., 0., 0.
                 , 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.
                 , 0.};
         for(int i=0; i<component.length; i++){
@@ -24,8 +24,9 @@ public class BurnerTest {
 
 
         gas.calculate(P, T, component);
+        Burner.setTenv(30.0);
 
-        Burner burner = new Burner((Gas) gas, 7, 30, 250);
+        Burner burner = new Burner((Gas) gas, 2.0, Burner.getTenv(), 300);
         burner.calculate();
         System.out.println(burner.getEfficiency());
     }

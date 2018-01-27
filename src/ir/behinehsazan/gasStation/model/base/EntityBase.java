@@ -47,7 +47,7 @@ public abstract class EntityBase implements Base{
 
 
     public double getConsumption() {
-        return consumption * getEfficiency();
+        return consumption / getEfficiency();
     }
 
     public void setConsumption(double constumption) {

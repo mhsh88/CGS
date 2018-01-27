@@ -7,8 +7,6 @@ import ir.behinehsazan.gasStation.model.pipeLine.base.BasePipe;
 import ir.behinehsazan.gasStation.model.regulator.Regulator;
 import ir.behinehsazan.gasStation.model.run.Runs;
 import ir.behinehsazan.gasStation.model.run.base.BaseRun;
-import sample.model.burner.Burner;
-import sample.model.heater.HeaterModel;
 import sample.model.heaters.HeatersModel;
 import sample.model.pipeLine.PipeLine;
 
@@ -86,22 +84,30 @@ public class StationLogic extends GasConsumer {
 
     public void setHeaters(HeatersModel heaters) {
         if(heaters != null){
+            this.heaters.setTin(beforeHeater.getTout());
+            this.heaters.setTout(afterHeater.getTin());
+            this.heaters.setPin(beforeHeater.getPout());
+            this.heaters.setPout(afterHeater.getPin());
+            this.heaters.setDebi(getDebi());
+            this.heaters.setGas(getGas());
 
-            for(HeaterModel heaterModel : heaters.getHeaterModels()){
+            for(int i = 0; i < heaters.getHeaterModels().size(); i ++){
                 Heater heater = new Heater();
-                heater.setEfficiency(heaterModel.getEfficiency());
+                heater.setEfficiency(heaters.getHeaterModels().get(i).getEfficiency());
 
-                for(Burner burner : heaterModel.getBurners()){
-                    burner.getFlueGasTemp();
-                    burner.getOxygenPecent();
-                    heater.setBurners(new ir.behinehsazan.gasStation.model.burner.Burner(getGas(), burner.getOxygenPecent(),
-                            getTenv(), burner.getFlueGasTemp()));
+                for(int j = 0; j < heaters.getHeaterModels().get(i).getBurners().size(); j++) {
+                    double flue = heaters.getHeaterModels().get(i).getBurners().get(j).getFlueGasTemp();
+                    double oxygen = heaters.getHeaterModels().get(i).getBurners().get(j).getOxygenPecent();
+                    heater.setBurners(new ir.behinehsazan.gasStation.model.burner.Burner(getGas(), oxygen,
+                            getTenv() - 273.15, flue));
                 }
 
                 this.heaters.getHeaters().add(heater);
             }
 
             this.heaters.calculate();
+            this.heaters.setConsumption();
+            this.heaters.componentConsumptionCal();
 
         }
         else{

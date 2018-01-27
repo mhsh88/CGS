@@ -169,6 +169,7 @@ public class ShowResultsController implements Initializable{
                         data.add(new Table("دمای دودکش مشعل " + temp2, String.valueOf( b.getTstack())));
                         data.add(new Table("درصد اکسیژن مشعل " + temp2, String.valueOf(b.getOxygen())));
                         data.add(new Table("راندمان مشعل " + temp2, String.valueOf(b.getEfficiency())));
+                        double tem = b.getConsumption();
                         data.add(new Table("مصرف مشعل " + temp2, String.valueOf(b.getConsumption())));
 
                         temp2++;
