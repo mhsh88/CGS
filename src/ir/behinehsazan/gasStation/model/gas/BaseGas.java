@@ -37,6 +37,13 @@ public class BaseGas implements FindRoot {
     protected ArrayList<Double> C_n = new ArrayList<Double>();
     protected Double p1;
     public static final Double R = 8.314510;
+    private double T_h;
+
+    public double getT_h() {
+        return T_h;
+    }
+
+
 
     public Double getZ() {
         return Z;
@@ -364,6 +371,17 @@ public class BaseGas implements FindRoot {
             0., 0., 0., 0., 0., 0., 0.,
             1671.69, 0., 0., 0., 0., 0., 0.};
 
+    final double[][] Ch = {{-1.60624067400000000, 0.94300879800000000, - 0.07952887700000000, - 0.22221523100000000,
+            0.10232186600000000, 5.71407681800000000, 0.03245301800000000,
+            0.38657166700000000, 5.49180622100000000, 40.21527998000000000, - 0.00143821000000000,
+            - 0.01023342100000000,
+            0.20477971800000000, 5.72853864300000000, 44.13499613000000000},
+        {0.40165793600000000, -0.21208744900000000, - 0.01232112200000000, 0.04548728500000000,
+            - 0.00924222800000000, - 0.27407968000000000,
+            - 0.00491592200000000, - 0.02388913000000000, - 0.48101573500000000, - 3.86828445000000000,
+            0.00021709700000000, 0.00234085000000000,
+            0.03063534700000000, - 0.07842183200000000, - 3.26417032000000000}};
+
 
     public void setComponent(Double[] component) {
         double sum = MathCalculation.listSum(component);
@@ -632,6 +650,25 @@ public class BaseGas implements FindRoot {
         mu = (phi_2 / phi_1 - 1) / C_p / M / rou * 1000;
         kappa = phi_1 / Z * C_p / C_v;
         w = Math.sqrt(phi_1 * C_p / C_v * R * T / M * 1000);
+
+
+        double Ma = 28.95;  //# molecular mass of air
+        double Gamma_g = M / Ma;
+        double psi = getP() * 0.145038;
+        double [] mass_matrix = {1, Math.log(psi), Math.log(Gamma_g), Math.pow((Math.log(psi)) , 2.0) , Math.log(psi) * Math.log(Gamma_g), Math.pow(Math.log(Gamma_g) , 2.0),
+                Math.pow((Math.log(psi)) , 3.0), Math.pow(Math.log(psi) , 2.0) * Math.log(Gamma_g), Math.pow(Math.log(Gamma_g) , 2.0) * Math.log(psi), Math.pow((Math.log(Gamma_g)) , 3),
+                Math.pow((Math.log(psi)) , 4.0), Math.pow(Math.log(psi) , 3.0) * Math.log(Gamma_g), Math.pow(Math.log(psi) , 2.0) * Math.pow(Math.log(Gamma_g) , 2.0),
+                Math.pow(Math.log(Gamma_g) , 3.0) * Math.log(psi), Math.pow(Math.log(Gamma_g),  4)};
+        double[] cc;
+        if (Gamma_g <= 0.7) {
+             cc = Ch[0];
+        }
+        else{
+        cc = Ch[1];}
+
+        double T_h = 1 / MathCalculation.dotProduct( cc, mass_matrix);
+        T_h = (T_h - 32) / 1.8;
+        this.T_h = T_h;
 
 
     }

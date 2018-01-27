@@ -1,5 +1,6 @@
 package sample.controller.stationProperty;
 
+import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -190,6 +191,34 @@ public class StationPropertyController {
         component[18] = Double.parseDouble(hydrogenSulfideTextField.getText());
         component[19] = Double.parseDouble(heliumTextField.getText());
         component[20] = Double.parseDouble(argonTextField.getText());
+        component = MathCalculation.normal(component);
+
+        Double[] M_i = {28.0135
+                , 44.01
+                , 16.043
+                , 30.07
+                , 44.097
+                , 58.123
+                , 58.123
+                , 72.15
+                , 72.15
+                , 86.177
+                , 100.204
+                , 114.231
+                , 128.258
+                , 142.285
+                , 2.0159
+                , 31.9988
+                , 28.01
+                , 18.0153
+                , 34.082
+                , 4.0026
+                , 39.948};
+        if(gasPercentType.getValue().toString().equals("درصد جرمی")){
+
+
+            component =   MathCalculation.normal(MathCalculation.matrixDevide(MathCalculation.pointToPointDivistion(component, M_i), MathCalculation.dotProduct(component, M_i)));
+        }
 
         stationPropertice.setComponent(component);
 
