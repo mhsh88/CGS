@@ -78,8 +78,11 @@ public abstract class GasConsumer extends EntityBase {
         double P2 = g.getP();
         double Z2 = g.getZ();
         double T2 = g.getT();
-
-        g.calculate(getPin(), getTin());
+        if(getPin() > 0 && getTin() > 0) {
+            g.calculate(getPin(), getTin());
+        }else {
+            g.calculate(getPout(), getTout());
+        }
         double P1 = g.getP();
         double Z1 = g.getZ();
         double T1 = g.getT();

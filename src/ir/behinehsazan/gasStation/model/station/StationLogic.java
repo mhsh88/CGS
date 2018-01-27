@@ -173,13 +173,19 @@ public class StationLogic extends GasConsumer {
     public void setCollector(sample.model.run.Runs runs) {
         if(runs != null) {
             double temp = -273.15;
+            double pi = 0;
             double debi = 0.0;
             for(BaseRun r : this.runs.getRuns()){
                 if(r.getTin() > temp){
                     temp = r.getTin();
                 }
+                if(r.getPin() > pi){
+                    pi = r.getPin();
+                }
                 debi += r.getDebi();
             }
+            setDebi(debi);
+            this.collector.setGas(getGas());
             this.collector.setOuterDiameter(runs.getCollector().getOD());
             this.collector.setInterDiameter(runs.getCollector().getID());
             this.collector.setInsulationFactor(runs.getCollector().getInsulationFactor());
@@ -187,9 +193,11 @@ public class StationLogic extends GasConsumer {
             this.collector.setLength(runs.getCollector().getLength());
             this.collector.setDebi(this.getDebi());
             this.collector.setTout(temp);
-            this.collector.setPout(this.runs.getPin());
+            this.collector.setPout(pi);
             this.collector.setInverse(true);
             this.collector.calculate();
+            this.collector.setConsumption();
+
         }
         else{
             this.collector.setTout(this.runs.getTin());
@@ -210,6 +218,7 @@ public class StationLogic extends GasConsumer {
         if(runs != null){
             this.runs.getRuns().clear();
 
+
             for(sample.model.run.Run r : runs.getRuns()) {
                 BaseRun run = new BaseRun();
                 run.setDebi(r.getDebi());
@@ -217,8 +226,11 @@ public class StationLogic extends GasConsumer {
                 run.setOuterDiameter(r.getOD());
                 run.setTout(getRegulator().getTin());
                 run.setPout(getRegulator().getPin());
+                run.setLength(r.getLength());
                 run.setGas(getGas());
                 run.setInverse(true);
+                run.calculate();
+                run.setConsumption();
 
                 this.runs.getRuns().add(run);
             }

@@ -21,9 +21,8 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#okAction" text="ok" textAlignment="JUSTIFY" GridPane.rowIndex="2" />
-      <TextField fx:id="textField" GridPane.rowIndex="3" />
-      <TextField fx:id="textField2" GridPane.rowIndex="4" />
+      <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveAction" text="save" textAlignment="JUSTIFY" GridPane.rowIndex="2" />
+
       <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="نتایج" textAlignment="JUSTIFY" textOverrun="CLIP" />
       <TableView fx:id="tableID" editable="false" prefWidth="248.0" GridPane.rowIndex="1">
          <columns>

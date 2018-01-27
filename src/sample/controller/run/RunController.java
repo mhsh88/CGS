@@ -14,10 +14,8 @@ import sample.model.run.Collector;
 import sample.model.run.Run;
 import sample.model.run.Runs;
 
-import javax.xml.soap.Text;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Observable;
 
 public class RunController {
 
@@ -123,6 +121,8 @@ public class RunController {
         Runs allRun = new Runs(runs, collector);
         Station.getInstance().getList().put("Runs", allRun);
 //        System.out.println(StationLogic.getInstance().getList().get("Runs"));
+        ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
+
     }
 
     public void clear(ActionEvent actionEvent) {

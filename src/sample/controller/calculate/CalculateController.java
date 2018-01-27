@@ -47,6 +47,7 @@ public class CalculateController extends BaseController{
 
 
             stationLogic.setRuns(runs);
+
             stationLogic.setCollector(runs);
 
 
