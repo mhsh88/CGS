@@ -88,4 +88,28 @@ public abstract class GasConsumer extends EntityBase {
         return Qdot;
 
     }
+    public void setConsumption(){
+        Gas g = getGas();
+        double heatConsumption;
+        double Dstd;
+        g.calculate(g.getP_theta(), g.getT_theta());
+        Dstd = g.getD();
+        g.calculate((getPin() + getPout()) / 2.0, (getTin() + getTout())/2.0 );
+        double D = g.getD();
+        g.calculate(getPin() , getTin());
+        double H1 = g.getH();
+        g.calculate(getPout(), getTout());
+        double H2 = g.getH();
+
+        heatConsumption = getQdot() * D * (H2 - H1); // kJ/s
+        // change kJ/s to kJ/hr
+        heatConsumption = heatConsumption * 3600;
+        // change kJ/hr to kg/hr
+        heatConsumption = heatConsumption / g.getHHVd();
+        //kg/hr to Standard m^3/hr
+        heatConsumption = heatConsumption / Dstd;
+
+        this.consumption = heatConsumption;
+
+    }
 }

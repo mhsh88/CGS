@@ -67,6 +67,7 @@ public class StationLogic extends GasConsumer {
             this.beforeHeater.setInverse(false);
             this.beforeHeater.setGas(getGas());
             this.beforeHeater.calculate();
+            this.beforeHeater.setConsumption();
         }
         else{
             this.beforeHeater.setTin(this.getTin());
@@ -105,10 +106,17 @@ public class StationLogic extends GasConsumer {
         }
         else{
             this.heaters.setTin(beforeHeater.getTout());
-            this.heaters.setTout(this.heaters.getTin());
+            this.heaters.setTout(afterHeater.getTin());
             this.heaters.setPin(beforeHeater.getPout());
-            this.heaters.setPout(this.heaters.getPin());
-            this.heaters.setConsumption(0.0);
+            this.heaters.setPout(afterHeater.getPin());
+            if(getDebi() > 0){
+                this.heaters.setDebi(getDebi());
+                this.heaters.setGas(getGas());
+                this.heaters.setConsumption();
+            }
+            else {
+                this.heaters.setConsumption(0.0);
+            }
         }
     }
 
@@ -119,6 +127,15 @@ public class StationLogic extends GasConsumer {
     public void setAfterHeater(PipeLine afterHeater) {
 
         if(afterHeater != null) {
+            double od = afterHeater.getOD();
+            double id = afterHeater.getID();
+            double thic = afterHeater.getLineThickness();
+            double iff = afterHeater.getInsulationFactor();
+            double it = afterHeater.getInsulationThickness();
+            double l = afterHeater.getLength();
+            double debi = getDebi();
+            double tin = getTin();
+            double pin = getPin();
             this.afterHeater.setOuterDiameter(afterHeater.getOD());
             this.afterHeater.setInterDiameter(afterHeater.getID());
             this.afterHeater.setInsulationFactor(afterHeater.getInsulationFactor());
@@ -128,7 +145,9 @@ public class StationLogic extends GasConsumer {
             this.afterHeater.setTout(this.collector.getTin());
             this.afterHeater.setPout(this.collector.getPin());
             this.afterHeater.setInverse(true);
+            this.afterHeater.setGas(getGas());
             this.afterHeater.calculate();
+            this.afterHeater.setConsumption();
         }
         else{
             this.afterHeater.setTout(this.collector.getTin());
@@ -218,15 +237,9 @@ public class StationLogic extends GasConsumer {
         double t1 = getTin();
         double t2 = getTout();
         this.regulator = new Regulator(getPin(),getTout(),getPout(),getGas(), true);
-        double p3 = this.regulator.getPin();
-        double p4 = this.regulator.getPout();
-        double t3 = this.regulator.getTin();
-        double t4 = this.regulator.getTout();
+
         this.regulator.calculate();
-        double p5 = this.regulator.getPin();
-        double p6 = this.regulator.getPout();
-        double t5 = this.regulator.getTin();
-        double t6 = this.regulator.getTout();
+
 //        this.regulator.setGas(getGas());
 //        this.regulator.setPin(getPin());
 //        this.regulator.setTout(getTout());

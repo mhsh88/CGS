@@ -44,6 +44,7 @@ public class BasePipeTest {
         System.out.println(pipe.getTout());
         System.out.println(pipe.getPin());
         System.out.println(pipe.getPout());
+        pipe.setConsumption();
         System.out.println(pipe.getConsumption());
 
 

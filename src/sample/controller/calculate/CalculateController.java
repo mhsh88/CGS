@@ -41,16 +41,19 @@ public class CalculateController extends BaseController{
             stationLogic.setTout(stationPropertice.getOutputTemp());
             stationLogic.setPout(stationPropertice.getOutputPressure());
 
+            stationLogic.setBeforeHeater(beforeHeaterPipeLine);
+
             stationLogic.setRegulator();
 
 
             stationLogic.setRuns(runs);
             stationLogic.setCollector(runs);
 
-            stationLogic.setBeforeHeater(beforeHeaterPipeLine);
+
 
 
             stationLogic.setAfterHeater(afterHeaterPipeLine);
+
 
             stationLogic.setHeaters(heatersModel);
 //

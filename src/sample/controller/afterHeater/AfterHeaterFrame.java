@@ -20,7 +20,7 @@ public class AfterHeaterFrame extends Application implements BaseFrame {
         stage = new Stage();
 
         stage.setScene(new Scene(root1, 500, 400));
-        stage.setTitle("خط لوله قبل از گرم کن");}
+        stage.setTitle("خط لوله بعد از گرم کن");}
         catch (Exception e){
             e.printStackTrace();
         }
@@ -33,6 +33,7 @@ public class AfterHeaterFrame extends Application implements BaseFrame {
 
 
     public void show() throws IOException {
+        stage.close();
         stage.show();
     }
 

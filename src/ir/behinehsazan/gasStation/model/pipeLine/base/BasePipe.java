@@ -24,6 +24,7 @@ public class BasePipe extends GasConsumer implements FindRoot {
 
 
     public BasePipe(){
+        setEfficiency(1.0);
     }
     public BasePipe(double T, double P, Gas g, double OD, double ID, double pipeLength, double QSdot, double t, double k_insolation, boolean inverse){
         super();
@@ -203,7 +204,7 @@ public class BasePipe extends GasConsumer implements FindRoot {
 
 //            double friction = rootFind();
             double friction = Math.abs(baseRoot);
-            deltaP = friction * g.getD() * (Math.pow(V , 2) / (2 * getInterDiameter())) * getLength();
+            deltaP = friction * g.getD() * (Math.pow(V , 2) / (2 * getInterDiameter())) * getLength()  * 0.001;
             if(isInverse())
                 pin = (getPout() - deltaP);
 //                setPin(getPout() - deltaP);

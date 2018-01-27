@@ -5,14 +5,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import sample.controller.base.BaseController;
 import sample.model.Station;
 import sample.model.burner.Burner;
 import sample.model.heater.HeaterModel;
@@ -21,7 +19,7 @@ import sample.model.heaters.HeatersModel;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class HeaterController {
+public class HeaterController extends BaseController{
 
     public TextField heaterNumberInput;
     public TabPane tabPane = new TabPane();
@@ -54,9 +52,10 @@ public class HeaterController {
             TabPane childTabPane = (TabPane) obj.get(0);
             ObservableList<Tab> childTabs = childTabPane.getTabs();
 
-            ArrayList<Burner> burners = null;
+//             burners = null;
+            ArrayList<Burner> burners = new ArrayList<Burner>();
             for (Tab tt : childTabs) {
-                burners = new ArrayList<Burner>();
+
                 HBox childhbox = (HBox) tt.getContent();
                 ObservableList<Node> gridList = childhbox.getChildren();
                 GridPane gridPane = (GridPane) gridList.get(0);
@@ -66,13 +65,29 @@ public class HeaterController {
                 System.out.println(oxygenTextField.getText());
                 System.out.println(flueGasTempTextField.getText());
 
-
-                burners.add(new Burner(Double.parseDouble(oxygenTextField.getText()), Double.parseDouble(flueGasTempTextField.getText())));
+                if(!oxygenTextField.getText().equals("") && !flueGasTempTextField.getText().equals("")) {
+                    burners.add(new Burner(Double.parseDouble(oxygenTextField.getText()), Double.parseDouble(flueGasTempTextField.getText())));
+                }
 
             }
-            heaterModels.add(new HeaterModel(Double.parseDouble(heaterRandeman.getText()), burners));
+            if(heaterRandeman.getText().equals("")) {
+                if(!(burners.size() < 1)) {
+                    heaterModels.add(new HeaterModel(0.75, burners));
+                }
+
+            }
+            else{
+                if(!(burners.size() < 1)){
+                    heaterModels.add(new HeaterModel(Double.parseDouble(heaterRandeman.getText()), burners));
+                }
+            }
 
 
+
+        }
+        if(heaterModels.size() < 1){
+            showAlert("خطا","خطا در اطلاعات ورودی" , "اطلاعاتی برای هیچ کدام از گرم‌کن‌ها وارد نشده است!", Alert.AlertType.ERROR);
+            return;
         }
         stationHeatersModel.setHeaterModels(heaterModels);
 
@@ -81,6 +96,8 @@ public class HeaterController {
 
 //        StationLogic station = StationLogic.getInstance();
 //        station.getList().put();
+
+        ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
 
 
     }

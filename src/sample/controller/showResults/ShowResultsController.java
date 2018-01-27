@@ -156,10 +156,11 @@ public class ShowResultsController implements Initializable{
 
                 Heaters heaters = stationLogic.getHeaters();
                 List<Heater> heater = heaters.getHeaters();
+                data.add(new Table("اطلاعات گرم کن ","" ));
                 int temp = 1;
                 for (Heater h : heater) {
 
-                    data.add(new Table("گرم کن ها" + temp,"" ));
+                    data.add(new Table("گرم کن " + temp,"" ));
                     data.add(new Table("راندمان گرم کن " + temp,String.valueOf(h.getEfficiency())));
 
                     List<Burner> burners = h.getBurners();
@@ -174,6 +175,7 @@ public class ShowResultsController implements Initializable{
                     }
                     temp++;
                 }
+                data.add(new Table("مصرف گرمکن‌ها", String.valueOf(heaters.getConsumption())));
             }
         }
 

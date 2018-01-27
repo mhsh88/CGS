@@ -6,6 +6,10 @@ import java.util.ArrayList;
 
 public class Heaters extends GasConsumer{
 
+    public Heaters(){
+        setEfficiency(1.0);
+    }
+
     ArrayList<Heater> heaters = new ArrayList<Heater>();
 
     public ArrayList<Heater> getHeaters() {

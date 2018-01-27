@@ -653,6 +653,9 @@ public class BaseGas implements FindRoot {
     }
 
 
+
+
+
 //    @Override
 //    public double value(double x) {
 //        return function(x);
@@ -682,4 +685,6 @@ public class BaseGas implements FindRoot {
         }
 
     }
+
+
 }
