@@ -11,7 +11,6 @@ import sample.controller.beforeHeater.BeforeHeaterFrame;
 import sample.controller.calculate.CalculateController;
 import sample.controller.heaterController.HeaterFrame;
 import sample.controller.run.RunFrame;
-import sample.controller.showResults.ShowResultsController;
 import sample.controller.showResults.ShowResultsFrame;
 import sample.controller.stationProperty.StationPropertyController;
 import sample.controller.stationProperty.StationPropertyFrame;
@@ -116,7 +115,7 @@ public class StationController {
 
     public void calculateButton(ActionEvent actionEvent) throws IOException {
         if(calculateController.calculate()){
-            ShowResultsController.showResult();
+
         showResultsFrame.show();
         }
 //        calculateButtonFrame.close();

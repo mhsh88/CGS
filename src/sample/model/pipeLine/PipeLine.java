@@ -35,6 +35,62 @@ public class PipeLine extends BaseModel{
     Double insulationThickness;
     Double insulationFactor;
     String size;
+    private Double Tin;
+    private Double Tout;
+    private Double Pin;
+    private Double Pout;
+    private Double withInsulationConsumption;
+    private Double notIsulationConsumption;
+
+    public Double getTin() {
+        return Tin;
+    }
+
+    public void setTin(Double tin) {
+        Tin = tin;
+    }
+
+    public Double getTout() {
+        return Tout;
+    }
+
+    public void setTout(Double tout) {
+        Tout = tout;
+    }
+
+    public Double getPin() {
+        return Pin;
+    }
+
+    public void setPin(Double pin) {
+        Pin = pin;
+    }
+
+    public Double getPout() {
+        return Pout;
+    }
+
+    public void setPout(Double pout) {
+        Pout = pout;
+    }
+
+    public Double getWithInsulationConsumption() {
+        return withInsulationConsumption;
+    }
+
+    public void setWithInsulationConsumption(Double withInsulationConsumption) {
+        this.withInsulationConsumption = withInsulationConsumption;
+    }
+
+    public Double getNotIsulationConsumption() {
+        return notIsulationConsumption;
+    }
+
+    public void setNotIsulationConsumption(Double notIsulationConsumption) {
+        this.notIsulationConsumption = notIsulationConsumption;
+    }
+
+
     private PipeSize pipeSize;
     public PipeLine(String size, double length){
         this.size = size;

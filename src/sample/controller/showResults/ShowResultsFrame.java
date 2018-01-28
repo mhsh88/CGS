@@ -40,7 +40,7 @@ public class ShowResultsFrame extends Application implements BaseFrame {
     public void show() throws IOException {
 
         stage.close();
-        ShowResultsController.showResult();
+//        ShowResultsController.showResult();
         stage.show();
 
     }

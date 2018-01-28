@@ -43,21 +43,21 @@ public class StationLogic extends GasConsumer {
     }
 
 
-    public void setBeforeHeater(PipeLine beforeHeater) {
+    public PipeLine setBeforeHeater(PipeLine beforeHeater) {
         if(beforeHeater != null) {
-            double od = beforeHeater.getOD();
-            double id = beforeHeater.getID();
-            double thic = beforeHeater.getLineThickness();
-            double iff = beforeHeater.getInsulationFactor();
-            double it = beforeHeater.getInsulationThickness();
-            double l = beforeHeater.getLength();
-            double debi = getDebi();
-            double tin = getTin();
-            double pin = getPin();
+//            double od = beforeHeater.getOD();
+//            double id = beforeHeater.getID();
+//            double thic = beforeHeater.getLineThickness();
+//            double iff = beforeHeater.getInsulationFactor();
+//            double it = beforeHeater.getInsulationThickness();
+//            double l = beforeHeater.getLength();
+//            double debi = getDebi();
+//            double tin = getTin();
+//            double pin = getPin();
             this.beforeHeater.setOuterDiameter(beforeHeater.getOD());
             this.beforeHeater.setInterDiameter(beforeHeater.getID());
-            this.beforeHeater.setInsulationFactor(beforeHeater.getInsulationFactor());
-            this.beforeHeater.setInsulationThickness(beforeHeater.getInsulationThickness());
+            this.beforeHeater.setInsulationFactor(0.0);
+            this.beforeHeater.setInsulationThickness(0.0);
             this.beforeHeater.setLength(beforeHeater.getLength());
             this.beforeHeater.setDebi(this.getDebi());
             this.beforeHeater.setTin(getTin());
@@ -66,6 +66,23 @@ public class StationLogic extends GasConsumer {
             this.beforeHeater.setGas(getGas());
             this.beforeHeater.calculate();
             this.beforeHeater.setConsumption();
+
+            beforeHeater.setNotIsulationConsumption(this.beforeHeater.getConsumption());
+
+
+            this.beforeHeater.setInsulationFactor(beforeHeater.getInsulationFactor());
+            this.beforeHeater.setInsulationThickness(beforeHeater.getInsulationThickness());
+            this.beforeHeater.calculate();
+            this.beforeHeater.setConsumption();
+            beforeHeater.setTin(this.beforeHeater.getTin());
+            beforeHeater.setPin(this.beforeHeater.getPin());
+            beforeHeater.setTout(this.beforeHeater.getTout());
+            beforeHeater.setPout(this.beforeHeater.getPout());
+            beforeHeater.setWithInsulationConsumption(this.beforeHeater.getConsumption());
+
+
+
+
         }
         else{
             this.beforeHeater.setTin(this.getTin());
@@ -74,8 +91,20 @@ public class StationLogic extends GasConsumer {
             this.beforeHeater.setPout(this.beforeHeater.getPin());
             this.beforeHeater.setConsumption(0.0);
 
+            if(beforeHeater != null) {
+                beforeHeater.setTin(this.beforeHeater.getTin());
+                beforeHeater.setPin(this.beforeHeater.getPin());
+                beforeHeater.setTout(this.beforeHeater.getTout());
+                beforeHeater.setPout(this.beforeHeater.getPout());
+                beforeHeater.setNotIsulationConsumption(this.beforeHeater.getConsumption());
+                beforeHeater.setWithInsulationConsumption(this.beforeHeater.getConsumption());
+            }
+
+
         }
 
+
+        return beforeHeater;
     }
 
     public Heaters getHeaters() {
@@ -130,7 +159,7 @@ public class StationLogic extends GasConsumer {
         return afterHeater;
     }
 
-    public void setAfterHeater(PipeLine afterHeater) {
+    public PipeLine setAfterHeater(PipeLine afterHeater) {
 
         if(afterHeater != null) {
             double od = afterHeater.getOD();
@@ -144,8 +173,8 @@ public class StationLogic extends GasConsumer {
             double pin = getPin();
             this.afterHeater.setOuterDiameter(afterHeater.getOD());
             this.afterHeater.setInterDiameter(afterHeater.getID());
-            this.afterHeater.setInsulationFactor(afterHeater.getInsulationFactor());
-            this.afterHeater.setInsulationThickness(afterHeater.getInsulationThickness());
+            this.afterHeater.setInsulationFactor(0.0);
+            this.afterHeater.setInsulationThickness(0.0);
             this.afterHeater.setLength(afterHeater.getLength());
             this.afterHeater.setDebi(this.getDebi());
             this.afterHeater.setTout(this.collector.getTin());
@@ -154,6 +183,22 @@ public class StationLogic extends GasConsumer {
             this.afterHeater.setGas(getGas());
             this.afterHeater.calculate();
             this.afterHeater.setConsumption();
+
+
+            afterHeater.setNotIsulationConsumption(this.afterHeater.getConsumption());
+
+
+            this.afterHeater.setInsulationFactor(afterHeater.getInsulationFactor());
+            this.afterHeater.setInsulationThickness(afterHeater.getInsulationThickness());
+            this.afterHeater.calculate();
+            this.afterHeater.setConsumption();
+            afterHeater.setTin(this.afterHeater.getTin());
+            afterHeater.setPin(this.afterHeater.getPin());
+            afterHeater.setTout(this.afterHeater.getTout());
+            afterHeater.setPout(this.afterHeater.getPout());
+            afterHeater.setWithInsulationConsumption(this.afterHeater.getConsumption());
+
+
         }
         else{
             this.afterHeater.setTout(this.collector.getTin());
@@ -161,8 +206,19 @@ public class StationLogic extends GasConsumer {
             this.afterHeater.setPin(this.collector.getPin());
             this.afterHeater.setPout(this.afterHeater.getPin());
             this.afterHeater.setConsumption(0.0);
+            if(afterHeater!= null) {
+
+                afterHeater.setTin(this.afterHeater.getTin());
+                afterHeater.setPin(this.afterHeater.getPin());
+                afterHeater.setTout(this.afterHeater.getTout());
+                afterHeater.setPout(this.afterHeater.getPout());
+                afterHeater.setNotIsulationConsumption(this.afterHeater.getConsumption());
+                afterHeater.setWithInsulationConsumption(this.afterHeater.getConsumption());
+            }
 
         }
+
+        return afterHeater;
 
     }
 
