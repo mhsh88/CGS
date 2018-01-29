@@ -151,6 +151,12 @@ public class HeaterController extends BaseController{
                 burnerTab.setText("مشعل " + j);
                 GridPane burnerContainer = new GridPane();
                 burnerContainer.add(new Label("درصد اکسیژن ٪"), 1, 0);
+                Spinner<Double> dblSpinner = new Spinner<>(0.0, 21.0, 0.0, 1.0);
+                SpinnerValueFactory.DoubleSpinnerValueFactory dblFactory =
+                        (SpinnerValueFactory.DoubleSpinnerValueFactory) dblSpinner.getValueFactory();
+                double dmin = dblFactory.getMin(); // 0.0
+                double dmax = dblFactory.getMax(); // 10.0
+                double dstep = dblFactory.getAmountToStepBy(); // 1.0
                 burnerContainer.add(new TextField(), 0, 0);
                 burnerContainer.add(new Label("دمای دودکش "), 1, 1);
                 burnerContainer.add(new TextField(), 0, 1);

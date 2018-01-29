@@ -1,6 +1,10 @@
 package sample.controller.stationProperty;
 
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -35,7 +39,7 @@ public class StationPropertyController extends BaseController {
 
 
 
-    public TextField carbonDioxideTextField = new TextField();
+    public JFXTextField carbonDioxideTextField = new JFXTextField();
     public TextField methanTextField = new TextField();
     public TextField ethaneTextField = new TextField();
     public TextField propaneTextField = new TextField();
@@ -131,6 +135,20 @@ public class StationPropertyController extends BaseController {
         environmentTempTextField.setText("30");
         windSpeedTextField.setText("10");
         stationDebiTextField.setText("40000");
+
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        carbonDioxideTextField.getValidators().add(validator);
+        validator.setMessage("no input");
+
+        carbonDioxideTextField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(!newValue)
+                {
+                    carbonDioxideTextField.validate();
+                }
+            }
+        });
 
 
 //        nitrogenTextField.textProperty().addListener(new ChangeListener<String>() {
