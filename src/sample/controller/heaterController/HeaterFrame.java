@@ -15,23 +15,34 @@ public class HeaterFrame extends Application implements BaseFrame {
     Stage stage;
 
     public HeaterFrame() {
-        try {
-            root1 = (Parent) fxmlLoader.load();
-            stage = new Stage();
-            stage.setScene(new Scene(root1, 600 , 400));
-            stage.setTitle("اطلاعات گرم کن");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        try {
+            root1 = (Parent) fxmlLoader.load();
+            stage = primaryStage;
+            stage.setScene(new Scene(root1, 600 , 400));
+            stage.setTitle("اطلاعات گرم کن");
+            HeaterController heaterController = (HeaterController) fxmlLoader.getController();
+            heaterController.setStage(stage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         show();
     }
 
 
     public void show() throws IOException {
+        if(root1 == null & stage == null){
+            try {
+                start(new Stage());
+                return;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         stage.close();
         stage.show();
     }

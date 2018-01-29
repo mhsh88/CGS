@@ -16,23 +16,37 @@ public class RunFrame extends Application implements BaseFrame {
     Stage stage;
 
     public RunFrame() {
-        try {
-            root1 = (Parent) fxmlLoader.load();
-            stage = new Stage();
-            stage.setScene(new Scene(root1, 500, 400));
-            stage.setTitle("اطلاعات ران ها");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        try {
+            root1 = (Parent) fxmlLoader.load();
+            stage = primaryStage;
+            stage.setScene(new Scene(root1, 500, 400));
+            stage.setTitle("اطلاعات ران ها");
+
+            RunController runController = (RunController) fxmlLoader.getController();
+            runController.setStage(stage);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         show();
     }
 
     @Override
     public void show() throws IOException {
+        if(root1 == null & stage == null){
+            try {
+                start(new Stage());
+                return;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         stage.close();
         stage.show();
     }

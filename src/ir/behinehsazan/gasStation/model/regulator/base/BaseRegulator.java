@@ -5,8 +5,6 @@ import ir.behinehsazan.gasStation.model.gas.Gas;
 import ir.behinehsazan.gasStation.model.mathCalculation.FindRoot;
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.solvers.BisectionSolver;
-import org.apache.commons.math3.analysis.solvers.BrentSolver;
-import org.apache.commons.math3.analysis.solvers.UnivariateSolver;
 
 public class BaseRegulator extends GasConsumer implements FindRoot {
     public BaseRegulator(){
@@ -36,21 +34,21 @@ public class BaseRegulator extends GasConsumer implements FindRoot {
         final double relativeAccuracy = 1.0e-12;
         final double absoluteAccuracy = 1.0e-8;
         final int maxOrder = 5;
-        UnivariateSolver nonBracketing = new BrentSolver(relativeAccuracy, absoluteAccuracy);
+//        UnivariateSolver nonBracketing = new BrentSolver(relativeAccuracy, absoluteAccuracy);
 
 
         BisectionSolver bSolver = new BisectionSolver(relativeAccuracy, absoluteAccuracy);
 //        double res = bSolver.solve(100, function, 0.0, 1000000.0, 1.0);
         while( Math.abs((muuu - g.getMu()) / g.getMu()) > 10e-7) {
             if(isInverse()){
-                this.setTin(nonBracketing.solve(100, function, 0.0, 5000.0));
+                this.setTin(bSolver.solve(100, function, 0.0, 5000.0, 1));
                 double t1 = this.getTin();
                 double t2 = this.getTout();
                 double p1 = this.getPin();
                 double p2 = this.getPout();
             }
             else{
-                setTout(nonBracketing.solve(100, function, 0.0, 5000.0));
+                setTout(bSolver.solve(100, function, 0.0, 5000.0, 1));
                 double t1 = this.getTin();
                 double t2 = this.getTout();
                 double p1 = this.getPin();

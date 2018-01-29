@@ -23,6 +23,8 @@ public class StationPropertyFrame extends Application implements BaseFrame {
     public void start(Stage primaryStage) throws Exception {
         root1 = (Parent) fxmlLoader.load();
         stage = primaryStage;
+        StationPropertyController controller = (StationPropertyController) fxmlLoader.getController();
+        controller.setStage(stage);
         stage.setScene(new Scene(root1, 1000, 700));
         stage.setTitle("اطلاعات ایستگاه گاز");
         show();

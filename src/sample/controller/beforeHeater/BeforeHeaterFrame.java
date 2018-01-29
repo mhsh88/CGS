@@ -15,23 +15,30 @@ public class BeforeHeaterFrame extends Application implements BaseFrame {
     Stage stage;
 
     public BeforeHeaterFrame() {
-        try {
-            root1 = (Parent) fxmlLoader.load();
-            stage = new Stage();
-            stage.setScene(new Scene(root1, 500, 400));
-            stage.setTitle("خط لوله قبل از گرم کن");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        root1 = (Parent) fxmlLoader.load();
+        stage = primaryStage;
+        stage.setScene(new Scene(root1, 500, 400));
+        stage.setTitle("خط لوله قبل از گرم کن");
+        BeforeHeaterController controller = (BeforeHeaterController) fxmlLoader.getController();
+        controller.setStage(stage);
         show();
     }
 
 
     public void show() throws IOException {
+        if(root1 == null & stage == null){
+            try {
+                start(new Stage());
+                return;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         stage.close();
         stage.show();
     }

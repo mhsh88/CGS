@@ -3,7 +3,6 @@ package sample.model;
 import ir.behinehsazan.gasStation.model.station.StationLogic;
 import sample.model.base.BaseModel;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,4 +33,7 @@ public class Station {
         return instance;
     }
 
+    public void setList(Map<String, BaseModel> list) {
+        this.list = list;
+    }
 }

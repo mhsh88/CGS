@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" prefHeight="500.0" prefWidth="1000.0" stylesheets="/sample/view/stationProperty/stationProperty.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.stationProperty.StationPropertyController">
+<GridPane fx:id="mainGridPane" alignment="center" hgap="10" prefHeight="500.0" prefWidth="1000.0" stylesheets="/sample/view/stationProperty/stationProperty.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.stationProperty.StationPropertyController">
     <columnConstraints>
         <ColumnConstraints />
         <ColumnConstraints />

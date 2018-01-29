@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" stylesheets="/sample/view/station/sample.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.stationController.StationController">
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.stationController.StationController">
+    <MenuBar >
+        <menus>
+            <Menu text="File">
+                <MenuItem text="New" onAction="#newMenu"/>
+                <MenuItem text="Open" onAction="#openMenu"/>
+                <MenuItem text="Save" onAction="#saveMenu"/>
+                <MenuItem text="Exit" onAction="#exitMenu"/>
+
+            </Menu>
+        </menus>
+    </MenuBar>
+
+<GridPane alignment="center" hgap="10" stylesheets="/sample/view/station/sample.css" vgap="10" >
+
+
+
     <Pane prefHeight="500.0" prefWidth="1000.0" styleClass="pane">
         <children>
             <Button fx:id="beforeHeaterPipeLine" layoutX="25.0" layoutY="225.0" mnemonicParsing="false" onAction="#beforeHeaterWindows" styleClass="gagePipe" text="Before Heater pipeline">
@@ -40,9 +60,9 @@
             <Button layoutX="676.5" layoutY="225.0" mnemonicParsing="false" styleClass="gagePipe" text="Station Exit" />
 
 
-         <Button layoutX="46.0" layoutY="52.0" mnemonicParsing="false" onAction="#stationPropertyWindows" text="Station Property" styleClass="stationProperty"/>
-         <Button layoutX="796.0" layoutY="52.0" mnemonicParsing="false" onAction="#showResultsWindows" text="Show Results" styleClass="showResults"/>
-         <Button layoutX="807.0" layoutY="150.0" mnemonicParsing="false" text="calculator" onAction="#calculateButton" styleClass="calculateButton"/>
+         <Button layoutX="46.0" layoutY="52.0" mnemonicParsing="false" onAction="#stationPropertyWindows" styleClass="stationProperty" text="Station Property" />
+         <Button layoutX="796.0" layoutY="52.0" mnemonicParsing="false" onAction="#showResultsWindows" styleClass="showResults" text="Show Results" />
+         <Button layoutX="807.0" layoutY="150.0" mnemonicParsing="false" onAction="#calculateButton" styleClass="calculateButton" text="calculator" />
 
 
         </children>
@@ -60,3 +80,4 @@
         <RowConstraints />
     </rowConstraints>
 </GridPane>
+</VBox>

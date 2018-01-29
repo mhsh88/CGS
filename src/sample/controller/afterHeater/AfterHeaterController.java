@@ -105,6 +105,47 @@ public class AfterHeaterController extends BaseController{
         });
 
     }
+    @Override
+    public void setOnShow() {
+        PipeLine afterHeater = (PipeLine) Station.getInstance().getList().get("afterHeaterPipeLine");
+        if(afterHeater != null){
+            lineLengthTextField.setText(String.valueOf(afterHeater.getLength()));
+            mmOrInchComboBox.getSelectionModel().select(afterHeater.getSize());
+            insulationRadioButton.setSelected(afterHeater.isInsulation());
+            if(afterHeater.isInsulation()){
+                insulationThicknessLabel.setDisable(false);
+                insulationThicknessTextField.setDisable(false);
+                insulationThicknessComboBox.setDisable(false);
+                insulationThicknessTextField.setDisable(false);
+                insulationFactorLabel.setDisable(false);
+                insulationFactorTextField.setDisable(false);
+                insulationFactorDimensionLabel.setDisable(false);
+                insulationFactorTextField.setText(String.valueOf(afterHeater.getInsulationFactor()));
+                insulationThicknessTextField.setText(String.valueOf(afterHeater.getInsulationThickness() * 100));
+                insulationThicknessComboBox.getSelectionModel().select("سانتی متر (cm)");
+
+            }else{
+                insulationThicknessLabel.setDisable(true);
+                insulationThicknessTextField.setDisable(true);
+                insulationThicknessComboBox.setDisable(true);
+                insulationThicknessTextField.setDisable(true);
+                insulationThicknessTextField.clear();
+                insulationFactorLabel.setDisable(true);
+                insulationFactorTextField.setDisable(true);
+                insulationFactorDimensionLabel.setDisable(true);
+                insulationFactorTextField.clear();
+            }
+
+
+
+
+
+
+        }
+        else{
+
+        }
+    }
 
     public void okAction(ActionEvent actionEvent) {
         double insulationThickness = 0;
@@ -155,6 +196,7 @@ public class AfterHeaterController extends BaseController{
         PipeLine pipeLine = new PipeLine(mmOrInchComboBox.getValue().toString() , pipelineLength);
         pipeLine.setInsulationFactor(insulationFactor);
         pipeLine.setInsulationThickness(insulationThickness);
+        pipeLine.setInsulation(insulationRadioButton.isSelected());
 
         Map<String, BaseModel> map = Station.getInstance().getList();
         map.put("afterHeaterPipeLine", pipeLine);

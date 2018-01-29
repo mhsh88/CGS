@@ -22,6 +22,7 @@ import sample.model.showResultEntity.Table;
 import sample.model.stationProperties.StationPropertice;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CalculateController extends BaseController{
     public boolean calculate() {
@@ -47,22 +48,36 @@ public class CalculateController extends BaseController{
                 }
                 if(stationPropertice.getDebi() < tempDebi){
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Current project is modified");
-                    alert.setContentText("Save?");
-                    ButtonType okButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
-                    ButtonType noButton = new ButtonType("Yes", ButtonBar.ButtonData.NO);
-                    ButtonType cancelButton = new ButtonType("Yes", ButtonBar.ButtonData.CANCEL_CLOSE);
-                    alert.getButtonTypes().setAll(okButton, noButton, cancelButton);
-                    double finalTempDebi = tempDebi;
-                    alert.showAndWait().ifPresent(type -> {
-                        if (type == ButtonType.OK) {
-                            stationPropertice.setDebi(finalTempDebi);
-                        } else if (type == ButtonType.NO) {
-
-                        } else {
-                            return;
-                        }
-                    });
+                    alert.setTitle("توجه");
+                    alert.setHeaderText("مجموع دبی عبوری تعیین شده برای ران‌ها بیش از مقدار مشخص شده برای ایستگاه است.");
+                    alert.setContentText("آیا مایل به اصلاح میزان دبی عبوری ایستگاه هستید؟");
+                    ButtonType okButton = new ButtonType("بله", ButtonBar.ButtonData.YES);
+                    ButtonType noButton = new ButtonType("خیر", ButtonBar.ButtonData.NO);
+//                    ButtonType cancelButton = new ButtonType("خروج", ButtonBar.ButtonData.CANCEL_CLOSE);
+                    alert.getButtonTypes().setAll(okButton, noButton);
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == okButton){
+                        stationPropertice.setDebi(tempDebi);
+                        // ... user chose "One"
+                    } else {
+                        // ... user chose CANCEL or closed the dialog
+                    }
+//                    double finalTempDebi = tempDebi;
+//                    alert.showAndWait().ifPresent(type -> {
+//                        if (type == ButtonType.YES) {
+//                            stationPropertice.setDebi(finalTempDebi);
+//                            System.out.println("Yes");
+//                        } else if (type == ButtonType.NO) {
+//
+//                            System.out.println("NO");
+//
+//                        } else if(type == ButtonType.CANCEL) {
+//                            System.out.println("Cancel Button Hit");
+//                        }
+//                        else if(type == ButtonType.CANCEL){
+//                            System.out.println("Close Button Hit");
+//                        }
+//                    });
                 }
 
             }
@@ -515,6 +530,11 @@ public class CalculateController extends BaseController{
             }
         }
 
+
+    }
+
+    @Override
+    public void setOnShow() {
 
     }
 }

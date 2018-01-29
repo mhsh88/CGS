@@ -35,6 +35,16 @@ public class PipeLine extends BaseModel{
     Double insulationThickness;
     Double insulationFactor;
     String size;
+
+    public boolean isInsulation() {
+        return insulation;
+    }
+
+    public void setInsulation(boolean insulation) {
+        this.insulation = insulation;
+    }
+
+    boolean insulation;
     private Double Tin;
     private Double Tout;
     private Double Pin;

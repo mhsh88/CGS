@@ -1,7 +1,9 @@
 package sample.model.pipeLine;
 
 
-public class PipeSize {
+import java.io.Serializable;
+
+public class PipeSize implements Serializable {
     double wallThickness;
     double outerDiameter;
 

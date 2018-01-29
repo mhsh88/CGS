@@ -16,23 +16,34 @@ public class AfterHeaterFrame extends Application implements BaseFrame {
     Stage stage;
 
     public AfterHeaterFrame() {
-        try{root1   = (Parent) fxmlLoader.load();
-        stage = new Stage();
 
-        stage.setScene(new Scene(root1, 500, 400));
-        stage.setTitle("خط لوله بعد از گرم کن");}
-        catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        root1   = (Parent) fxmlLoader.load();
+            stage = primaryStage;
+
+            stage.setScene(new Scene(root1, 500, 400));
+            stage.setTitle("خط لوله بعد از گرم کن");
+
+        stage = primaryStage;
+        AfterHeaterController controller = (AfterHeaterController) fxmlLoader.getController();
+        controller.setStage(stage);
+
         show();
     }
 
 
     public void show() throws IOException {
+        if(root1 == null & stage == null){
+            try {
+                start(new Stage());
+                return;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         stage.close();
         stage.show();
     }

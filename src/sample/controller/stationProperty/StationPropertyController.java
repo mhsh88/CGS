@@ -1,8 +1,6 @@
 package sample.controller.stationProperty;
 
 import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -10,6 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import sample.controller.base.BaseController;
 import sample.model.Station;
 import sample.model.base.BaseModel;
 import sample.model.stationProperties.StationPropertice;
@@ -17,7 +18,9 @@ import sample.model.stationProperties.StationPropertice;
 import java.io.IOException;
 import java.util.Map;
 
-public class StationPropertyController {
+public class StationPropertyController extends BaseController {
+    public GridPane mainGridPane = new GridPane();
+    Stage stage;
     private StationPropertice stationPropertice = new StationPropertice();
 
 
@@ -75,8 +78,7 @@ public class StationPropertyController {
     private Button cancelButton = new Button();
     @FXML
     TextField nitrogenTextField = new TextField();
-    
-    
+
 
     public StationPropertyController() {
     }
@@ -131,21 +133,21 @@ public class StationPropertyController {
         stationDebiTextField.setText("40000");
 
 
-        nitrogenTextField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable,
-                                String oldValue, String newValue) {
-                try {
-                    Integer.parseInt(newValue);
-                    if (newValue.endsWith("f") || newValue.endsWith("d")) {
-                        carbonDioxideTextField.setText(newValue.substring(0, newValue.length()-1));
-                    }
-                }
-                catch (Exception e) {
-                    nitrogenTextField.setText(oldValue);
-                }
-            }
-        });
+//        nitrogenTextField.textProperty().addListener(new ChangeListener<String>() {
+//            @Override
+//            public void changed(ObservableValue<? extends String> observable,
+//                                String oldValue, String newValue) {
+//                try {
+//                    Integer.parseInt(newValue);
+//                    if (newValue.endsWith("f") || newValue.endsWith("d")) {
+//                        carbonDioxideTextField.setText(newValue.substring(0, newValue.length()-1));
+//                    }
+//                }
+//                catch (Exception e) {
+//                    nitrogenTextField.setText(oldValue);
+//                }
+//            }
+//        });
 
 
 
@@ -163,9 +165,57 @@ public class StationPropertyController {
 //            }
 //
 //        });
+
+//          stage = (Stage) mainGridPane.getScene().getWindow();
+
+
+//        setOnStart();
     }
+    @Override
+    public void setOnShow() {
+        StationPropertice stationPropertice = (StationPropertice) Station.getInstance().getList().get("stationPropertice");
+        if(stationPropertice != null){
+            Double[] component = stationPropertice.getComponent();
+            methanTextField.setText(String.valueOf(component[0]));
+            nitrogenTextField.setText(String.valueOf(component[1]));
+            carbonDioxideTextField.setText(String.valueOf(component[2]));
+            ethaneTextField.setText(String.valueOf(component[3]));
+            propaneTextField.setText(String.valueOf(component[4]));
+            nButaneTextField.setText(String.valueOf(component[5]));
+            isoButaneTextField.setText(String.valueOf(component[6]));
+            nPentaneTextField.setText(String.valueOf(component[7]));
+            isoPentaneTextField.setText(String.valueOf(component[8]));
+            hexaneTextField.setText(String.valueOf(component[9]));
+            heptaneTextField.setText(String.valueOf(component[10]));
+            octaneTextField.setText(String.valueOf(component[11]));
+            nonaneTextField.setText(String.valueOf(component[12]));
+            decaneTextField.setText(String.valueOf(component[13]));
+            hydrogenTextField.setText(String.valueOf(component[14]));
+            oxygenTextField.setText(String.valueOf(component[15]));
+            carbonMonoxideTextField.setText(String.valueOf(component[16]));
+            waterTextField.setText(String.valueOf(component[17]));
+            hydrogenSulfideTextField.setText(String.valueOf(component[18]));
+            heliumTextField.setText(String.valueOf(component[19]));
+            argonTextField.setText(String.valueOf(component[20]));
+            inputGasTempTextField.setText(String.valueOf(stationPropertice.getInputTemp() - 273.15));
+            inputGasPressureTextField.setText(String.valueOf(Math.round(stationPropertice.getInputPressure() - 101.235)));
+            outputGasPressureTextField.setText(String.valueOf(Math.round(stationPropertice.getOutputPressure() - 101.235)));
+            outputGasTempTextField.setText(String.valueOf(stationPropertice.getOutputTemp() - 273.15));
+            environmentTempTextField.setText(String.valueOf(stationPropertice.getEnvironmentTemp() - 273.15));
+            windSpeedTextField.setText(String.valueOf(stationPropertice.getWindVelocity()));
+            stationDebiTextField.setText(String.valueOf(stationPropertice.getDebi()));
+            provinceTextField.setText(stationPropertice.getProvince());
+            cityTextField.setText(stationPropertice.getCity());
+            areaTextField.setText(stationPropertice.getArea());
+            nominalCapacityTextField.setText(stationPropertice.getNominalCapacity());
+            addressTextArea.setText(stationPropertice.getAddress());
 
 
+        }
+        else{
+            return;
+        }
+    }
 
 
     public void okButton(ActionEvent actionEvent) {
@@ -299,5 +349,7 @@ public class StationPropertyController {
 //        stage.close();
 
     }
+
+
 
 }

@@ -184,4 +184,103 @@ public class HeaterController extends BaseController{
         heaterNumberInput.clear();
         tabPane.getTabs().clear();
     }
+
+    @Override
+    public void setOnShow() {
+        HeatersModel heatersModel = (HeatersModel) Station.getInstance().getList().get("HeatersModel");
+        if(heatersModel != null){
+            tabPane.getTabs().clear();
+            ArrayList<HeaterModel> heaters = heatersModel.getHeaterModels();
+
+            heaterNumberInput.setText(String.valueOf(heaters.size()));
+//        tabPane.setMinSize(300,200);
+            if(heaterNumberInput.getText().equals("")) return;
+            int heaterNumber = Integer.parseInt(heaterNumberInput.getText());
+            if(heaterNumber>20){
+                heaterNumberInput.setText("20");
+                heaterNumber = 20;
+
+            }
+            else if(heaterNumber<0){
+                heaterNumberInput.setText("0");
+                heaterNumber = 0;
+            }
+            String[] heaterList = new String[heaterNumber];
+            for(int i = 1; i <= heaterNumber; i++){
+                heaterList[i-1] = String.valueOf(i);
+            }
+//        System.out.println(heaterNumberInput.getText());
+//        TabPane tabPane = new TabPane();
+//        BorderPane borderPane = new BorderPane();
+            for (int i = 1; i <= heaterNumber; i++) {
+                Tab tab = new Tab();
+//            tab.setGraphic(new Circle(0, 0, 10));
+                tab.setText("گرم کن " + i);
+                TabPane burnerTabPane = new TabPane();
+                VBox childVBox = new VBox();
+                Label randemanLabel = new Label("راندمان حرارتی گرم کن");
+                TextField randemanTextField = new TextField();
+
+                randemanTextField.setText(String.valueOf(Math.round(heaters.get(i-1).getEfficiency())));
+                HBox randemanHbox = new HBox();
+                randemanHbox.getChildren().add(randemanTextField);
+                randemanHbox.getChildren().add(randemanLabel);
+
+                randemanHbox.setAlignment(Pos.CENTER);
+
+                childVBox.getChildren().add(randemanHbox);
+
+                ArrayList<Burner> burners = heaters.get(i-1).getBurners();
+                for(int j = 1; j <= 3; j++){
+                    Tab burnerTab = new Tab();
+
+
+
+
+                    HBox childHBox = new HBox();
+
+                    burnerTab.setText("مشعل " + j);
+                    GridPane burnerContainer = new GridPane();
+                    burnerContainer.add(new Label("درصد اکسیژن ٪"), 1, 0);
+                    TextField oxygenTextField =  new TextField();
+                    TextField flueTextField =  new TextField();
+
+                        try{
+                            oxygenTextField.setText(String.valueOf(burners.get(j-1).getOxygenPecent()));
+                            flueTextField.setText(String.valueOf(burners.get(j-1).getFlueGasTemp()));
+
+                        }
+                        catch (IndexOutOfBoundsException e){
+
+                        }
+
+
+                    burnerContainer.add(oxygenTextField, 0, 0);
+                    burnerContainer.add(new Label("دمای دودکش "), 1, 1);
+                    burnerContainer.add(flueTextField, 0, 1);
+                    childHBox.getChildren().add(burnerContainer);
+                    childHBox.setAlignment(Pos.CENTER);
+                    burnerTab.setContent(childHBox);
+                    burnerTabPane.getTabs().add(burnerTab);
+                    burnerTabPane.setMinSize(300, 200);
+                    burnerTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+
+                }
+                HBox hbox = new HBox();
+//            hbox.getChildren().add(new Label("گرم کن " + i));
+                hbox.getChildren().add(burnerTabPane);
+                hbox.setAlignment(Pos.CENTER);
+                childVBox.getChildren().add(hbox);
+                childVBox.setAlignment(Pos.CENTER);
+
+                tab.setContent(childVBox);
+                tabPane.getTabs().add(tab);
+            }
+
+
+
+        }
+
+
+    }
 }

@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import sample.controller.base.BaseController;
 import sample.model.Station;
 import sample.model.run.Collector;
 import sample.model.run.Run;
@@ -17,7 +18,7 @@ import sample.model.run.Runs;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class RunController {
+public class RunController extends BaseController{
 
     public TextField runNumberInput;
     public TextField runLengthInput;
@@ -135,5 +136,67 @@ public class RunController {
 
     public void cancel(ActionEvent actionEvent) {
         ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
+    }
+
+    @Override
+    public void setOnShow() {
+        Runs runs = (Runs) Station.getInstance().getList().get("Runs");
+        if(runs != null){
+            runTapPane.getTabs().clear();
+            runNumberInput.setText(String.valueOf(runs.getRuns().size()));
+            if(runNumberInput.getText().equals("")) return;
+            int runNumber = Integer.parseInt(runNumberInput.getText());
+            if(runNumber>10){
+                runNumberInput.setText("10");
+//                runNumber = 20;
+
+            }
+            else if(runNumber<0){
+                runNumberInput.setText("0");
+                runNumber = 0;
+            }
+            runLengthInput.setText(String.valueOf(runs.getRuns().get(runs.getRuns().size() - 1).getLength()));
+            runColectorLengthInput.setText(String.valueOf(runs.getCollector().getLength()));
+            collectorComboBox.getSelectionModel().select(runs.getCollector().getSize());
+
+            ArrayList<Run> run = runs.getRuns();
+
+            for (int i = 1; i <= runNumber; i++) {
+
+                Tab tab = new Tab();
+
+
+
+
+                HBox childHBox = new HBox();
+
+                tab.setText("ران  " + i);
+                GridPane runContainer = new GridPane();
+                runContainer.add(new Label("دبی گاز عبوری "), 1, 0);
+                TextField debiTextField = new TextField();
+                debiTextField.setText(String.valueOf(run.get(i - 1).getDebi()));
+                runContainer.add(debiTextField, 0, 0);
+                runContainer.add(new Label("سایز (اینچ) "), 1, 1);
+                ComboBox comboBox = new ComboBox();
+                comboBox.getItems().removeAll();
+                comboBox.getItems().addAll( "2","4","6","8","10","12","16","20","24","30");
+                comboBox.getSelectionModel().select(run.get(i-1).getSize());
+                runContainer.add(comboBox, 0, 1);
+
+                childHBox.getChildren().add(runContainer);
+                childHBox.setAlignment(Pos.CENTER);
+                tab.setContent(childHBox);
+                runTapPane.getTabs().add(tab);
+                runTapPane.setMinSize(200,100);
+                runTapPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+
+
+
+
+            }
+
+
+        }
+
     }
 }
