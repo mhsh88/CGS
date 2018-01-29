@@ -2,6 +2,7 @@ package sample;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sample.controller.stationController.StationController;
 import sample.controller.stationProperty.StationPropertyFrame;
@@ -13,6 +14,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Image icon = new Image(getClass().getResourceAsStream("/sample/view/base/logo2.png"));
+        primaryStage.getIcons().add(icon);
         primaryStage.setOnCloseRequest(e -> Platform.exit());
 
         staionConroller.launchLogingController(primaryStage);

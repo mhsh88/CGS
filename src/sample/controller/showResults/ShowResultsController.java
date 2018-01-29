@@ -142,10 +142,10 @@ public class ShowResultsController implements Initializable {
 
 //Set extension filter
         FileChooser.ExtensionFilter extFilterALL =
-                new FileChooser.ExtensionFilter("All Files", "*.xls", "*.xlsx", "*.pdf",
+                new FileChooser.ExtensionFilter("All Files", "*.xls", "*.pdf",
                         "*.PDF");
         FileChooser.ExtensionFilter extFilterExcel =
-                new FileChooser.ExtensionFilter("Excel files (*.xls, *.xlsx)", "*.xls", "*.xlsx");
+                new FileChooser.ExtensionFilter("Excel files (*.xls)", "*.xls");
         FileChooser.ExtensionFilter extFilterPDF =
                 new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.PDF", "*.pdf");
         FileChooser.ExtensionFilter extFilterTIFF =
@@ -153,7 +153,7 @@ public class ShowResultsController implements Initializable {
                         "*.tif", "*.tiff");
 
         chooser.getExtensionFilters().addAll(extFilterALL, extFilterExcel, extFilterPDF);
-        File file = chooser.showOpenDialog(new Stage());
+        File file = chooser.showSaveDialog(new Stage());
 //        String filePath = file.getAbsolutePath();
         System.out.println(file.getName());
 //        System.out.println(filePath);
@@ -163,12 +163,12 @@ public class ShowResultsController implements Initializable {
 
             fileName = file.getName();
             fileExtension = fileName.substring(fileName.indexOf(".") + 1, file.getName().length());
-            System.out.println(">> fileExtension " + fileExtension);
+//            System.out.println(">> fileExtension " + fileExtension);
 
         } else {
             return;
         }
-        if (fileExtension.equals("xls") || fileExtension.equals("xlsx")) {
+        if (fileExtension.equals("xls")) {
 
             System.out.println(file.toString());
 

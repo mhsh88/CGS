@@ -85,7 +85,7 @@ Button#btn:hover {
 
 }
 .heater:pressed{
-    -icon-paint: #3187ff;
+    -icon-paint: red;
 
     /*-fx-graphic: url("./svgfile/heater/fireplace.png");*/
     /*-fx-background-image: url("./svgfile/heater/fireplace.svg");*/

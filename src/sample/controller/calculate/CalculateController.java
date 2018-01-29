@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class CalculateController extends BaseController{
-    final static String celciusDegree = " (°C)";
+    final static String celciusDegree = " (C°)";
     final static String percent = " (٪)";
     final static String pressureDegree = " (kPa)";
     final static String cubicMeter = " (متر مکعب بر ساعت) ";

@@ -175,9 +175,9 @@ public class StationController extends BaseController {
 
 
         chooser.getExtensionFilters().addAll(extFilterCGS);
-        File file = chooser.showOpenDialog(new Stage());
+        File file = chooser.showSaveDialog(new Stage());
 //        String filePath = file.getAbsolutePath();
-        System.out.println(file.getName());
+//        System.out.println(file.getName());
 
         if (file != null) {
 
