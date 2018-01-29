@@ -1,5 +1,7 @@
 package sample.controller.beforeHeater;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -84,6 +86,93 @@ public class BeforeHeaterController extends BaseController{
                 insulationFactorTextField.clear();
             }
         });
+
+
+        lineLengthTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    lineLengthTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(lineLengthTextField.getText());
+                        if(number > 1000){
+                            lineLengthTextField.setText("1000");
+                        }
+                        else if(number <0){
+                            lineLengthTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        lineLengthTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+        insulationThicknessTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    insulationThicknessTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(insulationThicknessTextField.getText());
+                        if(number > 100){
+                            insulationThicknessTextField.setText("100");
+                        }
+                        else if(number <0){
+                            insulationThicknessTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        insulationThicknessTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+        insulationFactorTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    insulationFactorTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(insulationFactorTextField.getText());
+//                        if(number > 100){
+//                            insulationFactorTextField.setText("100");
+//                        }
+                        if(number <0){
+                            insulationFactorTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        insulationFactorTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+
 
 
 

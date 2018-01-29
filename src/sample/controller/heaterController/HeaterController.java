@@ -1,5 +1,7 @@
 package sample.controller.heaterController;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +30,34 @@ public class HeaterController extends BaseController{
     public void initialize() throws IOException {
         tabPane.getTabs().clear();
         tabPane.setMinSize(400,200);
+
+        heaterNumberInput.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    heaterNumberInput.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Integer number = Integer.parseInt(heaterNumberInput.getText());
+                        if(number > 20){
+                            heaterNumberInput.setText("30");
+                        }
+                        else if(number <0){
+                            heaterNumberInput.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        heaterNumberInput.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
 
     }
 
@@ -130,7 +160,7 @@ public class HeaterController extends BaseController{
             TabPane burnerTabPane = new TabPane();
             VBox childVBox = new VBox();
             Label randemanLabel = new Label("راندمان حرارتی گرم کن");
-            TextField randemanTextField = new TextField();
+            TextField randemanTextField = addRandemanValidator(new TextField());
             HBox randemanHbox = new HBox();
             randemanHbox.getChildren().add(randemanTextField);
             randemanHbox.getChildren().add(randemanLabel);
@@ -151,15 +181,9 @@ public class HeaterController extends BaseController{
                 burnerTab.setText("مشعل " + j);
                 GridPane burnerContainer = new GridPane();
                 burnerContainer.add(new Label("درصد اکسیژن ٪"), 1, 0);
-                Spinner<Double> dblSpinner = new Spinner<>(0.0, 21.0, 0.0, 1.0);
-                SpinnerValueFactory.DoubleSpinnerValueFactory dblFactory =
-                        (SpinnerValueFactory.DoubleSpinnerValueFactory) dblSpinner.getValueFactory();
-                double dmin = dblFactory.getMin(); // 0.0
-                double dmax = dblFactory.getMax(); // 10.0
-                double dstep = dblFactory.getAmountToStepBy(); // 1.0
-                burnerContainer.add(new TextField(), 0, 0);
+                burnerContainer.add(addOxygenValidator(new TextField()), 0, 0);
                 burnerContainer.add(new Label("دمای دودکش "), 1, 1);
-                burnerContainer.add(new TextField(), 0, 1);
+                burnerContainer.add(addFlueGasValidator(new TextField()), 0, 1);
                 childHBox.getChildren().add(burnerContainer);
                 childHBox.setAlignment(Pos.CENTER);
                 burnerTab.setContent(childHBox);
@@ -225,7 +249,7 @@ public class HeaterController extends BaseController{
                 TabPane burnerTabPane = new TabPane();
                 VBox childVBox = new VBox();
                 Label randemanLabel = new Label("راندمان حرارتی گرم کن");
-                TextField randemanTextField = new TextField();
+                TextField randemanTextField = addRandemanValidator(new TextField());
 
                 randemanTextField.setText(String.valueOf(Math.round(heaters.get(i-1).getEfficiency())));
                 HBox randemanHbox = new HBox();
@@ -248,8 +272,8 @@ public class HeaterController extends BaseController{
                     burnerTab.setText("مشعل " + j);
                     GridPane burnerContainer = new GridPane();
                     burnerContainer.add(new Label("درصد اکسیژن ٪"), 1, 0);
-                    TextField oxygenTextField =  new TextField();
-                    TextField flueTextField =  new TextField();
+                    TextField oxygenTextField =  addOxygenValidator(new TextField());
+                    TextField flueTextField =  addFlueGasValidator(new TextField());
 
                         try{
                             oxygenTextField.setText(String.valueOf(burners.get(j-1).getOxygenPecent()));
@@ -288,5 +312,97 @@ public class HeaterController extends BaseController{
         }
 
 
+    }
+    private TextField addOxygenValidator(TextField textField){
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    textField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(textField.getText());
+                        if(number > 21){
+                            textField.setText("21");
+                        }
+                        else if(number <0){
+                            textField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        textField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+        return textField;
+    }
+
+    private TextField addRandemanValidator(TextField textField){
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    textField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(textField.getText());
+                        if(number >= 1){
+                            textField.setText("1");
+                        }
+                        else if(number <0){
+                            textField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        textField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+        return textField;
+    }
+
+    private TextField addFlueGasValidator(TextField textField){
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    textField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(textField.getText());
+                        if(number > 1500){
+                            textField.setText("1500");
+                        }
+                        else if(number <0){
+                            textField.setText("-60");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        textField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+        return textField;
     }
 }

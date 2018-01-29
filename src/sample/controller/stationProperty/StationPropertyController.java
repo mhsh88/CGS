@@ -1,7 +1,5 @@
 package sample.controller.stationProperty;
 
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.RequiredFieldValidator;
 import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import sample.controller.base.BaseController;
@@ -39,7 +38,7 @@ public class StationPropertyController extends BaseController {
 
 
 
-    public JFXTextField carbonDioxideTextField = new JFXTextField();
+    public TextField carbonDioxideTextField = new TextField();
     public TextField methanTextField = new TextField();
     public TextField ethaneTextField = new TextField();
     public TextField propaneTextField = new TextField();
@@ -136,19 +135,805 @@ public class StationPropertyController extends BaseController {
         windSpeedTextField.setText("10");
         stationDebiTextField.setText("40000");
 
-        RequiredFieldValidator validator = new RequiredFieldValidator();
-        carbonDioxideTextField.getValidators().add(validator);
-        validator.setMessage("no input");
 
-        carbonDioxideTextField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        nitrogenTextField.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(!newValue)
-                {
-                    carbonDioxideTextField.validate();
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    nitrogenTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(nitrogenTextField.getText());
+                        if(number > 100){
+                            nitrogenTextField.setText("100");
+                        }
+                        else if(number <0){
+                            nitrogenTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+                        nitrogenTextField.setText("");
+                        e.printStackTrace();
+                    }
                 }
             }
         });
+
+        carbonDioxideTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    carbonDioxideTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(carbonDioxideTextField.getText());
+                        if(number > 100){
+                            carbonDioxideTextField.setText("100");
+                        }
+                        else if(number <0){
+                            carbonDioxideTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+                        carbonDioxideTextField.setText("");
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        methanTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    methanTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(methanTextField.getText());
+                        if(number > 100){
+                            methanTextField.setText("100");
+                        }
+                        else if(number <0){
+                            methanTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+                        methanTextField.setText("");
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        ethaneTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    ethaneTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(ethaneTextField.getText());
+                        if(number > 100){
+                            ethaneTextField.setText("100");
+                        }
+                        else if(number <0){
+                            ethaneTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+                        ethaneTextField.setText("");
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        propaneTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    propaneTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(propaneTextField.getText());
+                        if(number > 100){
+                            propaneTextField.setText("100");
+                        }
+                        else if(number <0){
+                            propaneTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+                        propaneTextField.setText("");
+//                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        nButaneTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    nButaneTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(nButaneTextField.getText());
+                        if(number > 100){
+                            nButaneTextField.setText("100");
+                        }
+                        else if(number <0){
+                            nButaneTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        nButaneTextField.setText("");
+
+                    }
+                }
+            }
+        });
+
+        isoButaneTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    isoButaneTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(isoButaneTextField.getText());
+                        if(number > 100){
+                            isoButaneTextField.setText("100");
+                        }
+                        else if(number <0){
+                            isoButaneTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        isoButaneTextField.setText("");
+
+                    }
+                }
+            }
+        });
+
+        nPentaneTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    nPentaneTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(nPentaneTextField.getText());
+                        if(number > 100){
+                            nPentaneTextField.setText("100");
+                        }
+                        else if(number <0){
+                            nPentaneTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        nPentaneTextField.setText("");
+
+                    }
+                }
+            }
+        });
+
+        isoPentaneTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    isoPentaneTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(isoPentaneTextField.getText());
+                        if(number > 100){
+                            isoPentaneTextField.setText("100");
+                        }
+                        else if(number <0){
+                            isoPentaneTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        isoPentaneTextField.setText("");
+
+                    }
+                }
+            }
+        });
+
+        hexaneTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    hexaneTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(hexaneTextField.getText());
+                        if(number > 100){
+                            hexaneTextField.setText("100");
+                        }
+                        else if(number <0){
+                            hexaneTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        hexaneTextField.setText("");
+
+                    }
+                }
+            }
+        });
+
+        heptaneTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    heptaneTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(heptaneTextField.getText());
+                        if(number > 100){
+                            heptaneTextField.setText("100");
+                        }
+                        else if(number <0){
+                            heptaneTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        heptaneTextField.setText("");
+
+                    }
+                }
+            }
+        });
+
+        octaneTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    octaneTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(octaneTextField.getText());
+                        if(number > 100){
+                            octaneTextField.setText("100");
+                        }
+                        else if(number <0){
+                            octaneTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        octaneTextField.setText("");
+
+                    }
+                }
+            }
+        });
+
+        nonaneTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    nonaneTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(nonaneTextField.getText());
+                        if(number > 100){
+                            nonaneTextField.setText("100");
+                        }
+                        else if(number <0){
+                            nonaneTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        nonaneTextField.setText("");
+
+                    }
+                }
+            }
+        });
+
+        decaneTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    decaneTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(decaneTextField.getText());
+                        if(number > 100){
+                            decaneTextField.setText("100");
+                        }
+                        else if(number <0){
+                            decaneTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        decaneTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+        hydrogenTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    hydrogenTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(hydrogenTextField.getText());
+                        if(number > 100){
+                            hydrogenTextField.setText("100");
+                        }
+                        else if(number <0){
+                            hydrogenTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        hydrogenTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+        oxygenTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    oxygenTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(oxygenTextField.getText());
+                        if(number > 100){
+                            oxygenTextField.setText("100");
+                        }
+                        else if(number <0){
+                            oxygenTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        oxygenTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+        carbonMonoxideTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    carbonMonoxideTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(carbonMonoxideTextField.getText());
+                        if(number > 100){
+                            carbonMonoxideTextField.setText("100");
+                        }
+                        else if(number <0){
+                            carbonMonoxideTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        carbonMonoxideTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+        waterTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    waterTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(waterTextField.getText());
+                        if(number > 100){
+                            waterTextField.setText("100");
+                        }
+                        else if(number <0){
+                            waterTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        waterTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+        hydrogenSulfideTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    hydrogenSulfideTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(hydrogenSulfideTextField.getText());
+                        if(number > 100){
+                            hydrogenSulfideTextField.setText("100");
+                        }
+                        else if(number <0){
+                            hydrogenSulfideTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        hydrogenSulfideTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+        heliumTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    heliumTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(heliumTextField.getText());
+                        if(number > 100){
+                            heliumTextField.setText("100");
+                        }
+                        else if(number <0){
+                            heliumTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        heliumTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+        argonTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    argonTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(argonTextField.getText());
+                        if(number > 100){
+                            argonTextField.setText("100");
+                        }
+                        else if(number <0){
+                            argonTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        argonTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+        inputGasTempTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    inputGasTempTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(inputGasTempTextField.getText());
+                        if(number > 500){
+                            inputGasTempTextField.setText("500");
+                        }
+                        else if(number <-60){
+                            inputGasTempTextField.setText("-60");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        inputGasTempTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+        inputGasPressureTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    inputGasPressureTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(inputGasPressureTextField.getText());
+                        if(number > 20000){
+                            inputGasPressureTextField.setText("20000");
+                        }
+                        else if(number <0){
+                            inputGasPressureTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        inputGasPressureTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+        outputGasTempTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    outputGasTempTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(outputGasTempTextField.getText());
+                        if(number > 500){
+                            outputGasTempTextField.setText("500");
+                        }
+                        else if(number <-60){
+                            outputGasTempTextField.setText("-60");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        outputGasTempTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+
+        outputGasPressureTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    outputGasPressureTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(outputGasPressureTextField.getText());
+                        if(number > 20000){
+                            outputGasPressureTextField.setText("20000");
+                        }
+                        else if(number <0){
+                            outputGasPressureTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        outputGasPressureTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+        environmentTempTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    environmentTempTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(environmentTempTextField.getText());
+                        if(number > 100){
+                            environmentTempTextField.setText("100");
+                        }
+                        else if(number <-60){
+                            environmentTempTextField.setText("-60");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        environmentTempTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+
+        windSpeedTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    windSpeedTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(windSpeedTextField.getText());
+                        if(number > 100){
+                            windSpeedTextField.setText("100");
+                        }
+                        else if(number <0){
+                            windSpeedTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        windSpeedTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+
+
+
+        stationDebiTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    stationDebiTextField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(stationDebiTextField.getText());
+                        if(number > 10000000){
+                            stationDebiTextField.setText("10000000");
+                        }
+                        else if(number <0){
+                            stationDebiTextField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        stationDebiTextField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //        nitrogenTextField.textProperty().addListener(new ChangeListener<String>() {
@@ -369,5 +1154,33 @@ public class StationPropertyController extends BaseController {
     }
 
 
+    public void gasPropertyInput(KeyEvent keyEvent) {
+//        TextField textField = (TextField) keyEvent.getSource();
+//
+//
+//        if(textField.getText().equals("")){
+//            return;
+//        }
+//        try{
+//
+//            Double number = Double.parseDouble(textField.getText());
+//            if(number > 100.0){
+//                textField.clear();
+//                textField.setText("100");
+//            }else if (number<0.0){
+//                textField.clear();
+//                textField.setText("0");
+//            }
+//
+//        }
+//        catch (Exception e){
+//            textField.clear();
+//
+////            textField.setText("");
+//
+//
+//
+//        }
 
+    }
 }

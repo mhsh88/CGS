@@ -1,5 +1,7 @@
 package sample.controller.run;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,6 +36,95 @@ public class RunController extends BaseController{
         collectorComboBox.getItems().removeAll();
         collectorComboBox.getItems().addAll( "2","4","6","8","10","12","16","20","24","30");
         collectorComboBox.getSelectionModel().select("8");
+
+        runNumberInput.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    runNumberInput.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Integer number = Integer.parseInt(runNumberInput.getText());
+                        if(number > 20){
+                            runNumberInput.setText("20");
+                        }
+                        else if(number <0){
+                            runNumberInput.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        runNumberInput.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+        runLengthInput.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    runLengthInput.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(runLengthInput.getText());
+                        if(number > 50){
+                            runLengthInput.setText("50");
+                        }
+                        else if(number <0){
+                            runLengthInput.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        runLengthInput.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+        runColectorLengthInput.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    runColectorLengthInput.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(runColectorLengthInput.getText());
+                        if(number > 50){
+                            runColectorLengthInput.setText("50");
+                        }
+                        else if(number <0){
+                            runColectorLengthInput.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        runColectorLengthInput.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+
+
+
+
+
     }
 
 
@@ -63,7 +154,10 @@ public class RunController extends BaseController{
             tab.setText("ران  " + i);
             GridPane runContainer = new GridPane();
             runContainer.add(new Label("دبی گاز عبوری "), 1, 0);
-            runContainer.add(new TextField(), 0, 0);
+            TextField textField = addDebiValidator(new TextField());
+
+
+            runContainer.add(textField, 0, 0);
             runContainer.add(new Label("سایز (اینچ) "), 1, 1);
             ComboBox comboBox = new ComboBox();
             comboBox.getItems().removeAll();
@@ -146,15 +240,7 @@ public class RunController extends BaseController{
             runNumberInput.setText(String.valueOf(runs.getRuns().size()));
             if(runNumberInput.getText().equals("")) return;
             int runNumber = Integer.parseInt(runNumberInput.getText());
-            if(runNumber>10){
-                runNumberInput.setText("10");
-//                runNumber = 20;
 
-            }
-            else if(runNumber<0){
-                runNumberInput.setText("0");
-                runNumber = 0;
-            }
             runLengthInput.setText(String.valueOf(runs.getRuns().get(runs.getRuns().size() - 1).getLength()));
             runColectorLengthInput.setText(String.valueOf(runs.getCollector().getLength()));
             collectorComboBox.getSelectionModel().select(runs.getCollector().getSize());
@@ -173,7 +259,8 @@ public class RunController extends BaseController{
                 tab.setText("ران  " + i);
                 GridPane runContainer = new GridPane();
                 runContainer.add(new Label("دبی گاز عبوری "), 1, 0);
-                TextField debiTextField = new TextField();
+                TextField debiTextField = addDebiValidator(new TextField());
+
                 debiTextField.setText(String.valueOf(run.get(i - 1).getDebi()));
                 runContainer.add(debiTextField, 0, 0);
                 runContainer.add(new Label("سایز (اینچ) "), 1, 1);
@@ -198,5 +285,36 @@ public class RunController extends BaseController{
 
         }
 
+    }
+
+    private TextField addDebiValidator(TextField textField){
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("^[-+]?[0-9]*\\.?[0-9]+$")) {
+                    textField.setText(newValue.replaceAll("[^[A-z]+$]", ""));
+                }
+                else{
+                    try{
+                        Double number = Double.parseDouble(textField.getText());
+                        if(number > 100000000){
+                            textField.setText("100000000");
+                        }
+                        else if(number <0){
+                            textField.setText("0");
+                        }
+
+
+                    }
+                    catch (Exception e){
+
+                        textField.setText(newValue.replaceAll("[^\\d]",""));
+
+                    }
+                }
+            }
+        });
+        return textField;
     }
 }
