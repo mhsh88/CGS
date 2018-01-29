@@ -8,61 +8,61 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-
 <?import javafx.scene.layout.VBox?>
-<VBox xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.stationController.StationController">
-    <MenuBar >
+
+<VBox styleClass="vbox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.stationController.StationController">
+    <MenuBar>
         <menus>
             <Menu text="File">
-                <MenuItem text="New" onAction="#newMenu"/>
-                <MenuItem text="Open" onAction="#openMenu"/>
-                <MenuItem text="Save" onAction="#saveMenu"/>
-                <MenuItem text="Exit" onAction="#exitMenu"/>
+                <MenuItem onAction="#newMenu" text="New" />
+                <MenuItem onAction="#openMenu" text="Open" />
+                <MenuItem onAction="#saveMenu" text="Save" />
+                <MenuItem onAction="#exitMenu" text="Exit" />
 
             </Menu>
         </menus>
     </MenuBar>
 
-<GridPane alignment="center" hgap="10" stylesheets="/sample/view/station/sample.css" vgap="10" >
+<GridPane alignment="center" styleClass="vbox" stylesheets="/sample/view/station/sample.css">
 
 
 
-    <Pane prefHeight="500.0" prefWidth="1000.0" styleClass="pane">
+    <Pane prefHeight="500.0" prefWidth="1000.0" styleClass="pane" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
         <children>
-            <Button fx:id="beforeHeaterPipeLine" layoutX="25.0" layoutY="225.0" mnemonicParsing="false" onAction="#beforeHeaterWindows" styleClass="gagePipe" text="Before Heater pipeline">
+            <Button fx:id="beforeHeaterPipeLine" layoutX="25.0" layoutY="225.0" mnemonicParsing="false" onAction="#beforeHeaterWindows" styleClass="gagePipe">
 
             </Button>
-            <Button fx:id="heater" layoutX="95.0" layoutY="200.0" mnemonicParsing="false" onAction="#heaterWindows" styleClass="heater" text="Heater" />
-            <Button layoutX="195.0" layoutY="225.0" mnemonicParsing="false" onAction="#afterWindows" styleClass="gagePipe" text="After Heater pipeline" />
+            <Button fx:id="heater" layoutX="95.0" layoutY="200.0" mnemonicParsing="false" onAction="#heaterWindows" styleClass="heater" />
+            <Button layoutX="195.0" layoutY="225.0" mnemonicParsing="false" onAction="#afterWindows" styleClass="gagePipe" />
 
 
-            <Button layoutX="298.5" layoutY="150" mnemonicParsing="false" onAction="#runWindows" style="-fx-rotate: 270deg" styleClass="knee" text="Knee up left" />
-            <Button fx:id="leftFourWay" layoutX="265.0" layoutY="218.5" mnemonicParsing="false" onAction="#runWindows" style="-fx-rotate:180deg;" styleClass="fourWay" text="left 4 way" />
-            <Button layoutX="298.5" layoutY="304" mnemonicParsing="false" onAction="#runWindows" style="-fx-rotate: 180deg" styleClass="knee" text="knee down left" />
+            <Button layoutX="298.5" layoutY="150" mnemonicParsing="false" onAction="#runWindows" style="-fx-rotate: 270deg" styleClass="knee" />
+            <Button fx:id="leftFourWay" layoutX="265.0" layoutY="218.5" mnemonicParsing="false" onAction="#runWindows" style="-fx-rotate:180deg;" styleClass="fourWay" />
+            <Button layoutX="298.5" layoutY="304" mnemonicParsing="false" onAction="#runWindows" style="-fx-rotate: 180deg" styleClass="knee" />
 
-            <Button layoutX="366.5" layoutY="110" mnemonicParsing="false" onAction="#runWindows" styleClass="counter" text="counter 1" />
-            <Button layoutX="366.5" layoutY="203.5" mnemonicParsing="false" onAction="#runWindows" styleClass="counter" text="conunter 2" />
-            <Button layoutX="366.5" layoutY="300" mnemonicParsing="false" onAction="#runWindows" styleClass="counter" text="counter 3" />
+            <Button layoutX="366.5" layoutY="110" mnemonicParsing="false" onAction="#runWindows" styleClass="counter" />
+            <Button layoutX="366.5" layoutY="203.5" mnemonicParsing="false" onAction="#runWindows" styleClass="counter" />
+            <Button layoutX="366.5" layoutY="300" mnemonicParsing="false" onAction="#runWindows" styleClass="counter" />
 
-            <Button fx:id="pipe1" layoutX="436.5" layoutY="150.0" mnemonicParsing="false" onAction="#runWindows" styleClass="pipe" text="pipe 1" />
-            <Button fx:id="pipe2" layoutX="436.50" layoutY="245" mnemonicParsing="false" onAction="#runWindows" styleClass="pipe" text="pipe 2" />
-            <Button fx:id="pipe3" layoutX="436.50" layoutY="340" mnemonicParsing="false" onAction="#runWindows" styleClass="pipe" text="pipe 3" />
+            <Button fx:id="pipe1" layoutX="436.5" layoutY="150.0" mnemonicParsing="false" onAction="#runWindows" styleClass="pipe" />
+            <Button fx:id="pipe2" layoutX="436.50" layoutY="245" mnemonicParsing="false" onAction="#runWindows" styleClass="pipe" />
+            <Button fx:id="pipe3" layoutX="436.50" layoutY="340" mnemonicParsing="false" onAction="#runWindows" styleClass="pipe" />
 
-            <Button layoutX="526.5" layoutY="140.5" mnemonicParsing="false" onAction="#runWindows" styleClass="regulator" text="regulator 1" />
-            <Button layoutX="526.5" layoutY="235.5" mnemonicParsing="false" onAction="#runWindows" styleClass="regulator" text="regulator 2" />
-            <Button layoutX="526.5" layoutY="330.5" mnemonicParsing="false" onAction="#runWindows" styleClass="regulator" text="regulator 3" />
-
-
-            <Button layoutX="576.5" layoutY="150" mnemonicParsing="false" onAction="#runWindows" styleClass="knee" text="Knee up right" />
-            <Button fx:id="rightFourWay" layoutX="576.5" layoutY="218.5" mnemonicParsing="false" onAction="#runWindows" styleClass="fourWay" text="4 way right" />
-            <Button layoutX="576.5" layoutY="304" mnemonicParsing="false" onAction="#runWindows" style="-fx-rotate: 90" styleClass="knee" text="Knee down right" />
-
-            <Button layoutX="676.5" layoutY="225.0" mnemonicParsing="false" styleClass="gagePipe" text="Station Exit" />
+            <Button layoutX="526.5" layoutY="140.5" mnemonicParsing="false" onAction="#runWindows" styleClass="regulator" />
+            <Button layoutX="526.5" layoutY="235.5" mnemonicParsing="false" onAction="#runWindows" styleClass="regulator" />
+            <Button layoutX="526.5" layoutY="330.5" mnemonicParsing="false" onAction="#runWindows" styleClass="regulator" />
 
 
-         <Button layoutX="46.0" layoutY="52.0" mnemonicParsing="false" onAction="#stationPropertyWindows" styleClass="stationProperty" text="Station Property" />
-         <Button layoutX="796.0" layoutY="52.0" mnemonicParsing="false" onAction="#showResultsWindows" styleClass="showResults" text="Show Results" />
-         <Button layoutX="807.0" layoutY="150.0" mnemonicParsing="false" onAction="#calculateButton" styleClass="calculateButton" text="calculator" />
+            <Button layoutX="576.5" layoutY="150" mnemonicParsing="false" onAction="#runWindows" styleClass="knee" />
+            <Button fx:id="rightFourWay" layoutX="576.5" layoutY="218.5" mnemonicParsing="false" onAction="#runWindows" styleClass="fourWay" />
+            <Button layoutX="576.5" layoutY="304" mnemonicParsing="false" onAction="#runWindows" style="-fx-rotate: 90" styleClass="knee" />
+
+            <Button layoutX="676.5" layoutY="225.0" mnemonicParsing="false" styleClass="gagePipe" />
+
+
+         <Button layoutX="831.0" layoutY="41.0" mnemonicParsing="false" onAction="#stationPropertyWindows" styleClass="stationProperty" />
+         <Button layoutX="831.0" layoutY="261.0" mnemonicParsing="false" onAction="#showResultsWindows" styleClass="showResults" />
+         <Button layoutX="827.0" layoutY="150.0" mnemonicParsing="false" onAction="#calculateButton" styleClass="calculateButton" />
 
 
         </children>

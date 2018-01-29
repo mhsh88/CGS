@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sample.view.base.BaseFrame;
 
@@ -33,6 +34,8 @@ public class StationFrame extends Application implements BaseFrame {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Image icon = new Image(getClass().getResourceAsStream("/sample/view/base/logo.png"));
+        primaryStage.getIcons().add(icon);
         run(primaryStage);
         show();
     }
@@ -57,6 +60,9 @@ public class StationFrame extends Application implements BaseFrame {
         this.stage = stage;
         this.stage.setScene(new Scene(root1, 1000, 700));
         this.stage.setTitle("نرم افزار محاسبه مصرف گاز ایستگاه تقلیل فشار گاز");
+//        Image icon = new Image(getClass().getResourceAsStream("/sample/view/base/logo.png"));
+//        this.stage.getIcons().add(icon);
+
 
     }
 

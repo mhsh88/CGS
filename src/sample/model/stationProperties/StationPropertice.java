@@ -16,7 +16,7 @@ public class StationPropertice extends BaseModel {
     private double inputPressure;
     private double outputTemp;
     private double outputPressure;
-    private double environmentTemp;
+    private Double environmentTemp;
     private double windVelocity;
     private double debi;
 
@@ -100,11 +100,14 @@ public class StationPropertice extends BaseModel {
         this.outputPressure = outputPressure;
     }
 
-    public double getEnvironmentTemp() {
+    public Double getEnvironmentTemp() {
+        if(environmentTemp == null){
+            return environmentTemp;
+        }
         return environmentTemp + 273.15;
     }
 
-    public void setEnvironmentTemp(double environmentTemp) {
+    public void setEnvironmentTemp(Double environmentTemp) {
         this.environmentTemp = environmentTemp;
     }
 

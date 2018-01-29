@@ -25,6 +25,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class CalculateController extends BaseController{
+    final static String celciusDegree = " (°C)";
+    final static String percent = " (٪)";
+    final static String pressureDegree = " (kPa)";
+    final static String cubicMeter = " (متر مکعب بر ساعت) ";
+    final static String windSpeed = " (m/s) ";
     public boolean calculate() {
         boolean state;
 
@@ -215,23 +220,23 @@ public class CalculateController extends BaseController{
 //                    BasePipe beforeHeater = stationLogic.getBeforeHeater();
 //                    data.add(new Table("خط لوله قبل از گرم کن", ""));
 //
-//                    data.add(new Table("دمای گاز ورودی", String.valueOf(beforeHeater.getTin())));
+//                    data.add(new Table("دمای گاز ورودی", String.valueOf(beforeHeater.getTin() - 273.15)));
 //                    data.add(new Table("فشار گاز ورودی", String.valueOf(beforeHeater.getPin())));
-//                    data.add(new Table("دمای گاز خروجی", String.valueOf(beforeHeater.getTout())));
+//                    data.add(new Table("دمای گاز خروجی", String.valueOf(beforeHeater.getTout() - 273.15)));
 //                    data.add(new Table("فشار گاز خروجی", String.valueOf(beforeHeater.getPout())));
-//                    data.add(new Table("اختلاف دما", String.valueOf(beforeHeater.getTin() - beforeHeater.getTout())));
+//                    data.add(new Table("اختلاف دما", String.valueOf(beforeHeater.getTin() - 273.15 - beforeHeater.getTout() - 273.15)));
 //                    data.add(new Table("تلفات حرارتی", String.valueOf(beforeHeater.getConsumption())));
                 if(Station.getInstance().getList().get("beforeHeaterPipeLine") !=null) {
                     PipeLine beforeHeaterSampleModel = (PipeLine) Station.getInstance().getList().get("beforeHeaterPipeLine");
                     data.add(new Table("خط لوله قبل از گرم کن", ""));
 
-                    data.add(new Table("دمای گاز ورودی", String.valueOf(beforeHeaterSampleModel.getTin())));
-                    data.add(new Table("فشار گاز ورودی", String.valueOf(beforeHeaterSampleModel.getPin())));
-                    data.add(new Table("دمای گاز خروجی", String.valueOf(beforeHeaterSampleModel.getTout())));
-                    data.add(new Table("فشار گاز خروجی", String.valueOf(beforeHeaterSampleModel.getPout())));
-                    data.add(new Table("اختلاف دما", String.valueOf(beforeHeaterSampleModel.getTin() - beforeHeaterSampleModel.getTout())));
-                    data.add(new Table("تلفات حرارتی با عایق حرارتی", String.valueOf(beforeHeaterSampleModel.getWithInsulationConsumption())));
-                    data.add(new Table("تلفات حرارتی بدون عایق حرارتی", String.valueOf(beforeHeaterSampleModel.getNotIsulationConsumption())));
+                    data.add(new Table("دمای گاز ورودی" + celciusDegree, String.valueOf(beforeHeaterSampleModel.getTin() - 273.15)));
+                    data.add(new Table("فشار گاز ورودی" + pressureDegree, String.valueOf(beforeHeaterSampleModel.getPin())));
+                    data.add(new Table("دمای گاز خروجی" + celciusDegree, String.valueOf(beforeHeaterSampleModel.getTout() - 273.15)));
+                    data.add(new Table("فشار گاز خروجی" + pressureDegree, String.valueOf(beforeHeaterSampleModel.getPout())));
+                    data.add(new Table("اختلاف دما" + celciusDegree, String.valueOf(beforeHeaterSampleModel.getTin() - 273.15 - beforeHeaterSampleModel.getTout() - 273.15)));
+                    data.add(new Table(   "تلفات حرارتی با عایق حرارتی" + cubicMeter, String.valueOf(beforeHeaterSampleModel.getWithInsulationConsumption())));
+                    data.add(new Table("تلفات حرارتی بدون عایق حرارتی" + cubicMeter, String.valueOf(beforeHeaterSampleModel.getNotIsulationConsumption())));
 
 
 
@@ -255,17 +260,17 @@ public class CalculateController extends BaseController{
                     List<Burner> burners = h.getBurners();
                     int temp2 = 1;
                     for (Burner b : burners) {
-                        data.add(new Table("دمای دودکش مشعل " + temp2, String.valueOf(b.getTstack())));
-                        data.add(new Table("درصد اکسیژن مشعل " + temp2, String.valueOf(b.getOxygen())));
+                        data.add(new Table("دمای دودکش مشعل " + temp2  + celciusDegree , String.valueOf(b.getTstack())));
+                        data.add(new Table("درصد اکسیژن مشعل " + temp2 + percent, String.valueOf(b.getOxygen())));
                         data.add(new Table("راندمان مشعل " + temp2, String.valueOf(b.getEfficiency())));
                         double tem = b.getConsumption();
-                        data.add(new Table("مصرف مشعل " + temp2, String.valueOf(b.getConsumption())));
+                        data.add(new Table("مصرف مشعل " + temp2 + cubicMeter, String.valueOf(b.getConsumption())));
 
                         temp2++;
                     }
                     temp++;
                 }
-                data.add(new Table("مصرف گرمکن‌ها", String.valueOf(heaters.getConsumption())));
+                data.add(new Table("مصرف گرمکن‌ها" + cubicMeter, String.valueOf(heaters.getConsumption())));
             }
         }
 
@@ -274,25 +279,25 @@ public class CalculateController extends BaseController{
 
 //                BasePipe afterHeater = stationLogic.getAfterHeater();
 //                data.add(new Table("خط لوله بعد از گرم کن", ""));
-//                data.add(new Table("دمای گاز ورودی", String.valueOf(afterHeater.getTin())));
+//                data.add(new Table("دمای گاز ورودی", String.valueOf(afterHeater.getTin() - 273.15)));
 //
 //                data.add(new Table("فشار گاز ورودی", String.valueOf(afterHeater.getPin())));
-//                data.add(new Table("دمای گاز خروجی", String.valueOf(afterHeater.getTout())));
+//                data.add(new Table("دمای گاز خروجی", String.valueOf(afterHeater.getTout() - 273.15)));
 //                data.add(new Table("فشار گاز خروجی", String.valueOf(afterHeater.getPout())));
-//                data.add(new Table("اختلاف دما", String.valueOf(afterHeater.getTin() - afterHeater.getTout())));
+//                data.add(new Table("اختلاف دما", String.valueOf(afterHeater.getTin() - 273.15 - afterHeater.getTout() - 273.15)));
 //                data.add(new Table("تلفات حرارتی", String.valueOf(afterHeater.getConsumption())));
 
                 if(Station.getInstance().getList().get("afterHeaterPipeLine") !=null) {
                     PipeLine afterHeaterSampleModel = (PipeLine) Station.getInstance().getList().get("afterHeaterPipeLine");
                     data.add(new Table("خط لوله بعد از گرم کن", ""));
 
-                    data.add(new Table("دمای گاز ورودی", String.valueOf(afterHeaterSampleModel.getTin())));
-                    data.add(new Table("فشار گاز ورودی", String.valueOf(afterHeaterSampleModel.getPin())));
-                    data.add(new Table("دمای گاز خروجی", String.valueOf(afterHeaterSampleModel.getTout())));
-                    data.add(new Table("فشار گاز خروجی", String.valueOf(afterHeaterSampleModel.getPout())));
-                    data.add(new Table("اختلاف دما", String.valueOf(afterHeaterSampleModel.getTin() - afterHeaterSampleModel.getTout())));
-                    data.add(new Table("تلفات حرارتی با عایق حرارتی", String.valueOf(afterHeaterSampleModel.getWithInsulationConsumption())));
-                    data.add(new Table("تلفات حرارتی بدون عایق حرارتی", String.valueOf(afterHeaterSampleModel.getNotIsulationConsumption())));
+                    data.add(new Table("دمای گاز ورودی" + celciusDegree, String.valueOf(afterHeaterSampleModel.getTin() - 273.15)));
+                    data.add(new Table("فشار گاز ورودی" + pressureDegree, String.valueOf(afterHeaterSampleModel.getPin())));
+                    data.add(new Table("دمای گاز خروجی" + celciusDegree, String.valueOf(afterHeaterSampleModel.getTout() - 273.15)));
+                    data.add(new Table("فشار گاز خروجی" + pressureDegree, String.valueOf(afterHeaterSampleModel.getPout())));
+//                    data.add(new Table("اختلاف دما", String.valueOf(afterHeaterSampleModel.getTin()  - afterHeaterSampleModel.getTout() )));
+                    data.add(new Table("تلفات حرارتی با عایق حرارتی" + cubicMeter, String.valueOf(afterHeaterSampleModel.getWithInsulationConsumption())));
+                    data.add(new Table("تلفات حرارتی بدون عایق حرارتی" + cubicMeter, String.valueOf(afterHeaterSampleModel.getNotIsulationConsumption())));
 
 
 
@@ -307,13 +312,13 @@ public class CalculateController extends BaseController{
 
                 BasePipe collector = stationLogic.getCollector();
                 data.add(new Table("اطلاعات کلکتور", ""));
-                data.add(new Table("دمای گاز ورودی", String.valueOf(collector.getTin())));
+                data.add(new Table("دمای گاز ورودی" + celciusDegree, String.valueOf(collector.getTin() - 273.15)));
 
-                data.add(new Table("فشار گاز ورودی", String.valueOf(collector.getPin())));
-                data.add(new Table("دمای گاز خروجی", String.valueOf(collector.getTout())));
-                data.add(new Table("فشار گاز خروجی", String.valueOf(collector.getPout())));
-                data.add(new Table("اختلاف دما", String.valueOf(collector.getTin() - collector.getTout())));
-                data.add(new Table("تلفات حرارتی", String.valueOf(collector.getConsumption())));
+                data.add(new Table( "فشار گاز ورودی" + pressureDegree, String.valueOf(collector.getPin())));
+                data.add(new Table("دمای گاز خروجی" + celciusDegree, String.valueOf(collector.getTout() - 273.15)));
+                data.add(new Table("فشار گاز خروجی" + pressureDegree, String.valueOf(collector.getPout())));
+//                data.add(new Table("اختلاف دما", String.valueOf(collector.getTin() - 273.15 - collector.getTout() - 273.15)));
+                data.add(new Table("تلفات حرارتی" + cubicMeter, String.valueOf(collector.getConsumption())));
             }
         }
         if (stationLogic != null) {
@@ -326,11 +331,12 @@ public class CalculateController extends BaseController{
                 for (BaseRun r : run) {
                     data.add(new Table("ران " + i, String.valueOf(r.getPin())));
 
-                    data.add(new Table("فشار گاز ورودی", String.valueOf(r.getPin())));
-                    data.add(new Table("دمای گاز خروجی", String.valueOf(r.getTout())));
-                    data.add(new Table("فشار گاز خروجی", String.valueOf(r.getPout())));
-                    data.add(new Table("اختلاف دما", String.valueOf(r.getTin() - r.getTout())));
-                    data.add(new Table("تلفات حرارتی", String.valueOf(r.getConsumption())));
+                    data.add(new Table("دمای گاز ورودی" + celciusDegree, String.valueOf(r.getTin() - 273.15)));
+                    data.add(new Table("فشار گاز ورودی" + pressureDegree, String.valueOf(r.getPin())));
+                    data.add(new Table("دمای گاز خروجی" + celciusDegree, String.valueOf(r.getTout() - 273.15)));
+                    data.add(new Table("فشار گاز خروجی" + pressureDegree, String.valueOf(r.getPout())));
+//                    data.add(new Table("اختلاف دما", String.valueOf(r.getTin() - 273.15 - r.getTout() - 273.15)));
+                    data.add(new Table("تلفات حرارتی" + cubicMeter, String.valueOf(r.getConsumption())));
                     i++;
                 }
             }
@@ -340,10 +346,10 @@ public class CalculateController extends BaseController{
             if (stationLogic.getRegulator() != null) {
                 Regulator regulator = stationLogic.getRegulator();
                 data.add(new Table("رگولاتور", ""));
-                data.add(new Table("دمای گاز ورودی", String.valueOf(regulator.getTin())));
-                data.add(new Table("فشار گاز ورودی", String.valueOf(regulator.getPin())));
-                data.add(new Table("دمای گاز خروجی", String.valueOf(regulator.getTout())));
-                data.add(new Table("فشار گاز خروجی", String.valueOf(regulator.getPout())));
+                data.add(new Table("دمای گاز ورودی" + celciusDegree, String.valueOf(regulator.getTin() - 273.15)));
+                data.add(new Table("فشار گاز ورودی" + pressureDegree, String.valueOf(regulator.getPin())));
+                data.add(new Table("دمای گاز خروجی" + celciusDegree, String.valueOf(regulator.getTout() - 273.15)));
+                data.add(new Table("فشار گاز خروجی" + pressureDegree, String.valueOf(regulator.getPout())));
             }
         }
 
@@ -361,14 +367,16 @@ public class CalculateController extends BaseController{
             data.add(new Table("شهر", stationPropertice.getCity()));
             data.add(new Table("منطقه", stationPropertice.getArea()));
             data.add(new Table("آدرس", stationPropertice.getAddress()));
-            data.add(new Table("ظرفیت نامی", stationPropertice.getNominalCapacity()));
-            data.add(new Table("دمای محیط", String.valueOf(stationPropertice.getEnvironmentTemp())));
-            data.add(new Table("سرعت باد", String.valueOf(stationPropertice.getWindVelocity())));
-            data.add(new Table("دمای گاز ورودی به ایستگاه", String.valueOf(stationPropertice.getInputTemp())));
-            data.add(new Table("فشار گاز ورودی به ایستگاه", String.valueOf(stationPropertice.getInputPressure())));
-            data.add(new Table("دمای گاز خروجی از ایستگاه", String.valueOf(stationPropertice.getOutputTemp())));
-            data.add(new Table("فشار گاز خروجی از ایستگاه", String.valueOf(stationPropertice.getOutputPressure())));
-            data.add(new Table("دبی عبوری از ایستگاه", String.valueOf(stationPropertice.getDebi())));
+            data.add(new Table("ظرفیت نامی" + cubicMeter, stationPropertice.getNominalCapacity()));
+            if(stationPropertice.getEnvironmentTemp()!=null) {
+                data.add(new Table("دمای محیط" + celciusDegree, String.valueOf(stationPropertice.getEnvironmentTemp() - 273.15)));
+            }
+            data.add(new Table("سرعت باد" + windSpeed, String.valueOf(stationPropertice.getWindVelocity())));
+            data.add(new Table("دمای گاز ورودی به ایستگاه" + celciusDegree, String.valueOf(stationPropertice.getInputTemp() - 273.15)));
+            data.add(new Table("فشار گاز ورودی به ایستگاه" + pressureDegree, String.valueOf(stationPropertice.getInputPressure())));
+            data.add(new Table("دمای گاز خروجی از ایستگاه" + celciusDegree, String.valueOf(stationPropertice.getOutputTemp() - 273.15)));
+            data.add(new Table("فشار گاز خروجی از ایستگاه" + pressureDegree, String.valueOf(stationPropertice.getOutputPressure())));
+            data.add(new Table("دبی عبوری از ایستگاه" + cubicMeter, String.valueOf(stationPropertice.getDebi())));
             data.add(new Table("نیتروژن", String.valueOf(stationPropertice.getComponent()[0])));
             data.add(new Table("دی اکسید کربن", String.valueOf(stationPropertice.getComponent()[1])));
             data.add(new Table("متان", String.valueOf(stationPropertice.getComponent()[2])));
@@ -398,23 +406,23 @@ public class CalculateController extends BaseController{
 //                    BasePipe beforeHeater = stationLogic.getBeforeHeater();
 //                    data.add(new Table("خط لوله قبل از گرم کن", ""));
 //
-//                    data.add(new Table("دمای گاز ورودی", String.valueOf(beforeHeater.getTin())));
+//                    data.add(new Table("دمای گاز ورودی", String.valueOf(beforeHeater.getTin() - 273.15)));
 //                    data.add(new Table("فشار گاز ورودی", String.valueOf(beforeHeater.getPin())));
-//                    data.add(new Table("دمای گاز خروجی", String.valueOf(beforeHeater.getTout())));
+//                    data.add(new Table("دمای گاز خروجی", String.valueOf(beforeHeater.getTout() - 273.15)));
 //                    data.add(new Table("فشار گاز خروجی", String.valueOf(beforeHeater.getPout())));
-//                    data.add(new Table("اختلاف دما", String.valueOf(beforeHeater.getTin() - beforeHeater.getTout())));
+//                    data.add(new Table("اختلاف دما", String.valueOf(beforeHeater.getTin() - 273.15 - beforeHeater.getTout() - 273.15)));
 //                    data.add(new Table("تلفات حرارتی", String.valueOf(beforeHeater.getConsumption())));
                 if(Station.getInstance().getList().get("beforeHeaterPipeLine") !=null) {
                     PipeLine beforeHeaterSampleModel = (PipeLine) Station.getInstance().getList().get("beforeHeaterPipeLine");
                     data.add(new Table("خط لوله قبل از گرم کن", ""));
 
-                    data.add(new Table("دمای گاز ورودی", String.valueOf(beforeHeaterSampleModel.getTin())));
-                    data.add(new Table("فشار گاز ورودی", String.valueOf(beforeHeaterSampleModel.getPin())));
-                    data.add(new Table("دمای گاز خروجی", String.valueOf(beforeHeaterSampleModel.getTout())));
-                    data.add(new Table("فشار گاز خروجی", String.valueOf(beforeHeaterSampleModel.getPout())));
-                    data.add(new Table("اختلاف دما", String.valueOf(beforeHeaterSampleModel.getTin() - beforeHeaterSampleModel.getTout())));
-                    data.add(new Table("تلفات حرارتی با عایق حرارتی", String.valueOf(beforeHeaterSampleModel.getWithInsulationConsumption())));
-                    data.add(new Table("تلفات حرارتی بدون عایق حرارتی", String.valueOf(beforeHeaterSampleModel.getNotIsulationConsumption())));
+                    data.add(new Table("دمای گاز ورودی" + celciusDegree, String.valueOf(beforeHeaterSampleModel.getTin() - 273.15)));
+                    data.add(new Table("فشار گاز ورودی" + pressureDegree, String.valueOf(beforeHeaterSampleModel.getPin())));
+                    data.add(new Table("دمای گاز خروجی" + celciusDegree, String.valueOf(beforeHeaterSampleModel.getTout() - 273.15)));
+                    data.add(new Table("فشار گاز خروجی" + pressureDegree, String.valueOf(beforeHeaterSampleModel.getPout())));
+//                    data.add(new Table("اختلاف دما", String.valueOf(beforeHeaterSampleModel.getTin() - 273.15 - beforeHeaterSampleModel.getTout() - 273.15)));
+                    data.add(new Table("تلفات حرارتی با عایق حرارتی" + cubicMeter, String.valueOf(beforeHeaterSampleModel.getWithInsulationConsumption())));
+                    data.add(new Table("تلفات حرارتی بدون عایق حرارتی" + cubicMeter, String.valueOf(beforeHeaterSampleModel.getNotIsulationConsumption())));
 
 
 
@@ -438,17 +446,17 @@ public class CalculateController extends BaseController{
                     List<Burner> burners = h.getBurners();
                     int temp2 = 1;
                     for (Burner b : burners) {
-                        data.add(new Table("دمای دودکش مشعل " + temp2, String.valueOf(b.getTstack())));
-                        data.add(new Table("درصد اکسیژن مشعل " + temp2, String.valueOf(b.getOxygen())));
+                        data.add(new Table("دمای دودکش مشعل " + temp2 + celciusDegree, String.valueOf(b.getTstack())));
+                        data.add(new Table("درصد اکسیژن مشعل " + temp2 + percent, String.valueOf(b.getOxygen())));
                         data.add(new Table("راندمان مشعل " + temp2, String.valueOf(b.getEfficiency())));
                         double tem = b.getConsumption();
-                        data.add(new Table("مصرف مشعل " + temp2, String.valueOf(b.getConsumption())));
+                        data.add(new Table("مصرف مشعل " + temp2 + cubicMeter, String.valueOf(b.getConsumption())));
 
                         temp2++;
                     }
                     temp++;
                 }
-                data.add(new Table("مصرف گرمکن‌ها", String.valueOf(heaters.getConsumption())));
+                data.add(new Table("مصرف گرمکن‌ها" + cubicMeter, String.valueOf(heaters.getConsumption())));
             }
         }
 
@@ -457,25 +465,25 @@ public class CalculateController extends BaseController{
 
 //                BasePipe afterHeater = stationLogic.getAfterHeater();
 //                data.add(new Table("خط لوله بعد از گرم کن", ""));
-//                data.add(new Table("دمای گاز ورودی", String.valueOf(afterHeater.getTin())));
+//                data.add(new Table("دمای گاز ورودی", String.valueOf(afterHeater.getTin() - 273.15)));
 //
 //                data.add(new Table("فشار گاز ورودی", String.valueOf(afterHeater.getPin())));
-//                data.add(new Table("دمای گاز خروجی", String.valueOf(afterHeater.getTout())));
+//                data.add(new Table("دمای گاز خروجی", String.valueOf(afterHeater.getTout() - 273.15)));
 //                data.add(new Table("فشار گاز خروجی", String.valueOf(afterHeater.getPout())));
-//                data.add(new Table("اختلاف دما", String.valueOf(afterHeater.getTin() - afterHeater.getTout())));
+//                data.add(new Table("اختلاف دما", String.valueOf(afterHeater.getTin() - 273.15 - afterHeater.getTout() - 273.15)));
 //                data.add(new Table("تلفات حرارتی", String.valueOf(afterHeater.getConsumption())));
 
                 if(Station.getInstance().getList().get("afterHeaterPipeLine") !=null) {
                     PipeLine afterHeaterSampleModel = (PipeLine) Station.getInstance().getList().get("afterHeaterPipeLine");
                     data.add(new Table("خط لوله بعد از گرم کن", ""));
 
-                    data.add(new Table("دمای گاز ورودی", String.valueOf(afterHeaterSampleModel.getTin())));
-                    data.add(new Table("فشار گاز ورودی", String.valueOf(afterHeaterSampleModel.getPin())));
-                    data.add(new Table("دمای گاز خروجی", String.valueOf(afterHeaterSampleModel.getTout())));
-                    data.add(new Table("فشار گاز خروجی", String.valueOf(afterHeaterSampleModel.getPout())));
-                    data.add(new Table("اختلاف دما", String.valueOf(afterHeaterSampleModel.getTin() - afterHeaterSampleModel.getTout())));
-                    data.add(new Table("تلفات حرارتی با عایق حرارتی", String.valueOf(afterHeaterSampleModel.getWithInsulationConsumption())));
-                    data.add(new Table("تلفات حرارتی بدون عایق حرارتی", String.valueOf(afterHeaterSampleModel.getNotIsulationConsumption())));
+                    data.add(new Table("دمای گاز ورودی" + celciusDegree, String.valueOf(afterHeaterSampleModel.getTin() - 273.15)));
+                    data.add(new Table("فشار گاز ورودی" + pressureDegree, String.valueOf(afterHeaterSampleModel.getPin())));
+                    data.add(new Table("دمای گاز خروجی" + celciusDegree, String.valueOf(afterHeaterSampleModel.getTout() - 273.15)));
+                    data.add(new Table("فشار گاز خروجی" + pressureDegree, String.valueOf(afterHeaterSampleModel.getPout())));
+//                    data.add(new Table("اختلاف دما", String.valueOf(afterHeaterSampleModel.getTin() - 273.15 - afterHeaterSampleModel.getTout() - 273.15)));
+                    data.add(new Table("تلفات حرارتی با عایق حرارتی" + cubicMeter, String.valueOf(afterHeaterSampleModel.getWithInsulationConsumption())));
+                    data.add(new Table("تلفات حرارتی بدون عایق حرارتی" + cubicMeter, String.valueOf(afterHeaterSampleModel.getNotIsulationConsumption())));
 
 
 
@@ -490,13 +498,13 @@ public class CalculateController extends BaseController{
 
                 BasePipe collector = stationLogic.getCollector();
                 data.add(new Table("اطلاعات کلکتور", ""));
-                data.add(new Table("دمای گاز ورودی", String.valueOf(collector.getTin())));
+                data.add(new Table("دمای گاز ورودی" + celciusDegree, String.valueOf(collector.getTin() - 273.15)));
 
-                data.add(new Table("فشار گاز ورودی", String.valueOf(collector.getPin())));
-                data.add(new Table("دمای گاز خروجی", String.valueOf(collector.getTout())));
-                data.add(new Table("فشار گاز خروجی", String.valueOf(collector.getPout())));
-                data.add(new Table("اختلاف دما", String.valueOf(collector.getTin() - collector.getTout())));
-                data.add(new Table("تلفات حرارتی", String.valueOf(collector.getConsumption())));
+                data.add(new Table("فشار گاز ورودی" + pressureDegree, String.valueOf(collector.getPin())));
+                data.add(new Table("دمای گاز خروجی" + celciusDegree, String.valueOf(collector.getTout() - 273.15)));
+                data.add(new Table("فشار گاز خروجی" + pressureDegree, String.valueOf(collector.getPout())));
+//                data.add(new Table("اختلاف دما", String.valueOf(collector.getTin() - 273.15 - collector.getTout() - 273.15)));
+                data.add(new Table("تلفات حرارتی" + cubicMeter, String.valueOf(collector.getConsumption())));
             }
         }
         if (stationLogic != null) {
@@ -509,11 +517,14 @@ public class CalculateController extends BaseController{
                 for (BaseRun r : run) {
                     data.add(new Table("ران " + i, String.valueOf(r.getPin())));
 
-                    data.add(new Table("فشار گاز ورودی", String.valueOf(r.getPin())));
-                    data.add(new Table("دمای گاز خروجی", String.valueOf(r.getTout())));
-                    data.add(new Table("فشار گاز خروجی", String.valueOf(r.getPout())));
-                    data.add(new Table("اختلاف دما", String.valueOf(r.getTin() - r.getTout())));
-                    data.add(new Table("تلفات حرارتی", String.valueOf(r.getConsumption())));
+
+                    data.add(new Table("دمای گاز ورودی " + celciusDegree, String.valueOf(r.getTin() - 273.15)));
+
+                    data.add(new Table("فشار گاز ورودی" + pressureDegree, String.valueOf(r.getPin())));
+                    data.add(new Table("دمای گاز خروجی" + celciusDegree, String.valueOf(r.getTout() - 273.15)));
+                    data.add(new Table("فشار گاز خروجی" + pressureDegree, String.valueOf(r.getPout())));
+//                    data.add(new Table("اختلاف دما", String.valueOf(r.getTin() - 273.15 - r.getTout() - 273.15)));
+                    data.add(new Table("تلفات حرارتی" + cubicMeter, String.valueOf(r.getConsumption())));
                     i++;
                 }
             }
@@ -523,10 +534,10 @@ public class CalculateController extends BaseController{
             if (stationLogic.getRegulator() != null) {
                 Regulator regulator = stationLogic.getRegulator();
                 data.add(new Table("رگولاتور", ""));
-                data.add(new Table("دمای گاز ورودی", String.valueOf(regulator.getTin())));
-                data.add(new Table("فشار گاز ورودی", String.valueOf(regulator.getPin())));
-                data.add(new Table("دمای گاز خروجی", String.valueOf(regulator.getTout())));
-                data.add(new Table("فشار گاز خروجی", String.valueOf(regulator.getPout())));
+                data.add(new Table("دمای گاز ورودی" + celciusDegree, String.valueOf(regulator.getTin() - 273.15)));
+                data.add(new Table("فشار گاز ورودی" + pressureDegree, String.valueOf(regulator.getPin())));
+                data.add(new Table("دمای گاز خروجی" + celciusDegree, String.valueOf(regulator.getTout() - 273.15)));
+                data.add(new Table("فشار گاز خروجی" + pressureDegree, String.valueOf(regulator.getPout())));
             }
         }
 

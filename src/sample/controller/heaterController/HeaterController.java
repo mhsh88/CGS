@@ -324,8 +324,8 @@ public class HeaterController extends BaseController{
                 else{
                     try{
                         Double number = Double.parseDouble(textField.getText());
-                        if(number > 21){
-                            textField.setText("21");
+                        if(number > 20.99){
+                            textField.setText("20.99");
                         }
                         else if(number <0){
                             textField.setText("0");

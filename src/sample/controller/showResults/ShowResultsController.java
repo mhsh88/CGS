@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -180,6 +181,7 @@ public class ShowResultsController implements Initializable {
                 row.createCell(j).setCellValue(tableID.getColumns().get(j).getText());
             }
 
+
             for (int i = 0; i < tableID.getItems().size(); i++) {
                 row = spreadsheet.createRow(i + 1);
                 for (int j = 0; j < tableID.getColumns().size(); j++) {
@@ -189,6 +191,18 @@ public class ShowResultsController implements Initializable {
                         row.createCell(j).setCellValue("");
                     }
                 }
+            }
+
+            for(int i = 0; i< hydrateTable.getItems().size(); i++){
+                row = spreadsheet.createRow(tableID.getItems().size() + i + 5);
+                for (int j = 0; j < hydrateTable.getColumns().size(); j++) {
+                    if (hydrateTable.getColumns().get(j).getCellData(i) != null) {
+                        row.createCell( j).setCellValue(hydrateTable.getColumns().get(j).getCellData(i).toString());
+                    } else {
+                        row.createCell( j).setCellValue("");
+                    }
+                }
+
             }
 
             FileOutputStream fileOut = new FileOutputStream(file.toString());
@@ -203,32 +217,31 @@ public class ShowResultsController implements Initializable {
                 PdfWriter.getInstance(document, pdffile);
 
                 document.open();
-                document.add(new Paragraph("First iText PDF"));
-                document.add(new Paragraph(new Date().toString()));
+                Font f = FontFactory.getFont("/sample/view/showResult/font/BNazanin.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+//
 
-                document.addAuthor("Krishna Srinivasan");
+
+                document.addAuthor("Mohammad Hossein Sharifi");
                 document.addCreationDate();
-                document.addCreator("JavaBeat");
-                document.addTitle("Sample PDF");
+                document.addCreator("BEHINEH SAZAN SANAT TASISAT");
+                document.addTitle("City Gate Station Gas Consumption Calculation");
 
 
                 //Create Paragraph
-                Paragraph paragraph = new Paragraph("Title 1", new Font(Font.FontFamily.TIMES_ROMAN, 18,
+                Paragraph paragraph = new Paragraph("CGS gas Consumption Calculation", new Font(Font.FontFamily.TIMES_ROMAN, 18,
                         Font.BOLD));
 
-
-                //New line
-                Font f = FontFactory.getFont("/sample/view/showResult/font/BNazanin.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-                Paragraph pr = new Paragraph("حسین چقدر خفنه", f);
-
                 paragraph.add(new Paragraph(" "));
-                String FONT = "resources/fonts/FreeSans.ttf";
+//                document.add(new Paragraph("First iText PDF"));
 
-                paragraph.add(new Paragraph("\u0915\u093e\u0930 \u092a\u093e\u0930\u094d\u0915\u093f\u0902\u0917", f));
-                paragraph.add(new Paragraph("سلام", f));
-                paragraph.add("Test Paragraph");
+
+
+
+                paragraph.add(new Paragraph("Behineh Sazan Sanat Tasisat"));
                 paragraph.add(new Paragraph(" "));
                 document.add(paragraph);
+                document.add(new Paragraph(new Date().toString()));
+                document.add(new Paragraph(new Phrase("    ")));
 
                 //Create a table in PDF
                 PdfPTable pdfTable = new PdfPTable(2);
@@ -244,30 +257,11 @@ public class ShowResultsController implements Initializable {
 
                 pdfTable.setHeaderRows(1);
 
-                for (int i = 0; i < tableID.getItems().size(); i++) {
-                    for (int j = 0; j < tableID.getColumns().size(); j++) {
-                        if (tableID.getColumns().get(j).getCellData(i) != null) {
-                            cell1 = new PdfPCell(new Phrase(tableID.getColumns().get(j).getCellData(i).toString(), f));
-                            cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                            cell1.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
-                        } else {
-                            cell1 = new PdfPCell(new Phrase("", f));
-                            cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                            cell1.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
-                        }
-                        pdfTable.addCell(cell1);
-                    }
-                }
+
+                pdfTable = addTableToPdfPTable(pdfTable, tableID, f);
+                pdfTable = addTableToPdfPTable(pdfTable, hydrateTable, f);
 
 
-
-//                pdfTable.addCell("ستون ۱ سطح ۱");
-//                pdfTable.addCell("Row 1 Col 2");
-//                pdfTable.addCell("Row 1 Col 3");
-//
-//                pdfTable.addCell("Row 2 Col 1");
-//                pdfTable.addCell("Row 2 Col 2");
-//                pdfTable.addCell("Row 2 Col 3");
 
                 document.add(pdfTable);
 
@@ -280,5 +274,30 @@ public class ShowResultsController implements Initializable {
 
 //        Platform.exit();
         }
+    }
+    private PdfPTable addTableToPdfPTable(PdfPTable pdfPTable, TableView<Table> table, Font f){
+        PdfPCell cell1;
+
+        for (int i = 0; i < table.getItems().size(); i++) {
+            for (int j = 0; j < table.getColumns().size(); j++) {
+                if (tableID.getColumns().get(j).getCellData(i) != null) {
+                    cell1 = new PdfPCell(new Phrase(table.getColumns().get(j).getCellData(i).toString(), f));
+                    cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cell1.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+                } else {
+                    cell1 = new PdfPCell(new Phrase("", f));
+                    cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cell1.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+                }
+                pdfPTable.addCell(cell1);
+            }
+        }
+
+        return pdfPTable;
+
+    }
+
+    public void closeAction(ActionEvent actionEvent) {
+        ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
     }
 }

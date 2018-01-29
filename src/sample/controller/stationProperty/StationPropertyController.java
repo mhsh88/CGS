@@ -6,10 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -1004,7 +1001,10 @@ public class StationPropertyController extends BaseController {
             inputGasPressureTextField.setText(String.valueOf(Math.round(stationPropertice.getInputPressure() - 101.235)));
             outputGasPressureTextField.setText(String.valueOf(Math.round(stationPropertice.getOutputPressure() - 101.235)));
             outputGasTempTextField.setText(String.valueOf(stationPropertice.getOutputTemp() - 273.15));
-            environmentTempTextField.setText(String.valueOf(stationPropertice.getEnvironmentTemp() - 273.15));
+            if(stationPropertice.getEnvironmentTemp() != null) {
+                environmentTempTextField.setText(String.valueOf(stationPropertice.getEnvironmentTemp() - 273.15));
+            }
+            else environmentTempTextField.setText("");
             windSpeedTextField.setText(String.valueOf(stationPropertice.getWindVelocity()));
             stationDebiTextField.setText(String.valueOf(stationPropertice.getDebi()));
             provinceTextField.setText(stationPropertice.getProvince());
@@ -1023,27 +1023,37 @@ public class StationPropertyController extends BaseController {
 
     public void okButton(ActionEvent actionEvent) {
         // TODO it must check whether text is ok or not
-        component[0] = Double.parseDouble(nitrogenTextField.getText());
-        component[1] = Double.parseDouble(carbonDioxideTextField.getText());
-        component[2] = Double.parseDouble(methanTextField.getText());
-        component[3] = Double.parseDouble(ethaneTextField.getText());
-        component[4] = Double.parseDouble(propaneTextField.getText());
-        component[5] = Double.parseDouble(nButaneTextField.getText());
-        component[6] = Double.parseDouble(isoButaneTextField.getText());
-        component[7] = Double.parseDouble(nPentaneTextField.getText());
-        component[8] = Double.parseDouble(isoPentaneTextField.getText());
-        component[9] = Double.parseDouble(hexaneTextField.getText());
-        component[10] = Double.parseDouble(heptaneTextField.getText());
-        component[11] = Double.parseDouble(octaneTextField.getText());
-        component[12] = Double.parseDouble(nonaneTextField.getText());
-        component[13] = Double.parseDouble(decaneTextField.getText());
-        component[14] = Double.parseDouble(hydrogenTextField.getText());
-        component[15] = Double.parseDouble(oxygenTextField.getText());
-        component[16] = Double.parseDouble(carbonMonoxideTextField.getText());
-        component[17] = Double.parseDouble(waterTextField.getText());
-        component[18] = Double.parseDouble(hydrogenSulfideTextField.getText());
-        component[19] = Double.parseDouble(heliumTextField.getText());
-        component[20] = Double.parseDouble(argonTextField.getText());
+        try {
+            component[0] = Double.parseDouble(nitrogenTextField.getText());
+            component[1] = Double.parseDouble(carbonDioxideTextField.getText());
+            component[2] = Double.parseDouble(methanTextField.getText());
+            component[3] = Double.parseDouble(ethaneTextField.getText());
+            component[4] = Double.parseDouble(propaneTextField.getText());
+            component[5] = Double.parseDouble(nButaneTextField.getText());
+            component[6] = Double.parseDouble(isoButaneTextField.getText());
+            component[7] = Double.parseDouble(nPentaneTextField.getText());
+            component[8] = Double.parseDouble(isoPentaneTextField.getText());
+            component[9] = Double.parseDouble(hexaneTextField.getText());
+            component[10] = Double.parseDouble(heptaneTextField.getText());
+            component[11] = Double.parseDouble(octaneTextField.getText());
+            component[12] = Double.parseDouble(nonaneTextField.getText());
+            component[13] = Double.parseDouble(decaneTextField.getText());
+            component[14] = Double.parseDouble(hydrogenTextField.getText());
+            component[15] = Double.parseDouble(oxygenTextField.getText());
+            component[16] = Double.parseDouble(carbonMonoxideTextField.getText());
+            component[17] = Double.parseDouble(waterTextField.getText());
+            component[18] = Double.parseDouble(hydrogenSulfideTextField.getText());
+            component[19] = Double.parseDouble(heliumTextField.getText());
+            component[20] = Double.parseDouble(argonTextField.getText());
+        }
+        catch (Exception e){
+            showAlert("خطا", "خطا در اطلاعات ورودی","اطلاعات وارد شده برای اجزای گاز صحیح نمی باشد" , Alert.AlertType.ERROR );
+            return;
+        }
+        if(MathCalculation.listSum(component) <= 0){
+            showAlert("خطا", "خطا در اطلاعات ورودی","مجموع اجزای گاز نمی تواند صفر یا کمتر از صفر باشد" , Alert.AlertType.ERROR );
+            return;
+        }
         component = MathCalculation.normal(component);
 
         Double[] M_i = {28.0135
@@ -1082,13 +1092,161 @@ public class StationPropertyController extends BaseController {
         stationPropertice.setNominalCapacity(nominalCapacityTextField.getText());
         stationPropertice.setAddress(addressTextArea.getText());
 
-        stationPropertice.setInputTemp(Double.parseDouble(inputGasTempTextField.getText()));
-        stationPropertice.setInputPressure(Double.parseDouble(inputGasPressureTextField.getText()));
-        stationPropertice.setOutputPressure(Double.parseDouble(outputGasPressureTextField.getText()));
-        stationPropertice.setOutputTemp(Double.parseDouble(outputGasTempTextField.getText()));
-        stationPropertice.setEnvironmentTemp(Double.parseDouble(environmentTempTextField.getText()));
-        stationPropertice.setWindVelocity(Double.parseDouble(windSpeedTextField.getText()));
-        stationPropertice.setDebi(Double.parseDouble(stationDebiTextField.getText()));
+        try {
+            if(inputGasTempTextField.getText().equals("")){
+                showAlert("اخطار","دمای گاز ورودی به ایستگاه وارد نشده است","دمای گاز ورودی به ایستگاه را وارد نمایید", Alert.AlertType.WARNING);
+                return;
+            }
+             if(inputGasTempComboBox.getValue().toString().equals("°F")){
+                 stationPropertice.setInputTemp((Double.parseDouble(inputGasTempTextField.getText() ) - 32)/1.8);
+
+            }else if(inputGasTempComboBox.getValue().toString().equals("°C")){
+                 stationPropertice.setInputTemp(Double.parseDouble(inputGasTempTextField.getText() ));
+             }
+
+
+        }
+        catch (Exception e){
+
+
+            showAlert("خطا","دمای گاز ورودی به ایستگاه وارد نشده است","دمای گاز ورودی به ایستگاه را وارد نمایید", Alert.AlertType.ERROR);
+            return;
+        }
+
+
+        try {
+            if(inputGasPressureTextField.getText().equals("")){
+                showAlert("اخطار","فشار گاز ورودی به ایستگاه وارد نشده است","فشار گاز ورودی به ایستگاه را وارد نمایید", Alert.AlertType.WARNING);
+                return;
+            }
+            double prefactor = 1.0;
+            if(inputGasPressureComboBox.getValue().toString().equals("MPa")){
+                prefactor = 1000.0;
+            }else if(inputGasPressureComboBox.getValue().toString().equals("kPa")){
+                prefactor = 1.0;
+            }else if(inputGasPressureComboBox.getValue().toString().equals("Psi")){
+                prefactor = 6.89476;
+            }else
+                prefactor = 1.0;
+
+
+            stationPropertice.setInputPressure(prefactor * Double.parseDouble(inputGasPressureTextField.getText()));
+        }
+        catch (Exception e){
+
+
+            showAlert("خطا","فشار گاز ورودی به ایستگاه وارد نشده است","فشار گاز ورودی به ایستگاه را وارد نمایید", Alert.AlertType.ERROR);
+            return;
+        }
+        try {
+            if(outputGasPressureTextField.getText().equals("")){
+                showAlert("اخطار","فشار گاز خروجی به ایستگاه وارد نشده است","فشار گاز خروجی به ایستگاه را وارد نمایید", Alert.AlertType.WARNING);
+                return;
+            }
+
+            double prefactor = 1.0;
+            if(outputGasPressureComboBox.getValue().toString().equals("MPa")){
+                prefactor = 1000.0;
+            }else if(outputGasPressureComboBox.getValue().toString().equals("kPa")){
+                prefactor = 1.0;
+            }else if(outputGasPressureComboBox.getValue().toString().equals("Psi")){
+                prefactor = 6.89476;
+            }else
+                prefactor = 1.0;
+            stationPropertice.setOutputPressure(prefactor * Double.parseDouble(outputGasPressureTextField.getText()));
+        }
+        catch (Exception e){
+
+
+            showAlert("خطا","فشار گاز خروجی به ایستگاه وارد نشده است","فشار گاز خروجی به ایستگاه را وارد نمایید", Alert.AlertType.ERROR);
+            return;
+        }
+
+        try {
+            if(outputGasTempTextField.getText().equals("")){
+                showAlert("اخطار","دمای گاز خروجی به ایستگاه وارد نشده است","دمای گاز خروجی به ایستگاه را وارد نمایید", Alert.AlertType.WARNING);
+                return;
+            }
+            if(outputGasTempComboBox.getValue().toString().equals("°F")){
+                stationPropertice.setOutputTemp((Double.parseDouble(outputGasTempTextField.getText() ) - 32)/1.8);
+
+            }else if(outputGasTempComboBox.getValue().toString().equals("°C")){
+                stationPropertice.setOutputTemp(Double.parseDouble(outputGasTempTextField.getText()));
+            }
+        }
+        catch (Exception e){
+
+
+            showAlert("خطا","دمای گاز خروجی به ایستگاه وارد نشده است","دمای گاز خروجی به ایستگاه را وارد نمایید", Alert.AlertType.ERROR);
+            return;
+        }
+
+
+        try {
+
+            if(!environmentTempTextField.getText().equals("")){
+
+                if(environmentTempComboBox.getValue().toString().equals("°F")){
+                    stationPropertice.setEnvironmentTemp((Double.parseDouble(environmentTempTextField.getText() ) - 32)/1.8);
+
+                }else if(environmentTempComboBox.getValue().toString().equals("°C")){
+                    stationPropertice.setEnvironmentTemp(Double.parseDouble(environmentTempTextField.getText()));
+                }
+            }
+            else{
+                stationPropertice.setEnvironmentTemp(null);
+            }
+        }
+        catch (Exception e){
+
+
+            showAlert("خطا","دمای هوا به درستی وارد نشده است","دمای هوا را به درستی وارد نمایید", Alert.AlertType.ERROR);
+            return;
+        }
+
+        try {
+
+            if(!windSpeedTextField.getText().equals("")){
+                stationPropertice.setWindVelocity(Double.parseDouble(windSpeedTextField.getText()));
+            }
+            else if (windSpeedTextField.getText().equals("")){
+                stationPropertice.setWindVelocity(0);
+            }
+        }
+        catch (Exception e){
+
+
+            showAlert("خطا","سرعت باد به درستی وارد نشده است","سرعت باد را به درستی وارد نمایید", Alert.AlertType.ERROR);
+            return;
+        }
+
+        try {
+
+            if(!stationDebiTextField.getText().equals("")){
+                stationPropertice.setDebi(Double.parseDouble(stationDebiTextField.getText()));
+            }
+            else if (stationDebiTextField.getText().equals("")){
+                stationPropertice.setDebi(0);
+            }
+        }
+        catch (Exception e){
+
+
+            showAlert("خطا","سرعت باد به درستی وارد نشده است","سرعت باد را به درستی وارد نمایید", Alert.AlertType.ERROR);
+            return;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         Station station = Station.getInstance();

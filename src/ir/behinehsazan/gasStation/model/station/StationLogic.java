@@ -44,7 +44,7 @@ public class StationLogic extends GasConsumer {
 
 
     public PipeLine setBeforeHeater(PipeLine beforeHeater) {
-        if(beforeHeater != null) {
+        if(beforeHeater != null && getTenv() != null)  {
 //            double od = beforeHeater.getOD();
 //            double id = beforeHeater.getID();
 //            double thic = beforeHeater.getLineThickness();
@@ -112,7 +112,7 @@ public class StationLogic extends GasConsumer {
     }
 
     public void setHeaters(HeatersModel heaters) {
-        if(heaters != null){
+        if(heaters != null && getTenv() != null){
             this.heaters.setTin(beforeHeater.getTout());
             this.heaters.setTout(afterHeater.getTin());
             this.heaters.setPin(beforeHeater.getPout());
@@ -161,7 +161,7 @@ public class StationLogic extends GasConsumer {
 
     public PipeLine setAfterHeater(PipeLine afterHeater) {
 
-        if(afterHeater != null) {
+        if(afterHeater != null && getTenv() != null) {
             double od = afterHeater.getOD();
             double id = afterHeater.getID();
             double thic = afterHeater.getLineThickness();
@@ -227,7 +227,7 @@ public class StationLogic extends GasConsumer {
     }
 
     public void setCollector(sample.model.run.Runs runs) {
-        if(runs != null) {
+        if(runs != null && getTenv() != null) {
             double temp = -273.15;
             double pi = 0;
             double debi = 0.0;
@@ -271,7 +271,7 @@ public class StationLogic extends GasConsumer {
     }
 
     public void setRuns(sample.model.run.Runs runs) {
-        if(runs != null){
+        if(runs != null && getTenv() != null){
             this.runs.getRuns().clear();
 
 
