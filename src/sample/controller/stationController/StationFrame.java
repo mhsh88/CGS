@@ -1,6 +1,7 @@
 package sample.controller.stationController;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,8 +35,9 @@ public class StationFrame extends Application implements BaseFrame {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Image icon = new Image(getClass().getResourceAsStream("/sample/view/base/logo.png"));
+        Image icon = new Image(getClass().getResourceAsStream("/sample/view/base/logo2.png"));
         primaryStage.getIcons().add(icon);
+        primaryStage.setOnCloseRequest(e -> Platform.exit());
         run(primaryStage);
         show();
     }
