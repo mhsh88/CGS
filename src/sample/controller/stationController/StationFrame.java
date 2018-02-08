@@ -37,6 +37,10 @@ public class StationFrame extends Application implements BaseFrame {
     public void start(Stage primaryStage) throws Exception {
         Image icon = new Image(getClass().getResourceAsStream("/sample/view/base/logo2.png"));
         primaryStage.getIcons().add(icon);
+
+//        getFrame().setIconImage(
+//                new ImageIcon(getClass().getClassLoader().getResource("PATH/TO/YourImage.png"))
+//        );
         primaryStage.setOnCloseRequest(e -> Platform.exit());
         run(primaryStage);
         show();

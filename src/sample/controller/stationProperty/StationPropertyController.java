@@ -16,10 +16,13 @@ import sample.model.base.BaseModel;
 import sample.model.stationProperties.StationPropertice;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Map;
 
 public class StationPropertyController extends BaseController {
+    DecimalFormat df = new DecimalFormat("#.###");
     public GridPane mainGridPane = new GridPane();
+    public Label totalNumberText;
     Stage stage;
     private StationPropertice stationPropertice = new StationPropertice();
 
@@ -93,13 +96,13 @@ public class StationPropertyController extends BaseController {
         inputGasTempComboBox.getSelectionModel().select("°C");
         inputGasPressureComboBox.getItems().removeAll(inputGasTempComboBox.getItems());
         inputGasPressureComboBox.getItems().addAll("kPa", "MPa","Psi");
-        inputGasPressureComboBox.getSelectionModel().select("kPa");
+        inputGasPressureComboBox.getSelectionModel().select("Psi");
         outputGasTempComboBox.getItems().removeAll(inputGasTempComboBox.getItems());
         outputGasTempComboBox.getItems().addAll("°C", "°F");
         outputGasTempComboBox.getSelectionModel().select("°C");
         outputGasPressureComboBox.getItems().removeAll(inputGasTempComboBox.getItems());
         outputGasPressureComboBox.getItems().addAll("kPa","MPa", "Psi");
-        outputGasPressureComboBox.getSelectionModel().select("kPa");
+        outputGasPressureComboBox.getSelectionModel().select("Psi");
         environmentTempComboBox.getItems().removeAll(inputGasTempComboBox.getItems());
         environmentTempComboBox.getItems().addAll("°C", "°F");
         environmentTempComboBox.getSelectionModel().select("°C");
@@ -125,11 +128,11 @@ public class StationPropertyController extends BaseController {
         heliumTextField.setText("0");
         argonTextField.setText("0");
         inputGasTempTextField.setText("15");
-        inputGasPressureTextField.setText("8000");
-        outputGasPressureTextField.setText("3000");
+        inputGasPressureTextField.setText("800");
+        outputGasPressureTextField.setText("250");
         outputGasTempTextField.setText("8");
-        environmentTempTextField.setText("30");
-        windSpeedTextField.setText("10");
+        environmentTempTextField.setText("15");
+        windSpeedTextField.setText("4");
         stationDebiTextField.setText("40000");
 
 
@@ -976,9 +979,10 @@ public class StationPropertyController extends BaseController {
         StationPropertice stationPropertice = (StationPropertice) Station.getInstance().getList().get("stationPropertice");
         if(stationPropertice != null){
             Double[] component = stationPropertice.getComponent();
-            methanTextField.setText(String.valueOf(component[0]));
-            nitrogenTextField.setText(String.valueOf(component[1]));
-            carbonDioxideTextField.setText(String.valueOf(component[2]));
+
+            nitrogenTextField.setText(String.valueOf(component[0]));
+            carbonDioxideTextField.setText(String.valueOf(component[1]));
+            methanTextField.setText(String.valueOf(component[2]));
             ethaneTextField.setText(String.valueOf(component[3]));
             propaneTextField.setText(String.valueOf(component[4]));
             nButaneTextField.setText(String.valueOf(component[5]));
@@ -1024,27 +1028,27 @@ public class StationPropertyController extends BaseController {
     public void okButton(ActionEvent actionEvent) {
         // TODO it must check whether text is ok or not
         try {
-            component[0] = Double.parseDouble(nitrogenTextField.getText());
-            component[1] = Double.parseDouble(carbonDioxideTextField.getText());
-            component[2] = Double.parseDouble(methanTextField.getText());
-            component[3] = Double.parseDouble(ethaneTextField.getText());
-            component[4] = Double.parseDouble(propaneTextField.getText());
-            component[5] = Double.parseDouble(nButaneTextField.getText());
-            component[6] = Double.parseDouble(isoButaneTextField.getText());
-            component[7] = Double.parseDouble(nPentaneTextField.getText());
-            component[8] = Double.parseDouble(isoPentaneTextField.getText());
-            component[9] = Double.parseDouble(hexaneTextField.getText());
-            component[10] = Double.parseDouble(heptaneTextField.getText());
-            component[11] = Double.parseDouble(octaneTextField.getText());
-            component[12] = Double.parseDouble(nonaneTextField.getText());
-            component[13] = Double.parseDouble(decaneTextField.getText());
-            component[14] = Double.parseDouble(hydrogenTextField.getText());
-            component[15] = Double.parseDouble(oxygenTextField.getText());
-            component[16] = Double.parseDouble(carbonMonoxideTextField.getText());
-            component[17] = Double.parseDouble(waterTextField.getText());
-            component[18] = Double.parseDouble(hydrogenSulfideTextField.getText());
-            component[19] = Double.parseDouble(heliumTextField.getText());
-            component[20] = Double.parseDouble(argonTextField.getText());
+            component[0] = gasInputCheck(nitrogenTextField);
+            component[1] = gasInputCheck(carbonDioxideTextField);
+            component[2] = gasInputCheck(methanTextField);
+            component[3] = gasInputCheck(ethaneTextField);
+            component[4] = gasInputCheck(propaneTextField);
+            component[5] = gasInputCheck(nButaneTextField);
+            component[6] = gasInputCheck(isoButaneTextField);
+            component[7] = gasInputCheck(nPentaneTextField);
+            component[8] = gasInputCheck(isoPentaneTextField);
+            component[9] = gasInputCheck(hexaneTextField);
+            component[10] = gasInputCheck(heptaneTextField);
+            component[11] = gasInputCheck(octaneTextField);
+            component[12] = gasInputCheck(nonaneTextField);
+            component[13] = gasInputCheck(decaneTextField);
+            component[14] = gasInputCheck(hydrogenTextField);
+            component[15] = gasInputCheck(oxygenTextField);
+            component[16] = gasInputCheck(carbonMonoxideTextField);
+            component[17] = gasInputCheck(waterTextField);
+            component[18] = gasInputCheck(hydrogenSulfideTextField);
+            component[19] = gasInputCheck(heliumTextField);
+            component[20] = gasInputCheck(argonTextField);
         }
         catch (Exception e){
             showAlert("خطا", "خطا در اطلاعات ورودی","اطلاعات وارد شده برای اجزای گاز صحیح نمی باشد" , Alert.AlertType.ERROR );
@@ -1313,32 +1317,40 @@ public class StationPropertyController extends BaseController {
 
 
     public void gasPropertyInput(KeyEvent keyEvent) {
-//        TextField textField = (TextField) keyEvent.getSource();
-//
-//
-//        if(textField.getText().equals("")){
-//            return;
-//        }
-//        try{
-//
-//            Double number = Double.parseDouble(textField.getText());
-//            if(number > 100.0){
-//                textField.clear();
-//                textField.setText("100");
-//            }else if (number<0.0){
-//                textField.clear();
-//                textField.setText("0");
-//            }
-//
-//        }
-//        catch (Exception e){
-//            textField.clear();
-//
-////            textField.setText("");
-//
-//
-//
-//        }
+
+        component[0] = (!nitrogenTextField.getText().equals("")) ? Double.parseDouble(nitrogenTextField.getText()) : 0.0;
+        component[1] = (!carbonDioxideTextField.getText().equals("")) ? Double.parseDouble(carbonDioxideTextField.getText()) : 0.0;
+        component[2] = (!methanTextField.getText().equals("")) ? Double.parseDouble(methanTextField.getText()) : 0.0;
+        component[3] = (!ethaneTextField.getText().equals("")) ? Double.parseDouble(ethaneTextField.getText()) : 0.0;
+        component[4] = (!propaneTextField.getText().equals("")) ? Double.parseDouble(propaneTextField.getText()) : 0.0;
+        component[5] = (!nButaneTextField.getText().equals("")) ? Double.parseDouble(nButaneTextField.getText()) : 0.0;
+        component[6] = (!isoButaneTextField.getText().equals("")) ? Double.parseDouble(isoButaneTextField.getText()) : 0.0;
+        component[7] = (!nPentaneTextField.getText().equals("")) ? Double.parseDouble(nPentaneTextField.getText()) : 0.0;
+        component[8] = (!isoPentaneTextField.getText().equals("")) ? Double.parseDouble(isoPentaneTextField.getText()) : 0.0;
+        component[9] = (!hexaneTextField.getText().equals("")) ? Double.parseDouble(hexaneTextField.getText()) : 0.0;
+        component[10] = (!heptaneTextField.getText().equals("")) ? Double.parseDouble(heptaneTextField.getText()) : 0.0;
+        component[11] = (!octaneTextField.getText().equals("")) ? Double.parseDouble(octaneTextField.getText()) : 0.0;
+        component[12] = (!nonaneTextField.getText().equals("")) ? Double.parseDouble(nonaneTextField.getText()) : 0.0;
+        component[13] = (!decaneTextField.getText().equals("")) ? Double.parseDouble(decaneTextField.getText()) : 0.0;
+        component[14] = (!hydrogenTextField.getText().equals("")) ? Double.parseDouble(hydrogenTextField.getText()) : 0.0;
+        component[15] = (!oxygenTextField.getText().equals("")) ? Double.parseDouble(oxygenTextField.getText()) : 0.0;
+        component[16] = (!carbonMonoxideTextField.getText().equals("")) ? Double.parseDouble(carbonMonoxideTextField.getText()) : 0.0;
+        component[17] = (!waterTextField.getText().equals("")) ? Double.parseDouble(waterTextField.getText()) : 0.0;
+        component[18] = (!hydrogenSulfideTextField.getText().equals("")) ? Double.parseDouble(hydrogenSulfideTextField.getText()) : 0.0;
+        component[19] = (!heliumTextField.getText().equals("")) ? Double.parseDouble(heliumTextField.getText()) : 0.0;
+        component[20] = (!argonTextField.getText().equals("")) ? Double.parseDouble(argonTextField.getText()) : 0.0;
+
+        totalNumberText.setText(String.valueOf(df.format(MathCalculation.listSum(component))));
+
+
+
+
 
     }
-}
+
+    public double gasInputCheck(TextField textField){
+        return (!textField.getText().equals("")) ? Double.parseDouble(textField.getText()) : 0.0;
+
+    }
+
+    }

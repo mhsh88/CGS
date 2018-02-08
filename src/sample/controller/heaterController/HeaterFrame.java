@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sample.view.base.BaseFrame;
 
@@ -20,6 +21,8 @@ public class HeaterFrame extends Application implements BaseFrame {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Image icon = new Image(getClass().getResourceAsStream("/sample/view/base/logo2.png"));
+        primaryStage.getIcons().add(icon);
         try {
             root1 = (Parent) fxmlLoader.load();
             stage = primaryStage;
