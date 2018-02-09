@@ -1,4 +1,4 @@
-package main.java.sample.windows.beforeHeater;
+package sample.windows.beforeHeater;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

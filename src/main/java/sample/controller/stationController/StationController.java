@@ -1,4 +1,4 @@
-package main.java.sample.controller.stationController;
+package sample.controller.stationController;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -11,17 +11,17 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import main.java.sample.controller.afterHeater.AfterHeaterFrame;
-import main.java.sample.controller.beforeHeater.BeforeHeaterFrame;
-import main.java.sample.controller.calculate.CalculateController;
-import main.java.sample.controller.heaterController.HeaterFrame;
-import main.java.sample.controller.run.RunFrame;
-import main.java.sample.model.base.BaseModel;
-import main.java.sample.controller.base.BaseController;
-import main.java.sample.controller.showResults.ShowResultsFrame;
-import main.java.sample.controller.stationProperty.StationPropertyController;
-import main.java.sample.controller.stationProperty.StationPropertyFrame;
-import main.java.sample.model.Station;
+import sample.controller.afterHeater.AfterHeaterFrame;
+import sample.controller.beforeHeater.BeforeHeaterFrame;
+import sample.controller.calculate.CalculateController;
+import sample.controller.heaterController.HeaterFrame;
+import sample.controller.run.RunFrame;
+import sample.model.base.BaseModel;
+import sample.controller.base.BaseController;
+import sample.controller.showResults.ShowResultsFrame;
+import sample.controller.stationProperty.StationPropertyController;
+import sample.controller.stationProperty.StationPropertyFrame;
+import sample.model.Station;
 
 import java.io.*;
 import java.util.HashMap;
@@ -80,7 +80,7 @@ public class StationController extends BaseController {
 
     public void launchLogingController(Stage stage) throws IOException {
         this.stage = stage;
-        fxmlLoader = new FXMLLoader(getClass().getResource("/main/java/sample/view/station/sample.fxml"));
+        fxmlLoader = new FXMLLoader(getClass().getResource("/sample/view/station/sample.fxml"));
         root1 = (Parent) fxmlLoader.load();
 //        stage = new Stage();
         stage.setScene(new Scene(root1, 1000, 700));

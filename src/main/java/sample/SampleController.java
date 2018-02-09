@@ -1,14 +1,14 @@
-package main.java.sample;
+package sample;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import main.java.sample.controller.afterHeater.AfterHeaterFrame;
-import main.java.sample.controller.beforeHeater.BeforeHeaterFrame;
-import main.java.sample.controller.calculate.CalculateController;
-import main.java.sample.controller.heaterController.HeaterFrame;
-import main.java.sample.controller.run.RunFrame;
-import main.java.sample.controller.showResults.ShowResultsFrame;
-import main.java.sample.controller.stationProperty.StationPropertyFrame;
+import sample.controller.afterHeater.AfterHeaterFrame;
+import sample.controller.beforeHeater.BeforeHeaterFrame;
+import sample.controller.calculate.CalculateController;
+import sample.controller.heaterController.HeaterFrame;
+import sample.controller.run.RunFrame;
+import sample.controller.showResults.ShowResultsFrame;
+import sample.controller.stationProperty.StationPropertyFrame;
 
 import java.io.IOException;
 

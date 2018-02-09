@@ -1,13 +1,13 @@
-package main.java.ir.behinehsazan.gasStation.model.burner.base;
+package ir.behinehsazan.gasStation.model.burner.base;
 
-import main.java.ir.behinehsazan.gasStation.model.base.EntityBase;
-import main.java.ir.behinehsazan.gasStation.model.gas.Gas;
-import main.java.ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
+import ir.behinehsazan.gasStation.model.base.EntityBase;
+import ir.behinehsazan.gasStation.model.gas.Gas;
+import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.interpolation.SplineInterpolator;
 import org.apache.commons.math3.analysis.interpolation.UnivariateInterpolator;
 
-import static main.java.ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation.dotProduct;
+import static ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation.dotProduct;
 
 public class BaseBurner extends EntityBase {
     private Gas gas;

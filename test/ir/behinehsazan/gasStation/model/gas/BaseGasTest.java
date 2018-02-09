@@ -1,5 +1,7 @@
 package ir.behinehsazan.gasStation.model.gas;
 
+import ir.behinehsazan.gasStation.model.gas.BaseGas;
+import ir.behinehsazan.gasStation.model.gas.Gas;
 import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
 
 public class BaseGasTest {

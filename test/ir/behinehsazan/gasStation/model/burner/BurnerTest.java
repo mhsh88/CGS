@@ -1,5 +1,6 @@
 package ir.behinehsazan.gasStation.model.burner;
 
+import ir.behinehsazan.gasStation.model.burner.Burner;
 import ir.behinehsazan.gasStation.model.gas.BaseGas;
 import ir.behinehsazan.gasStation.model.gas.Gas;
 import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;

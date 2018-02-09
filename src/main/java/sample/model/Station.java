@@ -1,7 +1,7 @@
-package main.java.sample.model;
+package sample.model;
 
-import main.java.ir.behinehsazan.gasStation.model.station.StationLogic;
-import main.java.sample.model.base.BaseModel;
+import ir.behinehsazan.gasStation.model.station.StationLogic;
+import sample.model.base.BaseModel;
 
 import java.util.HashMap;
 import java.util.Map;

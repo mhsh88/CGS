@@ -1,4 +1,4 @@
-package main.java.sample.model.validator.numberTextField;
+package sample.model.validator.numberTextField;
 
 import java.awt.*;
 

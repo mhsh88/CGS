@@ -1,6 +1,6 @@
-package main.java.ir.behinehsazan.gasStation.model.mathCalculation.test.javaSyntaxCheck;
+package ir.behinehsazan.gasStation.model.mathCalculation.test.javaSyntaxCheck;
 
-import main.java.ir.behinehsazan.gasStation.model.base.EntityBase;
+import ir.behinehsazan.gasStation.model.base.EntityBase;
 
 public class EntityBaseTest extends EntityBase {
     @Override

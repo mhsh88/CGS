@@ -1,4 +1,4 @@
-package main.java.ir.behinehsazan.gasStation.model.base;
+package ir.behinehsazan.gasStation.model.base;
 
 public abstract class EntityBase implements Base{
 

@@ -1,4 +1,4 @@
-package main.java.sample.model.pipeLine;
+package sample.model.pipeLine;
 
 
 import java.io.Serializable;

@@ -1,4 +1,4 @@
-package main.java.ir.behinehsazan.gasStation.model.mathCalculation;
+package ir.behinehsazan.gasStation.model.mathCalculation;
 
 import org.apache.commons.math3.analysis.differentiation.UnivariateDifferentiableFunction;
 import org.apache.commons.math3.analysis.solvers.NewtonRaphsonSolver;

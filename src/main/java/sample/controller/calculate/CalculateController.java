@@ -1,25 +1,25 @@
-package main.java.sample.controller.calculate;
+package sample.controller.calculate;
 
-import main.java.ir.behinehsazan.gasStation.model.burner.Burner;
-import main.java.ir.behinehsazan.gasStation.model.gas.Gas;
-import main.java.ir.behinehsazan.gasStation.model.heater.Heater;
-import main.java.ir.behinehsazan.gasStation.model.heater.Heaters;
-import main.java.ir.behinehsazan.gasStation.model.pipeLine.base.BasePipe;
-import main.java.ir.behinehsazan.gasStation.model.regulator.Regulator;
-import main.java.ir.behinehsazan.gasStation.model.run.base.BaseRun;
-import main.java.ir.behinehsazan.gasStation.model.station.StationLogic;
+import ir.behinehsazan.gasStation.model.burner.Burner;
+import ir.behinehsazan.gasStation.model.gas.Gas;
+import ir.behinehsazan.gasStation.model.heater.Heater;
+import ir.behinehsazan.gasStation.model.heater.Heaters;
+import ir.behinehsazan.gasStation.model.pipeLine.base.BasePipe;
+import ir.behinehsazan.gasStation.model.regulator.Regulator;
+import ir.behinehsazan.gasStation.model.run.base.BaseRun;
+import ir.behinehsazan.gasStation.model.station.StationLogic;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import main.java.sample.controller.showResults.ShowResultsController;
-import main.java.sample.model.heaters.HeatersModel;
-import main.java.sample.model.pipeLine.PipeLine;
-import main.java.sample.model.run.Runs;
-import main.java.sample.controller.base.BaseController;
-import main.java.sample.model.Station;
-import main.java.sample.model.showResultEntity.Table;
-import main.java.sample.model.stationProperties.StationPropertice;
+import sample.controller.showResults.ShowResultsController;
+import sample.model.heaters.HeatersModel;
+import sample.model.pipeLine.PipeLine;
+import sample.model.run.Runs;
+import sample.controller.base.BaseController;
+import sample.model.Station;
+import sample.model.showResultEntity.Table;
+import sample.model.stationProperties.StationPropertice;
 
 import java.util.List;
 import java.util.Optional;
@@ -325,7 +325,7 @@ public class CalculateController extends BaseController{
             if (stationLogic.getRuns() != null) {
                 data.add(new Table("اطلاعات ران ها", ""));
 
-                main.java.ir.behinehsazan.gasStation.model.run.Runs runs = stationLogic.getRuns();
+                ir.behinehsazan.gasStation.model.run.Runs runs = stationLogic.getRuns();
                 List<BaseRun> run = runs.getRuns();
                 int i = 1;
                 for (BaseRun r : run) {
@@ -511,7 +511,7 @@ public class CalculateController extends BaseController{
             if (stationLogic.getRuns() != null) {
                 data.add(new Table("اطلاعات ران ها", ""));
 
-                main.java.ir.behinehsazan.gasStation.model.run.Runs runs = stationLogic.getRuns();
+                ir.behinehsazan.gasStation.model.run.Runs runs = stationLogic.getRuns();
                 List<BaseRun> run = runs.getRuns();
                 int i = 1;
                 for (BaseRun r : run) {

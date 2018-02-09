@@ -1,4 +1,4 @@
-package main.java.sample.controller.beforeHeater;
+package sample.controller.beforeHeater;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -6,11 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import main.java.sample.model.base.BaseModel;
-import main.java.sample.model.pipeLine.PipeLine;
-import main.java.sample.model.pipeLine.PipeSize;
-import main.java.sample.controller.base.BaseController;
-import main.java.sample.model.Station;
+import sample.model.base.BaseModel;
+import sample.model.pipeLine.PipeLine;
+import sample.model.pipeLine.PipeSize;
+import sample.controller.base.BaseController;
+import sample.model.Station;
 
 import java.io.IOException;
 import java.util.Map;

@@ -1,6 +1,6 @@
-package main.java.sample.model.pipeLine;
+package sample.model.pipeLine;
 
-import main.java.sample.model.base.BaseModel;
+import sample.model.base.BaseModel;
 
 import java.util.HashMap;
 import java.util.Map;

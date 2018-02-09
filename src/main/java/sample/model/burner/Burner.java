@@ -1,6 +1,6 @@
-package main.java.sample.model.burner;
+package sample.model.burner;
 
-import main.java.sample.model.base.BaseModel;
+import sample.model.base.BaseModel;
 
 public class Burner extends BaseModel {
     double oxygenPecent;

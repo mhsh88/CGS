@@ -1,4 +1,4 @@
-package main.java.sample.controller.showResults;
+package sample.controller.showResults;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BaseFont;
@@ -23,7 +23,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import main.java.sample.model.showResultEntity.Table;
+import sample.model.showResultEntity.Table;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -217,7 +217,7 @@ public class ShowResultsController implements Initializable {
                 PdfWriter.getInstance(document, pdffile);
 
                 document.open();
-                Font f = FontFactory.getFont("/main/java/sample/view/showResult/font/BNazanin.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                Font f = FontFactory.getFont("/sample/view/showResult/font/BNazanin.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 //
 
 

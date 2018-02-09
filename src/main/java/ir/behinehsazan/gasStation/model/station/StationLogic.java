@@ -1,16 +1,16 @@
-package main.java.ir.behinehsazan.gasStation.model.station;
+package ir.behinehsazan.gasStation.model.station;
 
-import main.java.ir.behinehsazan.gasStation.model.base.GasConsumer;
-import main.java.ir.behinehsazan.gasStation.model.burner.Burner;
-import main.java.ir.behinehsazan.gasStation.model.heater.Heater;
-import main.java.ir.behinehsazan.gasStation.model.heater.Heaters;
-import main.java.ir.behinehsazan.gasStation.model.pipeLine.base.BasePipe;
-import main.java.ir.behinehsazan.gasStation.model.regulator.Regulator;
-import main.java.ir.behinehsazan.gasStation.model.run.Runs;
-import main.java.ir.behinehsazan.gasStation.model.run.base.BaseRun;
-import main.java.sample.model.heaters.HeatersModel;
-import main.java.sample.model.pipeLine.PipeLine;
-import main.java.sample.model.run.Run;
+import ir.behinehsazan.gasStation.model.base.GasConsumer;
+import ir.behinehsazan.gasStation.model.burner.Burner;
+import ir.behinehsazan.gasStation.model.heater.Heater;
+import ir.behinehsazan.gasStation.model.heater.Heaters;
+import ir.behinehsazan.gasStation.model.pipeLine.base.BasePipe;
+import ir.behinehsazan.gasStation.model.regulator.Regulator;
+import ir.behinehsazan.gasStation.model.run.Runs;
+import ir.behinehsazan.gasStation.model.run.base.BaseRun;
+import sample.model.heaters.HeatersModel;
+import sample.model.pipeLine.PipeLine;
+import sample.model.run.Run;
 
 import java.util.ArrayList;
 
@@ -228,7 +228,7 @@ public class StationLogic extends GasConsumer {
         return collector;
     }
 
-    public void setCollector(main.java.sample.model.run.Runs runs) {
+    public void setCollector(sample.model.run.Runs runs) {
         if(runs != null && getTenv() != null) {
             double temp = -273.15;
             double pi = 0;
@@ -272,7 +272,7 @@ public class StationLogic extends GasConsumer {
         return runs;
     }
 
-    public void setRuns(main.java.sample.model.run.Runs runs) {
+    public void setRuns(sample.model.run.Runs runs) {
         if(runs != null && getTenv() != null){
             this.runs.getRuns().clear();
 

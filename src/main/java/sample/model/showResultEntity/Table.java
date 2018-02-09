@@ -1,4 +1,4 @@
-package main.java.sample.model.showResultEntity;
+package sample.model.showResultEntity;
 
 import javafx.beans.property.SimpleStringProperty;
 

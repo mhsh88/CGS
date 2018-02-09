@@ -1,7 +1,7 @@
-package main.java.ir.behinehsazan.gasStation.model.gas;
+package ir.behinehsazan.gasStation.model.gas;
 
-import main.java.ir.behinehsazan.gasStation.model.mathCalculation.FindRoot;
-import main.java.ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
+import ir.behinehsazan.gasStation.model.mathCalculation.FindRoot;
+import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.solvers.BisectionSolver;
 

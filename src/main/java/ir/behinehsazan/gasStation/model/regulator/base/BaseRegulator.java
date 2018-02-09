@@ -1,8 +1,8 @@
-package main.java.ir.behinehsazan.gasStation.model.regulator.base;
+package ir.behinehsazan.gasStation.model.regulator.base;
 
-import main.java.ir.behinehsazan.gasStation.model.base.GasConsumer;
-import main.java.ir.behinehsazan.gasStation.model.gas.Gas;
-import main.java.ir.behinehsazan.gasStation.model.mathCalculation.FindRoot;
+import ir.behinehsazan.gasStation.model.base.GasConsumer;
+import ir.behinehsazan.gasStation.model.gas.Gas;
+import ir.behinehsazan.gasStation.model.mathCalculation.FindRoot;
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.solvers.BisectionSolver;
 

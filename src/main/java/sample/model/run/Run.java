@@ -1,6 +1,6 @@
-package main.java.sample.model.run;
+package sample.model.run;
 
-import main.java.sample.model.pipeLine.PipeLine;
+import sample.model.pipeLine.PipeLine;
 
 public class Run extends PipeLine {
 

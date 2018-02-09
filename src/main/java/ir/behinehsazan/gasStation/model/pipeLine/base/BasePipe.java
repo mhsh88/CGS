@@ -1,9 +1,9 @@
-package main.java.ir.behinehsazan.gasStation.model.pipeLine.base;
+package ir.behinehsazan.gasStation.model.pipeLine.base;
 
-import main.java.ir.behinehsazan.gasStation.model.base.GasConsumer;
-import main.java.ir.behinehsazan.gasStation.model.gas.Gas;
-import main.java.ir.behinehsazan.gasStation.model.mathCalculation.FindRoot;
-import main.java.ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
+import ir.behinehsazan.gasStation.model.base.GasConsumer;
+import ir.behinehsazan.gasStation.model.gas.Gas;
+import ir.behinehsazan.gasStation.model.mathCalculation.FindRoot;
+import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.interpolation.SplineInterpolator;
 import org.apache.commons.math3.analysis.interpolation.UnivariateInterpolator;

@@ -1,4 +1,4 @@
-package main.java.sample.controller.run;
+package sample.controller.run;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -11,11 +11,11 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import main.java.sample.model.run.Run;
-import main.java.sample.model.run.Runs;
-import main.java.sample.controller.base.BaseController;
-import main.java.sample.model.Station;
-import main.java.sample.model.run.Collector;
+import sample.model.run.Run;
+import sample.model.run.Runs;
+import sample.controller.base.BaseController;
+import sample.model.Station;
+import sample.model.run.Collector;
 
 import java.io.IOException;
 import java.util.ArrayList;

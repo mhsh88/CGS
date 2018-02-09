@@ -1,7 +1,7 @@
-package main.java.ir.behinehsazan.gasStation.model.regulator;
+package ir.behinehsazan.gasStation.model.regulator;
 
-import main.java.ir.behinehsazan.gasStation.model.gas.Gas;
-import main.java.ir.behinehsazan.gasStation.model.regulator.base.BaseRegulator;
+import ir.behinehsazan.gasStation.model.gas.Gas;
+import ir.behinehsazan.gasStation.model.regulator.base.BaseRegulator;
 
 public class Regulator extends BaseRegulator {
     public Regulator(){

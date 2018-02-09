@@ -1,7 +1,7 @@
-package main.java.ir.behinehsazan.gasStation.model.burner;
+package ir.behinehsazan.gasStation.model.burner;
 
-import main.java.ir.behinehsazan.gasStation.model.burner.base.BaseBurner;
-import main.java.ir.behinehsazan.gasStation.model.gas.Gas;
+import ir.behinehsazan.gasStation.model.burner.base.BaseBurner;
+import ir.behinehsazan.gasStation.model.gas.Gas;
 
 public class Burner extends BaseBurner{
 

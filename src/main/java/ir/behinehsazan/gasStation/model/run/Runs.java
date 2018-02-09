@@ -1,7 +1,7 @@
-package main.java.ir.behinehsazan.gasStation.model.run;
+package ir.behinehsazan.gasStation.model.run;
 
-import main.java.ir.behinehsazan.gasStation.model.base.GasConsumer;
-import main.java.ir.behinehsazan.gasStation.model.run.base.BaseRun;
+import ir.behinehsazan.gasStation.model.base.GasConsumer;
+import ir.behinehsazan.gasStation.model.run.base.BaseRun;
 
 import java.util.ArrayList;
 

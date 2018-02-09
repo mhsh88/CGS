@@ -1,7 +1,7 @@
-package main.java.sample.model.run;
+package sample.model.run;
 
-import main.java.sample.model.base.BaseModel;
-import main.java.sample.model.pipeLine.PipeLine;
+import sample.model.base.BaseModel;
+import sample.model.pipeLine.PipeLine;
 
 import java.util.ArrayList;
 import java.util.Objects;

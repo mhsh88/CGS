@@ -1,4 +1,4 @@
-package main.java.sample.controller.base;
+package sample.controller.base;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;

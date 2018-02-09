@@ -1,6 +1,6 @@
-package main.java.ir.behinehsazan.gasStation.model.base;
+package ir.behinehsazan.gasStation.model.base;
 
-import main.java.ir.behinehsazan.gasStation.model.gas.Gas;
+import ir.behinehsazan.gasStation.model.gas.Gas;
 
 public abstract class GasConsumer extends EntityBase {
     double Tin;

@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" stylesheets="/main/java/sample/view/beforHeater/beforeHeater.css" vgap="10"
+<GridPane alignment="center" hgap="10" stylesheets="/sample/view/beforHeater/beforeHeater.css" vgap="10"
           minWidth="500" minHeight="400" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="main.java.sample.controller.beforeHeater.BeforeHeaterController">
+          fx:controller="sample.controller.beforeHeater.BeforeHeaterController">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>

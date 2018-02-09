@@ -1,6 +1,6 @@
-package main.java.sample.controller.stationProperty;
+package sample.controller.stationProperty;
 
-import main.java.ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
+import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -10,10 +10,10 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import main.java.sample.model.Station;
-import main.java.sample.model.base.BaseModel;
-import main.java.sample.controller.base.BaseController;
-import main.java.sample.model.stationProperties.StationPropertice;
+import sample.model.Station;
+import sample.model.base.BaseModel;
+import sample.controller.base.BaseController;
+import sample.model.stationProperties.StationPropertice;
 
 import java.io.IOException;
 import java.text.DecimalFormat;

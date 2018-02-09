@@ -1,4 +1,4 @@
-package main.java.sample.controller.heaterController;
+package sample.controller.heaterController;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,11 +12,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import main.java.sample.model.burner.Burner;
-import main.java.sample.model.heaters.HeatersModel;
-import main.java.sample.controller.base.BaseController;
-import main.java.sample.model.Station;
-import main.java.sample.model.heater.HeaterModel;
+import sample.model.burner.Burner;
+import sample.model.heaters.HeatersModel;
+import sample.controller.base.BaseController;
+import sample.model.Station;
+import sample.model.heater.HeaterModel;
 
 import java.io.IOException;
 import java.util.ArrayList;

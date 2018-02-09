@@ -1,4 +1,4 @@
-package main.java.sample.view.base;
+package sample.view.base;
 
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package main.java.sample.model.base;
+package sample.model.base;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package main.java.ir.behinehsazan.gasStation.model.mathCalculation;
+package ir.behinehsazan.gasStation.model.mathCalculation;
 
 public class BisectionMethod {
 

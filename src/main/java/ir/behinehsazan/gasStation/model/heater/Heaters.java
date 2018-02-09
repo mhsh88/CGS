@@ -1,6 +1,6 @@
-package main.java.ir.behinehsazan.gasStation.model.heater;
+package ir.behinehsazan.gasStation.model.heater;
 
-import main.java.ir.behinehsazan.gasStation.model.base.GasConsumer;
+import ir.behinehsazan.gasStation.model.base.GasConsumer;
 
 import java.util.ArrayList;
 

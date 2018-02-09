@@ -1,6 +1,6 @@
-package main.java.sample.model.stationProperties;
+package sample.model.stationProperties;
 
-import main.java.sample.model.base.BaseModel;
+import sample.model.base.BaseModel;
 
 import java.util.Arrays;
 import java.util.Objects;

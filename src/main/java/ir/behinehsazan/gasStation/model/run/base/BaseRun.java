@@ -1,6 +1,6 @@
-package main.java.ir.behinehsazan.gasStation.model.run.base;
+package ir.behinehsazan.gasStation.model.run.base;
 
-import main.java.ir.behinehsazan.gasStation.model.pipeLine.base.BasePipe;
+import ir.behinehsazan.gasStation.model.pipeLine.base.BasePipe;
 
 public class BaseRun extends BasePipe {
     public BaseRun(){

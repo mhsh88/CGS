@@ -1,4 +1,4 @@
-package main.java.sample.windows.beforeHeater;
+package sample.windows.beforeHeater;
 
 public class BeforeHeaterController {
 

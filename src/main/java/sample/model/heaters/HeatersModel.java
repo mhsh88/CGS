@@ -1,7 +1,7 @@
-package main.java.sample.model.heaters;
+package sample.model.heaters;
 
-import main.java.sample.model.base.BaseModel;
-import main.java.sample.model.heater.HeaterModel;
+import sample.model.base.BaseModel;
+import sample.model.heater.HeaterModel;
 
 import java.util.ArrayList;
 

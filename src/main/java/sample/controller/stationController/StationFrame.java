@@ -1,4 +1,4 @@
-package main.java.sample.controller.stationController;
+package sample.controller.stationController;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -8,7 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import main.java.sample.view.base.BaseFrame;
+import sample.view.base.BaseFrame;
 
 import java.awt.*;
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class StationFrame extends Application implements BaseFrame {
 //        return instance;
 //    }
 
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/main/java/sample/view/station/sample.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/view/station/sample.fxml"));
     Parent root1;
     Stage stage;
     @FXML
@@ -35,7 +35,7 @@ public class StationFrame extends Application implements BaseFrame {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Image icon = new Image(getClass().getResourceAsStream("/main/java/sample/view/base/logo2.png"));
+        Image icon = new Image(getClass().getResourceAsStream("/sample/view/base/logo2.png"));
         primaryStage.getIcons().add(icon);
 
 //        getFrame().setIconImage(
