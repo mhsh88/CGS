@@ -6,12 +6,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sample.view.base.BaseFrame;
 
 import java.awt.*;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class StationFrame extends Application implements BaseFrame {
 //    private static final StationFrame instance = new StationFrame();
@@ -21,22 +23,31 @@ public class StationFrame extends Application implements BaseFrame {
 //    public static StationFrame getInstance(){
 //        return instance;
 //    }
+//    String locationString = System.getProperty("user.dir") + "/src/main/java/sample/view/station/sample.fxml";
+//    URL locationURL = new URL(locationString);
+//    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("./sample.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("./sample.fxml"));
+        InputStream ur = StationFrame.class.getResourceAsStream(".");
+        URL url = StationFrame.class.getResource(".");
+        URL url2 = getClass().getResource("../../view/");
+        URL url3 = getClass().getClassLoader().getResource(".");
 
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/view/station/sample.fxml"));
+//        URL url3 = new URL();
+//    FXMLLoader fxmlLoader = new FXMLLoader(StationFrame.class.getResource("sample.fxml"));
     Parent root1;
     Stage stage;
     @FXML
     TextField nitrogenTextField = new TextField();
 
-    public StationFrame() {
+    public StationFrame() throws MalformedURLException {
     }
 
 
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Image icon = new Image(getClass().getResourceAsStream("/sample/view/base/logo2.png"));
-        primaryStage.getIcons().add(icon);
+//        Image icon = new Image(getClass().getResourceAsStream("/sample/view/base/logo2.png"));
+//        primaryStage.getIcons().add(icon);
 
 //        getFrame().setIconImage(
 //                new ImageIcon(getClass().getClassLoader().getResource("PATH/TO/YourImage.png"))
@@ -61,6 +72,7 @@ public class StationFrame extends Application implements BaseFrame {
     }
 
     public void run(Stage stage) throws IOException {
+
         root1 = (Parent) fxmlLoader.load();
 //        stage = new Stage();
         this.stage = stage;
