@@ -159,7 +159,7 @@ public class HeaterController extends BaseController{
             tab.setText("گرم کن " + i);
             TabPane burnerTabPane = new TabPane();
             VBox childVBox = new VBox();
-            Label randemanLabel = new Label("راندمان حرارتی گرم کن");
+            Label randemanLabel = new Label("بازده جذب گرمایی کویل‌های گرم کن");
             TextField randemanTextField = addRandemanValidator(new TextField());
             HBox randemanHbox = new HBox();
             randemanHbox.getChildren().add(randemanTextField);

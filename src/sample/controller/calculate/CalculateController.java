@@ -169,7 +169,7 @@ public class CalculateController extends BaseController{
                 data.add(new Table("خطا","دمای هیدرات برای شرایط زیر قابل محاسبه نیست"));
                 return false;
             }
-            stationLogic.setTout(gas.getT_h() + 273.15);
+            stationLogic.setTout(gas.getT_h() + 273.15 + 2);
             stationLogic.setPout(stationPropertice.getOutputPressure());
 
             station.getList().put("beforeHeaterPipeLine", stationLogic.setBeforeHeater(beforeHeaterPipeLine));
@@ -211,7 +211,9 @@ public class CalculateController extends BaseController{
 
         }
         else{
-            data.add(new Table("محاسبات بر اساس دمای هیدرات", ""));
+            data.add(new Table("محاسبات بر اساس دمای هیدرات به علاوه ۲ درجه", ""));
+            data.add(new Table("دمای هیدرات ", String.valueOf(stationLogic.getGas().getT_h())));
+
         }
         if (stationLogic != null) {
             if (stationLogic.getBeforeHeater() != null) {
@@ -255,14 +257,14 @@ public class CalculateController extends BaseController{
                 for (Heater h : heater) {
 
                     data.add(new Table("گرم کن " + temp, ""));
-                    data.add(new Table("راندمان گرم کن " + temp, String.valueOf(h.getEfficiency())));
+                    data.add(new Table("بازده جذب گرمایی کویل‌ها " + temp, String.valueOf(h.getEfficiency())));
 
                     List<Burner> burners = h.getBurners();
                     int temp2 = 1;
                     for (Burner b : burners) {
                         data.add(new Table("دمای دودکش مشعل " + temp2  + celciusDegree , String.valueOf(b.getTstack())));
                         data.add(new Table("درصد اکسیژن مشعل " + temp2 + percent, String.valueOf(b.getOxygen())));
-                        data.add(new Table("راندمان مشعل " + temp2, String.valueOf(b.getEfficiency())));
+                        data.add(new Table("بازده ناخالص (gross) مشعل " + temp2, String.valueOf(b.getEfficiency())));
                         double tem = b.getConsumption();
                         data.add(new Table("مصرف مشعل " + temp2 + cubicMeter, String.valueOf(b.getConsumption())));
 
@@ -441,14 +443,14 @@ public class CalculateController extends BaseController{
                 for (Heater h : heater) {
 
                     data.add(new Table("گرم کن " + temp, ""));
-                    data.add(new Table("راندمان گرم کن " + temp, String.valueOf(h.getEfficiency())));
+                    data.add(new Table("بازده جذب گرمایی کویل‌ها " , String.valueOf(h.getEfficiency())));
 
                     List<Burner> burners = h.getBurners();
                     int temp2 = 1;
                     for (Burner b : burners) {
                         data.add(new Table("دمای دودکش مشعل " + temp2 + celciusDegree, String.valueOf(b.getTstack())));
                         data.add(new Table("درصد اکسیژن مشعل " + temp2 + percent, String.valueOf(b.getOxygen())));
-                        data.add(new Table("راندمان مشعل " + temp2, String.valueOf(b.getEfficiency())));
+                        data.add(new Table("بازده ناخالص (gross) مشعل " + temp2, String.valueOf(b.getEfficiency())));
                         double tem = b.getConsumption();
                         data.add(new Table("مصرف مشعل " + temp2 + cubicMeter, String.valueOf(b.getConsumption())));
 

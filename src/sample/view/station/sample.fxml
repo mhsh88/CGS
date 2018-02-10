@@ -61,7 +61,7 @@
 
 
          <Button layoutX="831.0" layoutY="41.0" mnemonicParsing="false" onAction="#stationPropertyWindows" styleClass="stationProperty" />
-         <Button layoutX="831.0" layoutY="261.0" mnemonicParsing="false" onAction="#showResultsWindows" styleClass="showResults" />
+         <Button layoutX="831.0" layoutY="261.0" mnemonicParsing="false" onAction="#showResultsWindows" styleClass="showResults" visible="false" />
          <Button layoutX="827.0" layoutY="150.0" mnemonicParsing="false" onAction="#calculateButton" styleClass="calculateButton" />
 
 
