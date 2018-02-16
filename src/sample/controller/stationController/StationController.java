@@ -22,8 +22,13 @@ import sample.controller.stationProperty.StationPropertyController;
 import sample.controller.stationProperty.StationPropertyFrame;
 import sample.model.Station;
 import sample.model.base.BaseModel;
+import sample.util.FileLocation;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -175,18 +180,37 @@ public class StationController extends BaseController {
 
 
         chooser.getExtensionFilters().addAll(extFilterCGS);
+
+        chooser.setInitialDirectory(new FileLocation().getFileLocation());
+
+        chooser.setInitialFileName("New.cgs");
+
         File file = chooser.showSaveDialog(new Stage());
+        if(file == null){
+            return;
+        }
+        String dir="";
+        if (file.isDirectory())
+        {
+            dir=file.getAbsolutePath();
+        }
+        else
+        {
+            dir=file.getAbsolutePath().replaceAll(file.getName(), "");
+        }
+
+
 //        String filePath = file.getAbsolutePath();
 //        System.out.println(file.getName());
 
         if (file != null) {
 
-            String fileName = file.getName();
-            String fileExtension = fileName.substring(fileName.indexOf(".") + 1, file.getName().length());
+//            String fileName = file.getName();
+            String fileExtension = file.getName().substring(file.getName().indexOf(".") + 1, file.getName().length());
             if(fileExtension.equals("cgs") || fileExtension.equals("CGS")){
                 Map<String, BaseModel> ldapContent = Station.getInstance().getList();
-                File saveFile = new File(fileName);
-                FileOutputStream f = new FileOutputStream(saveFile);
+//                File saveFile = new File(file.get);
+                FileOutputStream f = new FileOutputStream(file);
                 ObjectOutputStream s = null;
                 try {
                     s = new ObjectOutputStream(f);
@@ -200,7 +224,14 @@ public class StationController extends BaseController {
                 }
                 s.flush();
 
+
+
             }
+            Path path = Paths.get(getClass().getResource("../../saveFile/cgs").getPath().toString());
+            Files.write(path, Arrays.asList(dir));
+
+
+
 
         } else {
             return;
@@ -211,7 +242,7 @@ public class StationController extends BaseController {
 
     }
 
-    public void openMenu(ActionEvent actionEvent) {
+    public void openMenu(ActionEvent actionEvent) throws IOException {
         FileChooser chooser = new FileChooser();
 //        FileChooserBuilder fcb = FileChooserBuilder.create();
 //        FileChooser fc = fcb.title("Open Dialog").build();
@@ -223,9 +254,22 @@ public class StationController extends BaseController {
 
 
         chooser.getExtensionFilters().addAll(extFilterCGS);
+        chooser.setInitialDirectory(new FileLocation().getFileLocation());
+
         File file = chooser.showOpenDialog(new Stage());
-//        String filePath = file.getAbsolutePath();
-        System.out.println(file.getName());
+
+        if(file == null){
+            return;
+        }
+        String dir="";
+        if (file.isDirectory())
+        {
+            dir=file.getAbsolutePath();
+        }
+        else
+        {
+            dir=file.getAbsolutePath().replaceAll(file.getName(), "");
+        }
 
         if (file != null) {
 
@@ -281,13 +325,15 @@ public class StationController extends BaseController {
 //                map = ldapContent;
 //                System.out.println(map);
             }
+            Path path = Paths.get(getClass().getResource("../../saveFile/cgs").getPath().toString());
+            Files.write(path, Arrays.asList(dir));
         }
         else{
             return;
         }
     }
 
-    public void exitMenu(ActionEvent actionEvent) {
+    public void exitMenu(ActionEvent actionEvent) throws IOException {
         if(!Station.getInstance().getList().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("توجه");
@@ -300,6 +346,7 @@ public class StationController extends BaseController {
             alert.getButtonTypes().setAll(okButton, noButton, cancelButton);
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == okButton) {
+                saveMenu(actionEvent);
 
             } else if (result.get() == cancelButton) {
                 return;
@@ -340,6 +387,12 @@ public class StationController extends BaseController {
     public void setOnShow() {
 
     }
+
+    public void saveAsMenu(ActionEvent actionEvent) throws IOException {
+        saveMenu(actionEvent);
+    }
+
+
 }
 
 

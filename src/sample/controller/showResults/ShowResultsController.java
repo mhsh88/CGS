@@ -6,6 +6,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.application.Platform;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +24,9 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import sample.controller.showResults.test.ExcelTest;
 import sample.model.showResultEntity.Table;
+import sample.util.FileLocation;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,6 +34,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -153,10 +157,20 @@ public class ShowResultsController implements Initializable {
                         "*.tif", "*.tiff");
 
         chooser.getExtensionFilters().addAll(extFilterALL, extFilterExcel, extFilterPDF);
+        chooser.setInitialDirectory(new FileLocation().getFileLocation());
+        
+        chooser.setInitialFileName("reports.xls");
+        
         File file = chooser.showSaveDialog(new Stage());
-//        String filePath = file.getAbsolutePath();
-        System.out.println(file.getName());
-//        System.out.println(filePath);
+
+        ObjectProperty<String> d = chooser.initialFileNameProperty();
+        FileChooser.ExtensionFilter zxc = chooser.getSelectedExtensionFilter();
+        List<String> sd = zxc.getExtensions();
+
+        chooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2).equals("PDF");
+
+
+
         String fileExtension = null;
         String fileName = null;
         if (file != null) {
@@ -168,9 +182,13 @@ public class ShowResultsController implements Initializable {
         } else {
             return;
         }
-        if (fileExtension.equals("xls")) {
+        if (chooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2).equals("XLS")) {
 
             System.out.println(file.toString());
+
+            ExcelTest et = new ExcelTest();
+            et.excelTest(file.toString(), tableID,"محاسبات بر اساس دمای وارد شده");
+            et.excelTest(file.toString(), hydrateTable,"محاسبات بر اساس دمای هیدرات به علاوه ۲ درجه");
 
             Workbook workbook = new HSSFWorkbook();
             Sheet spreadsheet = workbook.createSheet("result");
@@ -208,7 +226,7 @@ public class ShowResultsController implements Initializable {
             FileOutputStream fileOut = new FileOutputStream(file.toString());
             workbook.write(fileOut);
             fileOut.close();
-        } else if (fileExtension.equals("pdf") || fileExtension.equals("PDF")) {
+        } else if (chooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2).equals("PDF")) {
 
             try {
                 OutputStream pdffile = new FileOutputStream(new File(file.toString()));

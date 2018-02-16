@@ -17,6 +17,8 @@
                 <MenuItem onAction="#newMenu" text="New" />
                 <MenuItem onAction="#openMenu" text="Open" />
                 <MenuItem onAction="#saveMenu" text="Save" />
+                <MenuItem onAction="#saveAsMenu" text="Save As" />
+
                 <MenuItem onAction="#exitMenu" text="Exit" />
 
             </Menu>
