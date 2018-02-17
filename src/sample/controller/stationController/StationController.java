@@ -150,7 +150,7 @@ public class StationController extends BaseController implements Initializable {
     }
 
 
-    public void newMenu(ActionEvent actionEvent) {
+    public void newMenu(ActionEvent actionEvent) throws IOException {
         if(!Station.getInstance().getList().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("توجه");
@@ -163,6 +163,7 @@ public class StationController extends BaseController implements Initializable {
             alert.getButtonTypes().setAll(okButton, noButton, cancelButton);
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == okButton) {
+                saveMenu(actionEvent);
 
             } else if (result.get() == cancelButton) {
                 return;
@@ -289,7 +290,7 @@ public class StationController extends BaseController implements Initializable {
                 Map<String, BaseModel> ldapContent = new HashMap<String, BaseModel>();
 
 
-                File openFile = new File(fileName);
+                File openFile = new File(file.getAbsolutePath());
                 FileInputStream f = null;
                 try {
                     f = new FileInputStream(openFile);
