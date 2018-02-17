@@ -152,22 +152,33 @@ public class ShowResultsController implements Initializable {
                 new FileChooser.ExtensionFilter("Excel files (*.xls)", "*.xls");
         FileChooser.ExtensionFilter extFilterPDF =
                 new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.PDF", "*.pdf");
-        FileChooser.ExtensionFilter extFilterTIFF =
-                new FileChooser.ExtensionFilter("TIFF files (*.tiff)", "*.TIF", "*.TIFF",
-                        "*.tif", "*.tiff");
 
         chooser.getExtensionFilters().addAll(extFilterALL, extFilterExcel, extFilterPDF);
         chooser.setInitialDirectory(new FileLocation().getFileLocation());
         
-        chooser.setInitialFileName("reports.xls");
+        chooser.setInitialFileName("reports");
         
         File file = chooser.showSaveDialog(new Stage());
 
         ObjectProperty<String> d = chooser.initialFileNameProperty();
         FileChooser.ExtensionFilter zxc = chooser.getSelectedExtensionFilter();
         List<String> sd = zxc.getExtensions();
+        if (file == null){
+            return;
+        }
+        String dir="";
+        if (file.isDirectory())
+        {
+            dir=file.getAbsolutePath();
+        }
+        else
+        {
+            dir=file.getAbsolutePath().replaceAll(file.getName(), "");
+        }
 
         chooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2).equals("PDF");
+        String asfghsdf = chooser.getSelectedExtensionFilter().getExtensions().get(0);
+        boolean sdf = chooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2).equals("XLS");
 
 
 
@@ -182,9 +193,7 @@ public class ShowResultsController implements Initializable {
         } else {
             return;
         }
-        if (chooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2).equals("XLS")) {
-
-            System.out.println(file.toString());
+        if (chooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2).equals("xls")) {
 
             ExcelTest et = new ExcelTest();
             et.excelTest(file.toString(), tableID,"محاسبات بر اساس دمای وارد شده");
@@ -223,13 +232,13 @@ public class ShowResultsController implements Initializable {
 
             }
 
-            FileOutputStream fileOut = new FileOutputStream(file.toString());
+            FileOutputStream fileOut = new FileOutputStream(file.getParent()+"/"+file.getName().split("[.]")[0] + ".xls");
             workbook.write(fileOut);
             fileOut.close();
         } else if (chooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2).equals("PDF")) {
 
             try {
-                OutputStream pdffile = new FileOutputStream(new File(file.toString()));
+                OutputStream pdffile = new FileOutputStream(new File(file.getParent() + "/" +file.getName().toString().split("[.]")[0]+".pdf"));
 
                 Document document = new Document();
                 PdfWriter.getInstance(document, pdffile);
@@ -292,6 +301,8 @@ public class ShowResultsController implements Initializable {
 
 //        Platform.exit();
         }
+
+        new FileLocation().setFileLocation(dir);
     }
     private PdfPTable addTableToPdfPTable(PdfPTable pdfPTable, TableView<Table> table, Font f){
         PdfPCell cell1;

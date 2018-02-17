@@ -25,10 +25,6 @@ import sample.model.base.BaseModel;
 import sample.util.FileLocation;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -227,8 +223,8 @@ public class StationController extends BaseController {
 
 
             }
-            Path path = Paths.get(getClass().getResource("../../saveFile/cgs").getPath().toString());
-            Files.write(path, Arrays.asList(dir));
+
+            new FileLocation().setFileLocation(dir);
 
 
 
@@ -325,8 +321,7 @@ public class StationController extends BaseController {
 //                map = ldapContent;
 //                System.out.println(map);
             }
-            Path path = Paths.get(getClass().getResource("../../saveFile/cgs").getPath().toString());
-            Files.write(path, Arrays.asList(dir));
+            new FileLocation().setFileLocation(dir);
         }
         else{
             return;
