@@ -18,7 +18,11 @@ public class FileLocation {
         return new String(encoded, Charset.defaultCharset());
     }
     public  File getFileLocation() throws IOException {
-        String location = readFile(StationController.class.getResource("../../saveFile/cgs").getPath().toString());
+        String pngpath = StationController.class.getResource("../../saveFile/cgs").getFile();
+        File file = new File(pngpath);
+        System.out.println(file.getAbsolutePath());
+
+        String location = readFile(file.getAbsolutePath());
         location = location.trim();
         File tempFile = new File(location);
         File recordsDir = new File(System.getProperty("user.home"), "Behin-Simulator/");;
@@ -34,7 +38,9 @@ public class FileLocation {
     }
 
     public void setFileLocation(String dir) throws IOException {
-        Path path = Paths.get(StationController.class.getResource("../../saveFile/cgs").getPath().toString());
+        String pngpath = StationController.class.getResource("../../saveFile/cgs").getFile();
+        File file = new File(pngpath);
+        Path path = Paths.get(file.getAbsolutePath());
         Files.write(path, Arrays.asList(dir));
     }
 }
