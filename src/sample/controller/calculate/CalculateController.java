@@ -30,6 +30,7 @@ public class CalculateController extends BaseController{
     final static String pressureDegree = " (kPa)";
     final static String cubicMeter = " (متر مکعب بر ساعت) ";
     final static String windSpeed = " (m/s) ";
+    double Th;
     public boolean calculate() {
         boolean state;
 
@@ -157,6 +158,7 @@ public class CalculateController extends BaseController{
             Double[] component = stationPropertice.getComponent();
             gas.setComponent(component);
             gas.calculate(stationPropertice.getOutputPressure(), stationPropertice.getOutputTemp(),component);
+            Th = gas.getT_h();
             stationLogic.setGas(gas);
             stationLogic.setTenv(stationPropertice.getEnvironmentTemp());
             stationLogic.setVair(stationPropertice.getWindVelocity());
@@ -169,7 +171,7 @@ public class CalculateController extends BaseController{
                 data.add(new Table("خطا","دمای هیدرات برای شرایط زیر قابل محاسبه نیست"));
                 return false;
             }
-            stationLogic.setTout(gas.getT_h() + 273.15 + 2);
+            stationLogic.setTout(Th + 273.15 + 2);
             stationLogic.setPout(stationPropertice.getOutputPressure());
 
             station.getList().put("beforeHeaterPipeLine", stationLogic.setBeforeHeater(beforeHeaterPipeLine));
@@ -212,7 +214,8 @@ public class CalculateController extends BaseController{
         }
         else{
             data.add(new Table("محاسبات بر اساس دمای هیدرات به علاوه ۲ درجه", ""));
-            data.add(new Table("دمای هیدرات ", String.valueOf(stationLogic.getGas().getT_h())));
+            System.out.println(Th);
+            data.add(new Table("دمای هیدرات ", String.valueOf(Th)));
 
         }
         if (stationLogic != null) {

@@ -64,8 +64,9 @@ public class StationFrame extends Application implements BaseFrame {
         root1 = (Parent) fxmlLoader.load();
 //        stage = new Stage();
         this.stage = stage;
-        this.stage.setScene(new Scene(root1, 1000, 700));
+        this.stage.setScene(new Scene(root1, 1000, 500));
         this.stage.setTitle("نرم افزار محاسبه مصرف گاز ایستگاه تقلیل فشار گاز");
+        this.stage.getScene().getStylesheets().add(getClass().getResource("/sample/view/station/sample.css").toExternalForm());
 //        Image icon = new Image(getClass().getResourceAsStream("/sample/view/base/logo.png"));
 //        this.stage.getIcons().add(icon);
 

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox styleClass="vbox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.stationController.StationController">
+<VBox fx:id="mainVbox" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="vbox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.stationController.StationController">
     <MenuBar>
         <menus>
             <Menu text="File">
@@ -25,7 +25,7 @@
         </menus>
     </MenuBar>
 
-<GridPane alignment="center" styleClass="vbox" stylesheets="/sample/view/station/sample.css">
+<GridPane alignment="center" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="vbox" stylesheets="/sample/view/station/sample.css">
 
 
 

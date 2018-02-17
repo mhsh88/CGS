@@ -3,12 +3,14 @@ package sample.controller.stationController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.controller.afterHeater.AfterHeaterFrame;
@@ -25,11 +27,14 @@ import sample.model.base.BaseModel;
 import sample.util.FileLocation;
 
 import java.io.*;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class StationController extends BaseController {
+public class StationController extends BaseController implements Initializable {
+    public VBox mainVbox;
     Stage stage;
     Scene scene;
     FXMLLoader fxmlLoader;
@@ -52,6 +57,12 @@ public class StationController extends BaseController {
     public Button pipe3 = new Button();
     public Button leftFourWay = new Button();
     public Button rightFourWay = new Button();
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+//    Stage stage = (Stage)mainVbox.getScene().getWindow();
+//        mainVbox.prefWidthProperty().bind(stage.widthProperty().multiply(0.80));
+
+    }
 
     public StationPropertyFrame getStationPropertyFrame() {
         return stationPropertyFrame;
@@ -90,6 +101,8 @@ public class StationController extends BaseController {
 //        stage.setScene(scene);
 //        stage.setResizable(true);
 //        stage.hide();
+        mainVbox.prefWidthProperty().bind(stage.widthProperty().multiply(0.80));
+        mainVbox.prefHeightProperty().bind(stage.heightProperty().multiply(0.80));
         stage.show();
     }
 
@@ -386,6 +399,7 @@ public class StationController extends BaseController {
     public void saveAsMenu(ActionEvent actionEvent) throws IOException {
         saveMenu(actionEvent);
     }
+
 
 
 }
