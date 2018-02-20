@@ -76,7 +76,7 @@ public class HeaterController extends BaseController{
             HBox hbox1 = (HBox) hboxobj.get(0);
             ObservableList<Node> onjInHBox1 = hbox1.getChildren();
             TextField heaterRandeman = (TextField) onjInHBox1.get(0);
-            System.out.println(heaterRandeman.getText());
+//            System.out.println(heaterRandeman.getText());
             HBox hbox = (HBox) hboxobj.get(1);
             ObservableList<Node> obj = hbox.getChildren();
             TabPane childTabPane = (TabPane) obj.get(0);
@@ -92,8 +92,8 @@ public class HeaterController extends BaseController{
                 ObservableList<Node> gridPaneChildren = gridPane.getChildren();
                 TextField oxygenTextField = (TextField) gridPaneChildren.get(1);
                 TextField flueGasTempTextField = (TextField) gridPaneChildren.get(3);
-                System.out.println(oxygenTextField.getText());
-                System.out.println(flueGasTempTextField.getText());
+//                System.out.println(oxygenTextField.getText());
+//                System.out.println(flueGasTempTextField.getText());
 
                 if(!oxygenTextField.getText().equals("") && !flueGasTempTextField.getText().equals("")) {
                     burners.add(new Burner(Double.parseDouble(oxygenTextField.getText()), Double.parseDouble(flueGasTempTextField.getText())));
@@ -108,7 +108,7 @@ public class HeaterController extends BaseController{
             }
             else{
                 if(!(burners.size() < 1)){
-                    heaterModels.add(new HeaterModel(Double.parseDouble(heaterRandeman.getText()), burners));
+                    heaterModels.add(new HeaterModel(Double.parseDouble(heaterRandeman.getText()) / 100 , burners));
                 }
             }
 
@@ -122,7 +122,7 @@ public class HeaterController extends BaseController{
         stationHeatersModel.setHeaterModels(heaterModels);
 
         Station.getInstance().getList().put("HeatersModel", stationHeatersModel);
-        System.out.println(Station.getInstance().getList().get("HeatersModel"));
+//        System.out.println(Station.getInstance().getList().get("HeatersModel"));
 
 //        StationLogic station = StationLogic.getInstance();
 //        station.getList().put();
@@ -251,7 +251,7 @@ public class HeaterController extends BaseController{
                 Label randemanLabel = new Label("راندمان حرارتی گرم کن");
                 TextField randemanTextField = addRandemanValidator(new TextField());
 
-                randemanTextField.setText(String.valueOf(Math.round(heaters.get(i-1).getEfficiency())));
+                randemanTextField.setText(String.valueOf(Math.round(heaters.get(i-1).getEfficiency() * 100)));
                 HBox randemanHbox = new HBox();
                 randemanHbox.getChildren().add(randemanTextField);
                 randemanHbox.getChildren().add(randemanLabel);
@@ -355,8 +355,8 @@ public class HeaterController extends BaseController{
                 else{
                     try{
                         Double number = Double.parseDouble(textField.getText());
-                        if(number >= 1){
-                            textField.setText("1");
+                        if(number >= 100){
+                            textField.setText("100");
                         }
                         else if(number <0){
                             textField.setText("0");

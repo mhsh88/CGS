@@ -260,7 +260,7 @@ public class CalculateController extends BaseController{
                 for (Heater h : heater) {
 
                     data.add(new Table("گرم کن " + temp, ""));
-                    data.add(new Table("بازده جذب گرمایی کویل‌ها " + temp, String.valueOf(h.getEfficiency())));
+                    data.add(new Table("بازده جذب گرمایی کویل‌ها " + temp, String.valueOf(h.getEfficiency() * 100)));
 
                     List<Burner> burners = h.getBurners();
                     int temp2 = 1;
@@ -446,7 +446,7 @@ public class CalculateController extends BaseController{
                 for (Heater h : heater) {
 
                     data.add(new Table("گرم کن " + temp, ""));
-                    data.add(new Table("بازده جذب گرمایی کویل‌ها " , String.valueOf(h.getEfficiency())));
+                    data.add(new Table("بازده جذب گرمایی کویل‌ها " , String.valueOf(h.getEfficiency() * 100)));
 
                     List<Burner> burners = h.getBurners();
                     int temp2 = 1;
