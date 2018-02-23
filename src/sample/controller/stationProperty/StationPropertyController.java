@@ -17,9 +17,19 @@ import sample.model.stationProperties.StationPropertice;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.DoubleStream;
 
 public class StationPropertyController extends BaseController {
+    final static private String PSI = "Psi";
+    final static private String MPA = "MPa";
+    final static private String KPA = "kPa";
+    final static private String MOLPERCENT = "درصد مولی";
+    final static private String WEIGHTPERCENT = "درصد جرمی";
+
+
+
     DecimalFormat df = new DecimalFormat("#.###");
     public GridPane mainGridPane = new GridPane();
     public Label totalNumberText;
@@ -978,7 +988,9 @@ public class StationPropertyController extends BaseController {
     public void setOnShow() {
         StationPropertice stationPropertice = (StationPropertice) Station.getInstance().getList().get("stationPropertice");
         if(stationPropertice != null){
-            Double[] component = stationPropertice.getComponent();
+            Double[] tempComponent = stationPropertice.getComponent();
+
+            double[] component = Arrays.stream(tempComponent).map(n -> df.format(n * 100)).mapToDouble(Double::valueOf).toArray();
 
             nitrogenTextField.setText(String.valueOf(component[0]));
             carbonDioxideTextField.setText(String.valueOf(component[1]));
@@ -1002,8 +1014,13 @@ public class StationPropertyController extends BaseController {
             heliumTextField.setText(String.valueOf(component[19]));
             argonTextField.setText(String.valueOf(component[20]));
             inputGasTempTextField.setText(String.valueOf(stationPropertice.getInputTemp() - 273.15));
-            inputGasPressureTextField.setText(String.valueOf(Math.round(stationPropertice.getInputPressure() - 101.235)));
-            outputGasPressureTextField.setText(String.valueOf(Math.round(stationPropertice.getOutputPressure() - 101.235)));
+//            System.out.println(inputGasPressureComboBox.getValue().toString());
+            double pressure = (inputGasPressureComboBox.getValue().toString().equals(PSI)) ? Math.round((stationPropertice.getInputPressure() - 101.235) * 0.145038) :
+                    (inputGasPressureComboBox.getValue().toString().equals(MPA) ? Math.round((stationPropertice.getInputPressure() - 101.235) / 1000): Math.round(stationPropertice.getInputPressure() - 101.235));
+            inputGasPressureTextField.setText(String.valueOf(pressure));
+            pressure = (outputGasPressureComboBox.getValue().toString().equals(PSI)) ? Math.round((stationPropertice.getOutputPressure() - 101.235) * 0.145038) :
+                    (outputGasPressureComboBox.getValue().toString().equals(MPA) ? Math.round((stationPropertice.getOutputPressure() - 101.235) / 1000) : Math.round(stationPropertice.getOutputPressure() - 101.235));
+            outputGasPressureTextField.setText(String.valueOf(pressure));
             outputGasTempTextField.setText(String.valueOf(stationPropertice.getOutputTemp() - 273.15));
             if(stationPropertice.getEnvironmentTemp() != null) {
                 environmentTempTextField.setText(String.valueOf(stationPropertice.getEnvironmentTemp() - 273.15));
@@ -1016,6 +1033,8 @@ public class StationPropertyController extends BaseController {
             areaTextField.setText(stationPropertice.getArea());
             nominalCapacityTextField.setText(stationPropertice.getNominalCapacity());
             addressTextArea.setText(stationPropertice.getAddress());
+
+            totalNumberText.setText(String.valueOf(df.format(Arrays.stream(component).sum())));
 
 
         }
