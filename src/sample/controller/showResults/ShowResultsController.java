@@ -13,13 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -49,12 +49,21 @@ public class ShowResultsController implements Initializable {
     TableView<Table> tableID;
     @FXML
     TableView<Table> hydrateTable;
+
     @FXML
     TableColumn<Table, String> name;
     @FXML
+    TableColumn<Table, String> meter;
+    @FXML
     TableColumn<Table, String> value;
+
+//    TreeItem<String> pressureItem = new TreeItem<>("Psi");
+//    TreeItem<String> tempretureItem = new TreeItem<>("F");
+
     @FXML
     TableColumn<Table, String> hydrateName;
+    @FXML
+    TableColumn<Table, String> hydrateMeter;
     @FXML
     TableColumn<Table, String> hydrateValue;
 
@@ -76,22 +85,33 @@ public class ShowResultsController implements Initializable {
 
 
         name.setCellValueFactory(new PropertyValueFactory<Table, String>("name"));
+        meter.setCellValueFactory(new PropertyValueFactory<Table, String>("meter"));
         value.setCellValueFactory(new PropertyValueFactory<Table, String>("value"));
         hydrateName.setCellValueFactory(new PropertyValueFactory<Table, String>("name"));
+        hydrateMeter.setCellValueFactory(new PropertyValueFactory<Table, String>("meter"));
         hydrateValue.setCellValueFactory(new PropertyValueFactory<Table, String>("value"));
 
 //        showResult();
         tableID.setItems(data);
         tableID.setColumnResizePolicy((param) -> true);
         Platform.runLater(() -> customResize(tableID));
-        name.prefWidthProperty().bind(tableID.widthProperty().divide(2));
-        value.prefWidthProperty().bind(tableID.widthProperty().divide(2));
+        name.prefWidthProperty().bind(tableID.widthProperty().divide(3));
+        meter.prefWidthProperty().bind(tableID.widthProperty().divide(3));
+        value.prefWidthProperty().bind(tableID.widthProperty().divide(3));
+        tableID.setEditable(true);
+        name.setCellFactory(new Callback<TableColumn<Table, String>, TableCell<Table, String>>() {
+            @Override
+            public TableCell<Table, String> call(TableColumn<Table, String> param) {
+                return new TextFieldTableCell<>();
+            }
+        });
 //        showResult();
         hydrateTable.setItems(dataWithThydrate);
         hydrateTable.setColumnResizePolicy((param) -> true);
         Platform.runLater(() -> customResize(hydrateTable));
-        hydrateName.prefWidthProperty().bind(hydrateTable.widthProperty().divide(2));
-        hydrateValue.prefWidthProperty().bind(hydrateTable.widthProperty().divide(2));
+        hydrateName.prefWidthProperty().bind(hydrateTable.widthProperty().divide(3));
+        hydrateMeter.prefWidthProperty().bind(tableID.widthProperty().divide(3));
+        hydrateValue.prefWidthProperty().bind(hydrateTable.widthProperty().divide(3));
 //        showResult();
 
     }

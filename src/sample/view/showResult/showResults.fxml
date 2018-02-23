@@ -32,8 +32,9 @@
             <TableView fx:id="tableID" editable="false" prefWidth="248.0" GridPane.rowIndex="1">
                <columns>
 
-                  <TableColumn fx:id="value" prefWidth="75.0" text="مقدار" />
-                   <TableColumn fx:id="name" prefWidth="75.0" text="نام" />
+                  <TableColumn fx:id="value" prefWidth="75.0" text="مقدار" styleClass="alignment"/>
+                  <TableColumn fx:id="meter" prefWidth="75.0" text="واحد" styleClass="alignment"/>
+                  <TableColumn fx:id="name" prefWidth="75.0" text="نام" styleClass="centeralignment"/>
                </columns>
             </TableView>
          </Tab>
@@ -42,8 +43,9 @@
             <TableView fx:id="hydrateTable" editable="false" prefWidth="248.0" GridPane.rowIndex="1">
                <columns>
 
-                  <TableColumn fx:id="hydrateValue" prefWidth="75.0" text="مقدار" />
-                  <TableColumn fx:id="hydrateName" prefWidth="75.0" text="نام" />
+                  <TableColumn fx:id="hydrateValue" prefWidth="75.0" text="مقدار" styleClass="alignment" />
+                  <TableColumn fx:id="hydrateMeter" prefWidth="75.0" text="واحد" styleClass="alignment"/>
+                  <TableColumn fx:id="hydrateName" prefWidth="75.0" text="نام" styleClass="centeralignment"/>
                </columns>
             </TableView>
          </Tab>

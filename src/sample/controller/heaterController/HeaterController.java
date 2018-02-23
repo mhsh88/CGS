@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import sample.controller.base.BaseController;
+import sample.controller.calculate.CalculateController;
 import sample.model.Station;
 import sample.model.burner.Burner;
 import sample.model.heater.HeaterModel;
@@ -108,7 +109,7 @@ public class HeaterController extends BaseController{
             }
             else{
                 if(!(burners.size() < 1)){
-                    heaterModels.add(new HeaterModel(Double.parseDouble(heaterRandeman.getText()), burners));
+                    heaterModels.add(new HeaterModel(Double.parseDouble(heaterRandeman.getText()) / 100, burners));
                 }
             }
 
@@ -159,7 +160,7 @@ public class HeaterController extends BaseController{
             tab.setText("گرم کن " + i);
             TabPane burnerTabPane = new TabPane();
             VBox childVBox = new VBox();
-            Label randemanLabel = new Label("بازده جذب گرمایی کویل‌های گرم کن");
+            Label randemanLabel = new Label("بازده جذب گرمایی کویل‌های گرم کن" + CalculateController.percent);
             TextField randemanTextField = addRandemanValidator(new TextField());
             HBox randemanHbox = new HBox();
             randemanHbox.getChildren().add(randemanTextField);
@@ -251,7 +252,7 @@ public class HeaterController extends BaseController{
                 Label randemanLabel = new Label("راندمان حرارتی گرم کن");
                 TextField randemanTextField = addRandemanValidator(new TextField());
 
-                randemanTextField.setText(String.valueOf(Math.round(heaters.get(i-1).getEfficiency())));
+                randemanTextField.setText(String.valueOf(Math.round(heaters.get(i-1).getEfficiency() * 100)));
                 HBox randemanHbox = new HBox();
                 randemanHbox.getChildren().add(randemanTextField);
                 randemanHbox.getChildren().add(randemanLabel);
@@ -355,8 +356,8 @@ public class HeaterController extends BaseController{
                 else{
                     try{
                         Double number = Double.parseDouble(textField.getText());
-                        if(number >= 1){
-                            textField.setText("1");
+                        if(number >= 100){
+                            textField.setText("100");
                         }
                         else if(number <0){
                             textField.setText("0");
