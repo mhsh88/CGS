@@ -225,6 +225,7 @@ public class RunController extends BaseController{
         runColectorLengthInput.clear();
         runLengthInput.clear();
         runTapPane.getTabs().clear();
+        Station.getInstance().getList().remove("Runs");
 
     }
 

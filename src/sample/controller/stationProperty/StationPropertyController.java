@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.stream.DoubleStream;
 
 public class StationPropertyController extends BaseController {
     final static private String PSI = "Psi";
@@ -1315,6 +1314,8 @@ public class StationPropertyController extends BaseController {
         environmentTempTextField.clear();
         windSpeedTextField.clear();
         stationDebiTextField.clear();
+
+        Station.getInstance().getList().remove("stationPropertice");
 
 
 

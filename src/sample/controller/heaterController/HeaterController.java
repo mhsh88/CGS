@@ -214,6 +214,7 @@ public class HeaterController extends BaseController{
     public void clearButton(ActionEvent actionEvent) {
         heaterNumberInput.clear();
         tabPane.getTabs().clear();
+        Station.getInstance().getList().remove("HeatersModel");
     }
 
     @Override

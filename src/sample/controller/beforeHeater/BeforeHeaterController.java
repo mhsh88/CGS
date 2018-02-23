@@ -281,6 +281,7 @@ public class BeforeHeaterController extends BaseController{
         lineLengthTextField.clear();
         insulationThicknessTextField.clear();
         insulationFactorTextField.clear();
+        Station.getInstance().getList().remove("beforeHeaterPipeLine");
     }
 
     public void cancelButton(ActionEvent actionEvent) {
