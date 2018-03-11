@@ -16,13 +16,15 @@ public class Table {
     DecimalFormat df = new DecimalFormat("#.###");
 
     public Table(String name, String meter,  String value) {
-        df.setRoundingMode(RoundingMode.CEILING);
+        df.setRoundingMode(RoundingMode.HALF_EVEN);
 
         try{
             Double val = Double.parseDouble(value);
 
 
             if(meter.equals(CalculateController.PSI)){
+                df = new DecimalFormat("#.#");
+                df.setRoundingMode(RoundingMode.HALF_EVEN);
 
                 val = (val - 101.235) * 0.145038;
 

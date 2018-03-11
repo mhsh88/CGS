@@ -310,8 +310,8 @@ public class CalculateController extends BaseController{
                     data.add(new Table("دمای گاز خروجی" , CELCIUS, String.valueOf(afterHeaterSampleModel.getTout() - 273.15)));
                     data.add(new Table("فشار گاز خروجی" , PSI, String.valueOf(afterHeaterSampleModel.getPout())));
 //                    data.add(new Table("اختلاف دما", String.valueOf(afterHeaterSampleModel.getTin()  - afterHeaterSampleModel.getTout() )));
-                    data.add(new Table("تلفات حرارتی با عایق حرارتی" , cubicMeter, MINUS + String.valueOf(afterHeaterSampleModel.getWithInsulationConsumption())));
-                    data.add(new Table("تلفات حرارتی بدون عایق حرارتی" , cubicMeter, MINUS + String.valueOf(afterHeaterSampleModel.getNotIsulationConsumption())));
+                    data.add(new Table("تلفات حرارتی با عایق حرارتی" , cubicMeter,  String.valueOf(-1 * afterHeaterSampleModel.getWithInsulationConsumption())));
+                    data.add(new Table("تلفات حرارتی بدون عایق حرارتی" , cubicMeter, String.valueOf(-1 * afterHeaterSampleModel.getNotIsulationConsumption())));
 
 
 
@@ -332,7 +332,7 @@ public class CalculateController extends BaseController{
                 data.add(new Table("دمای گاز خروجی" , CELCIUS, String.valueOf(collector.getTout() - 273.15)));
                 data.add(new Table("فشار گاز خروجی" , PSI, String.valueOf(collector.getPout())));
 //                data.add(new Table("اختلاف دما", String.valueOf(collector.getTin() - 273.15 - collector.getTout() - 273.15)));
-                data.add(new Table("تلفات حرارتی" , cubicMeter, MINUS + String.valueOf(collector.getConsumption())));
+                data.add(new Table("تلفات حرارتی" , cubicMeter, String.valueOf(-1 * collector.getConsumption())));
             }
         }
         if (stationLogic != null) {
@@ -350,7 +350,7 @@ public class CalculateController extends BaseController{
                     data.add(new Table("دمای گاز خروجی" , CELCIUS, String.valueOf(r.getTout() - 273.15)));
                     data.add(new Table("فشار گاز خروجی" , PSI, String.valueOf(r.getPout())));
 //                    data.add(new Table("اختلاف دما", String.valueOf(r.getTin() - 273.15 - r.getTout() - 273.15)));
-                    data.add(new Table("تلفات حرارتی" , cubicMeter, MINUS + String.valueOf(r.getConsumption())));
+                    data.add(new Table("تلفات حرارتی" , cubicMeter, String.valueOf(-1 * r.getConsumption())));
                     i++;
                 }
             }
@@ -435,8 +435,8 @@ public class CalculateController extends BaseController{
                     data.add(new Table("دمای گاز خروجی" , CELCIUS, String.valueOf(beforeHeaterSampleModel.getTout() - 273.15)));
                     data.add(new Table("فشار گاز خروجی" , PSI, String.valueOf(beforeHeaterSampleModel.getPout())));
 //                    data.add(new Table("اختلاف دما", String.valueOf(beforeHeaterSampleModel.getTin() - 273.15 - beforeHeaterSampleModel.getTout() - 273.15)));
-                    data.add(new Table("تلفات حرارتی با عایق حرارتی" , cubicMeter, MINUS + String.valueOf(beforeHeaterSampleModel.getWithInsulationConsumption())));
-                    data.add(new Table("تلفات حرارتی بدون عایق حرارتی" , cubicMeter, MINUS + String.valueOf(beforeHeaterSampleModel.getNotIsulationConsumption())));
+                    data.add(new Table("تلفات حرارتی با عایق حرارتی" , cubicMeter,  String.valueOf(-1 * beforeHeaterSampleModel.getWithInsulationConsumption())));
+                    data.add(new Table("تلفات حرارتی بدون عایق حرارتی" , cubicMeter,  String.valueOf(-1 * beforeHeaterSampleModel.getNotIsulationConsumption())));
 
 
 
@@ -496,8 +496,8 @@ public class CalculateController extends BaseController{
                     data.add(new Table("دمای گاز خروجی" , CELCIUS, String.valueOf(afterHeaterSampleModel.getTout() - 273.15)));
                     data.add(new Table("فشار گاز خروجی" , PSI, String.valueOf(afterHeaterSampleModel.getPout())));
 //                    data.add(new Table("اختلاف دما", String.valueOf(afterHeaterSampleModel.getTin() - 273.15 - afterHeaterSampleModel.getTout() - 273.15)));
-                    data.add(new Table("تلفات حرارتی با عایق حرارتی" , cubicMeter, MINUS + String.valueOf(afterHeaterSampleModel.getWithInsulationConsumption())));
-                    data.add(new Table("تلفات حرارتی بدون عایق حرارتی" , cubicMeter, MINUS + String.valueOf(afterHeaterSampleModel.getNotIsulationConsumption())));
+                    data.add(new Table("تلفات حرارتی با عایق حرارتی" , cubicMeter,  String.valueOf(-1 * afterHeaterSampleModel.getWithInsulationConsumption())));
+                    data.add(new Table("تلفات حرارتی بدون عایق حرارتی" , cubicMeter,  String.valueOf(-1 * afterHeaterSampleModel.getNotIsulationConsumption())));
 
 
 
@@ -537,7 +537,7 @@ public class CalculateController extends BaseController{
                     data.add(new Table("دمای گاز خروجی" , CELCIUS, String.valueOf(r.getTout() - 273.15)));
                     data.add(new Table("فشار گاز خروجی" , PSI, String.valueOf(r.getPout())));
 //                    data.add(new Table("اختلاف دما", String.valueOf(r.getTin() - 273.15 - r.getTout() - 273.15)));
-                    data.add(new Table("تلفات حرارتی" , cubicMeter, MINUS + String.valueOf(r.getConsumption())));
+                    data.add(new Table("تلفات حرارتی" , cubicMeter,  String.valueOf(-1 * r.getConsumption())));
                     i++;
                 }
             }
