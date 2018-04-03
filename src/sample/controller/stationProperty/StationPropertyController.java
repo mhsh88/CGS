@@ -986,6 +986,7 @@ public class StationPropertyController extends BaseController {
     @Override
     public void setOnShow() {
         StationPropertice stationPropertice = (StationPropertice) Station.getInstance().getList().get("stationPropertice");
+        DecimalFormat dff = new DecimalFormat("#0.0");
         if(stationPropertice != null){
             Double[] tempComponent = stationPropertice.getComponent();
 
@@ -1012,32 +1013,42 @@ public class StationPropertyController extends BaseController {
             hydrogenSulfideTextField.setText(String.valueOf(component[18]));
             heliumTextField.setText(String.valueOf(component[19]));
             argonTextField.setText(String.valueOf(component[20]));
-            inputGasTempTextField.setText(String.valueOf(stationPropertice.getInputTemp() - 273.15));
+            inputGasTempTextField.setText(dff.format(stationPropertice.getInputTemp() - 273.15));
 //            System.out.println(inputGasPressureComboBox.getValue().toString());
-            double pressure = (inputGasPressureComboBox.getValue().toString().equals(PSI)) ? Math.round((stationPropertice.getInputPressure() - 101.235) * 0.145038) :
+
+//            Double temdsd = Double.parseDouble(dff.format((stationPropertice.getInputPressure() - 101.235) * 0.145038));
+//            System.out.println(temdsd.getClass());
+//            System.out.println(Math.round((stationPropertice.getInputPressure() - 101.235) * 0.145038));
+            double pressure = (inputGasPressureComboBox.getValue().toString().equals(PSI)) ? Double.parseDouble(dff.format((stationPropertice.getInputPressure() - 101.235) * 0.145038)) :
                     (inputGasPressureComboBox.getValue().toString().equals(MPA) ? Math.round((stationPropertice.getInputPressure() - 101.235) / 1000): Math.round(stationPropertice.getInputPressure() - 101.235));
             inputGasPressureTextField.setText(String.valueOf(pressure));
-            pressure = (outputGasPressureComboBox.getValue().toString().equals(PSI)) ? Math.round((stationPropertice.getOutputPressure() - 101.235) * 0.145038) :
+            pressure = (outputGasPressureComboBox.getValue().toString().equals(PSI)) ? Double.parseDouble(dff.format(((stationPropertice.getOutputPressure() - 101.235) * 0.145038))) :
                     (outputGasPressureComboBox.getValue().toString().equals(MPA) ? Math.round((stationPropertice.getOutputPressure() - 101.235) / 1000) : Math.round(stationPropertice.getOutputPressure() - 101.235));
             outputGasPressureTextField.setText(String.valueOf(pressure));
-            outputGasTempTextField.setText(String.valueOf(stationPropertice.getOutputTemp() - 273.15));
+            outputGasTempTextField.setText(dff.format(stationPropertice.getOutputTemp() - 273.15));
             if(stationPropertice.getEnvironmentTemp() != null) {
-                environmentTempTextField.setText(String.valueOf(stationPropertice.getEnvironmentTemp() - 273.15));
+                environmentTempTextField.setText(dff.format(stationPropertice.getEnvironmentTemp() - 273.15));
             }
             else environmentTempTextField.setText("");
-            windSpeedTextField.setText(String.valueOf(stationPropertice.getWindVelocity()));
-            stationDebiTextField.setText(String.valueOf(stationPropertice.getDebi()));
+            windSpeedTextField.setText(dff.format(stationPropertice.getWindVelocity()));
+            stationDebiTextField.setText(dff.format(stationPropertice.getDebi()));
             provinceTextField.setText(stationPropertice.getProvince());
             cityTextField.setText(stationPropertice.getCity());
             areaTextField.setText(stationPropertice.getArea());
             nominalCapacityTextField.setText(stationPropertice.getNominalCapacity());
             addressTextArea.setText(stationPropertice.getAddress());
 
-            totalNumberText.setText(String.valueOf(df.format(Arrays.stream(component).sum())));
+            DecimalFormat totalNumberDF = new DecimalFormat("#0.00");
+            totalNumberText.setText(String.valueOf(totalNumberDF.format(Arrays.stream(component).sum())));
 
 
         }
         else{
+            try {
+                initialize();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return;
         }
     }
@@ -1316,7 +1327,6 @@ public class StationPropertyController extends BaseController {
         stationDebiTextField.clear();
 
         Station.getInstance().getList().remove("stationPropertice");
-
 
 
 
