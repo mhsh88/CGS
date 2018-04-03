@@ -2,15 +2,48 @@ package sample.controller.showResults.test;
 
 
 import javafx.scene.control.TableView;
+import org.apache.poi.hssf.usermodel.HSSFHeader;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.dhatim.fastexcel.Workbook;
 import org.dhatim.fastexcel.Worksheet;
 import sample.model.showResultEntity.Table;
 
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 public class ExcelTest {
+
+    public static void main(String args[]){
+        HSSFWorkbook workbook = new HSSFWorkbook();
+
+
+        HSSFSheet spreadsheet = workbook.createSheet("result");
+
+        spreadsheet.createFreezePane( 3,  3,  3,  3);
+
+        HSSFHeader header = spreadsheet.getHeader();
+        header.setLeft(HSSFHeader.font("Calibri", "regular") +
+                HSSFHeader.fontSize((short) 14) + "My " + HSSFHeader.startBold() + "Styled" +
+                HSSFHeader.endBold() + " Text with page number " + HSSFHeader.page());
+//        HeadersFooters headersFooters = new HeadersFooters();
+
+        FileOutputStream fileOut = null;
+        try {
+            fileOut = new FileOutputStream("C:\\Users\\Hossein\\Behin-Simulator\\reports.xls");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            workbook.write(fileOut);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fileOut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void excelTest(String file, TableView<Table> tableID, String sheetName){
         try (OutputStream os = new BufferedOutputStream(new FileOutputStream(file),2048)){

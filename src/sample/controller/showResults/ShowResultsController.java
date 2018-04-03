@@ -20,6 +20,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.apache.poi.hssf.usermodel.HSSFHeader;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -215,12 +217,15 @@ public class ShowResultsController implements Initializable {
         }
         if (chooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2).equals("xls")) {
 
-            ExcelTest et = new ExcelTest();
-            et.excelTest(file.toString(), tableID,"محاسبات بر اساس دمای وارد شده");
-            et.excelTest(file.toString(), hydrateTable,"محاسبات بر اساس دمای هیدرات به علاوه ۲ درجه");
+//            ExcelTest et = new ExcelTest();
+//            et.excelTest(file.toString(), tableID,"محاسبات بر اساس دمای وارد شده");
+//            et.excelTest(file.toString(), hydrateTable,"محاسبات بر اساس دمای هیدرات به علاوه ۲ درجه");
 
-            Workbook workbook = new HSSFWorkbook();
-            Sheet spreadsheet = workbook.createSheet("result");
+            HSSFWorkbook workbook = new HSSFWorkbook();
+
+
+            HSSFSheet spreadsheet = workbook.createSheet("result");
+
 
             Row row = spreadsheet.createRow(0);
 
@@ -251,6 +256,10 @@ public class ShowResultsController implements Initializable {
                 }
 
             }
+            HSSFHeader header = spreadsheet.getHeader();
+            header.setCenter(HSSFHeader.font("Calibri", "regular") +
+                    HSSFHeader.fontSize((short) 14) + "My " + HSSFHeader.startBold() + "Styled" +
+                    HSSFHeader.endBold() + " Text with page number " + HSSFHeader.page());
 
             FileOutputStream fileOut = new FileOutputStream(file.getParent()+"/"+file.getName().split("[.]")[0] + ".xls");
             workbook.write(fileOut);
