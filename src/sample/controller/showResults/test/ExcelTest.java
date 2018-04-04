@@ -25,11 +25,34 @@ public class ExcelTest {
         header.setLeft(HSSFHeader.font("Calibri", "regular") +
                 HSSFHeader.fontSize((short) 14) + "My " + HSSFHeader.startBold() + "Styled" +
                 HSSFHeader.endBold() + " Text with page number " + HSSFHeader.page());
+        spreadsheet.autoSizeColumn(2);
+        spreadsheet.setDisplayRowColHeadings(true);
+        spreadsheet.setDisplayGuts(true);
+
 //        HeadersFooters headersFooters = new HeadersFooters();
+//        XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(xlFileAddress));
+//        Workbook wb = WorkbookFactory.create(new File(xlFileAddress));
+//        Workbook wb = WorkbookFactory.create(new FileInputStream(xlFileAddress));
+
+        // merging cells
+//        Workbook wb = new HSSFWorkbook();
+//        Sheet sheet = wb.createSheet("new sheet");
+//
+//        Row row = sheet.createRow(1);
+//        Cell cell = row.createCell(1);
+//        cell.setCellValue("This is a test of merging");
+//
+//        sheet.addMergedRegion(new CellRangeAddress(
+//                1, //first row (0-based)
+//                1, //last row  (0-based)
+//                1, //first column (0-based)
+//                2  //last column  (0-based)
+//        ));
+
 
         FileOutputStream fileOut = null;
         try {
-            fileOut = new FileOutputStream("C:\\Users\\Hossein\\Behin-Simulator\\reports.xls");
+            fileOut = new FileOutputStream("/home/ics/Desktop/reports.xls");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,7 @@
 package sample.controller.showResults;
 
 import com.itextpdf.text.*;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -20,20 +21,20 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFHeader;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.util.IOUtils;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import sample.controller.showResults.test.ExcelTest;
 import sample.model.showResultEntity.Table;
 import sample.util.FileLocation;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -225,20 +226,36 @@ public class ShowResultsController implements Initializable {
 
 
             HSSFSheet spreadsheet = workbook.createSheet("result");
+            addImage(workbook, spreadsheet);
 
 
-            Row row = spreadsheet.createRow(0);
+//            Row row = spreadsheet.createRow(5);
+//
+//            for (int j = 0; j < tableID.getColumns().size(); j++) {
+//                row.createCell(j).setCellValue(tableID.getColumns().get(j).getText());
+//            }
+            Row row = spreadsheet.createRow(6);
+            row.createCell(0).setCellValue("محاسبات بر اساس اطلاعات وارد شده");
 
-            for (int j = 0; j < tableID.getColumns().size(); j++) {
-                row.createCell(j).setCellValue(tableID.getColumns().get(j).getText());
-            }
+            spreadsheet.addMergedRegion(new CellRangeAddress(
+                    6, //first row (0-based)
+                    6, //last row  (0-based)
+                    0, //first column (0-based)
+                    2  //last column  (0-based)
+            ));
+
 
 
             for (int i = 0; i < tableID.getItems().size(); i++) {
-                row = spreadsheet.createRow(i + 1);
+
+                row = spreadsheet.createRow(i + 7);
+
                 for (int j = 0; j < tableID.getColumns().size(); j++) {
+
                     if (tableID.getColumns().get(j).getCellData(i) != null) {
+
                         row.createCell(j).setCellValue(tableID.getColumns().get(j).getCellData(i).toString());
+
                     } else {
                         row.createCell(j).setCellValue("");
                     }
@@ -246,12 +263,34 @@ public class ShowResultsController implements Initializable {
             }
 
             for(int i = 0; i< hydrateTable.getItems().size(); i++){
-                row = spreadsheet.createRow(tableID.getItems().size() + i + 5);
+
+                row = spreadsheet.createRow(tableID.getItems().size() + i + 5 + 7);
+
                 for (int j = 0; j < hydrateTable.getColumns().size(); j++) {
+
                     if (hydrateTable.getColumns().get(j).getCellData(i) != null) {
+
                         row.createCell( j).setCellValue(hydrateTable.getColumns().get(j).getCellData(i).toString());
+
+                        if (i == 0 && j == 2){
+                            spreadsheet.addMergedRegion(new CellRangeAddress(
+                                    row.getRowNum(), //first row (0-based)
+                                    row.getRowNum(), //last row  (0-based)
+                                    0, //first column (0-based)
+                                    row.getLastCellNum() - 1  //last column  (0-based)
+                            ));
+//                            row.createCell(1);
+//
+//                            HSSFCell cell = (HSSFCell) row.getCell(1);
+//                            cell.setCellValue(hydrateTable.getColumns().get(j).getCellData(i).toString());
+                            row.createCell( 0).setCellValue(hydrateTable.getColumns().get(j).getCellData(i).toString());
+                        }
+
+
                     } else {
+
                         row.createCell( j).setCellValue("");
+
                     }
                 }
 
@@ -357,5 +396,104 @@ public class ShowResultsController implements Initializable {
 
     public void closeAction(ActionEvent actionEvent) {
         ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
+    }
+
+    public void addImage(Workbook wb, Sheet sheet){
+
+        try {
+
+//            Workbook wb = new XSSFWorkbook();
+//            Sheet sheet = wb.createSheet("My Sample Excel");
+            //FileInputStream obtains input bytes from the image file
+            InputStream inputStream = getClass().getResourceAsStream("/sample/view/base/logo.png");
+
+//                InputStream inputStream = new FileInputStream("/sample/view/base/logo.png");
+            //Get the contents of an InputStream as a byte[].
+            byte[] bytes = IOUtils.toByteArray(inputStream);
+            //Adds a picture to the workbook
+            int pictureIdx = wb.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
+            //close the input stream
+            inputStream.close();
+            //Returns an object that handles instantiating concrete classes
+            CreationHelper helper = wb.getCreationHelper();
+            //Creates the top-level drawing patriarch.
+            Drawing drawing = sheet.createDrawingPatriarch();
+
+            //Create an anchor that is attached to the worksheet
+            ClientAnchor anchor = helper.createClientAnchor();
+
+            //create an anchor with upper left cell _and_ bottom right cell
+            anchor.setCol1(0); //Column B
+            anchor.setRow1(0); //Row 3
+            anchor.setCol2(4); //Column C
+            anchor.setRow2(5); //Row 4
+
+            //Creates a picture
+            Picture pict = drawing.createPicture(anchor, pictureIdx);
+
+            //Reset the image to the original size
+            //pict.resize(); //don't do that. Let the anchor resize the image!
+
+            //Create the Cell B3
+//                Cell cell = sheet.createRow(2).createCell(1);
+
+            sheet.addMergedRegion(new CellRangeAddress(
+                    0, //first row (0-based)
+                    4, //last row  (0-based)
+                    0, //first column (0-based)
+                    3  //last column  (0-based)
+            ));
+
+            //set width to n character widths = count characters * 256
+            //int widthUnits = 20*256;
+            //sheet.setColumnWidth(1, widthUnits);
+
+            //set height to n points in twips = n * 20
+            //short heightUnits = 60*20;
+            //cell.getRow().setHeight(heightUnits);
+
+            Row row = sheet.createRow(0);
+            Cell cell = row.createCell(4);
+            cell.setCellValue("شرکت بهینه سازان صنعت تاسیسات");
+            CellStyle style = wb.createCellStyle();
+            style.setAlignment(CellStyle.ALIGN_CENTER);
+            style.setVerticalAlignment(CellStyle.ALIGN_CENTER);
+            org.apache.poi.ss.usermodel.Font font = wb.createFont();
+            font.setBoldweight(org.apache.poi.ss.usermodel.Font.BOLDWEIGHT_BOLD);
+            font.setFontHeightInPoints((short) 18);
+            style.setFont(font);
+            cell.setCellStyle(style);
+
+            sheet.addMergedRegion(new CellRangeAddress(
+                    0, //first row (0-based)
+                    1, //last row  (0-based)
+                    4, //first column (0-based)
+                    9  //last column  (0-based)
+            ));
+
+            Row row2  = sheet.createRow(2);
+            Cell cell2 = row2.createCell(4);
+            cell2.setCellValue("نرم‌افزار محاسبه مصرف ایستگاه‌های تقلیل فشار گاز");
+            font.setFontHeightInPoints((short) 14);
+            cell2.setCellStyle(style);
+
+           sheet.addMergedRegion(new CellRangeAddress(
+                    2, //first row (0-based)
+                    3, //last row  (0-based)
+                    4, //first column (0-based)
+                    9  //last column  (0-based)
+            ));
+
+
+
+
+
+
+
+            //Write the Excel file
+
+        } catch (IOException ioex) {
+            ioex.printStackTrace();
+        }
     }
 }
