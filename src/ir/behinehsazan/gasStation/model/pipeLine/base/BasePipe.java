@@ -4,10 +4,12 @@ import ir.behinehsazan.gasStation.model.base.GasConsumer;
 import ir.behinehsazan.gasStation.model.gas.Gas;
 import ir.behinehsazan.gasStation.model.mathCalculation.FindRoot;
 import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
+import javafx.scene.control.Alert;
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.interpolation.SplineInterpolator;
 import org.apache.commons.math3.analysis.interpolation.UnivariateInterpolator;
 import org.apache.commons.math3.analysis.solvers.BisectionSolver;
+import sample.controller.base.BaseController;
 
 public class BasePipe extends GasConsumer implements FindRoot {
     private double length;
@@ -227,7 +229,14 @@ public class BasePipe extends GasConsumer implements FindRoot {
             if(isInverse()){
 
             setTin((getTout() - getTenv()) / Math.exp(
-                    -Math.PI * getInterDiameter() * getLength() * h_Total / (mdot * g.getC_p() * 1000)) + getTenv());}
+                    -Math.PI * getInterDiameter() * getLength() * h_Total / (mdot * g.getC_p() * 1000)) + getTenv());
+            double tt = getTin();
+            if(Math.abs(tt)>273.15 + 70){
+                BaseController.showAlert("خطا","خطا در اطلاعات ورودی","دبی وارد شده برای ران‌ها یا ایستگاه کمتر از حد مجاز است.", Alert.AlertType.ERROR);
+                throw new IllegalArgumentException("دبی وارد شده کمتر از حد مجاز است. \n لطفا اطلاعات صحیح وارد نمایید.");
+            }
+
+            }
             else{
                 setTout((getTin() - getTenv()) * Math.exp(
                         -Math.PI * getInterDiameter() * getLength() * h_Total / (mdot * g.getC_p() * 1000)) + getTenv());

@@ -11,6 +11,8 @@ import sample.model.heaters.HeatersModel;
 import sample.model.pipeLine.PipeLine;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class StationLogic extends GasConsumer {
 
@@ -275,6 +277,8 @@ public class StationLogic extends GasConsumer {
             this.runs.getRuns().clear();
 
 
+
+            List<Double> tempList = new ArrayList<>();
             for(sample.model.run.Run r : runs.getRuns()) {
                 BaseRun run = new BaseRun();
                 run.setDebi(r.getDebi());
@@ -286,10 +290,13 @@ public class StationLogic extends GasConsumer {
                 run.setGas(getGas());
                 run.setInverse(true);
                 run.calculate();
-                run.setConsumption();
-
+                tempList.add(run.getTin());
                 this.runs.getRuns().add(run);
             }
+         for(BaseRun run : this.runs.getRuns()){
+                run.setTin(tempList.get(tempList.indexOf(Collections.min(tempList))));
+                run.setConsumption();
+         }
 
         }
         else{

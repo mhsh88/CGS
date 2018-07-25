@@ -9,7 +9,7 @@ public abstract class BaseController {
     private Stage stage;
 
     public abstract void setOnShow();
-    public void showAlert(String title, String info, String message,Alert.AlertType alertType) {
+    public static void showAlert(String title, String info, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(info);
