@@ -34,7 +34,7 @@ public class RunController extends BaseController{
     @FXML
     public void initialize() throws IOException {
         collectorComboBox.getItems().removeAll();
-        collectorComboBox.getItems().addAll( "2","4","6","8","10","12","16","20","24","30");
+        collectorComboBox.getItems().addAll( "2","3","4","6","8","10","12","16","20","24","30");
         collectorComboBox.getSelectionModel().select("8");
 
         runNumberInput.textProperty().addListener(new ChangeListener<String>() {
@@ -161,7 +161,7 @@ public class RunController extends BaseController{
             runContainer.add(new Label("سایز (اینچ) "), 1, 1);
             ComboBox comboBox = new ComboBox();
             comboBox.getItems().removeAll();
-            comboBox.getItems().addAll( "2","4","6","8","10","12","16","20","24","30");
+            comboBox.getItems().addAll( "2","3","4","6","8","10","12","16","20","24","30");
             comboBox.getSelectionModel().select("8");
             runContainer.add(comboBox, 0, 1);
 
@@ -267,7 +267,7 @@ public class RunController extends BaseController{
                 runContainer.add(new Label("سایز (اینچ) "), 1, 1);
                 ComboBox comboBox = new ComboBox();
                 comboBox.getItems().removeAll();
-                comboBox.getItems().addAll( "2","4","6","8","10","12","16","20","24","30");
+                comboBox.getItems().addAll( "2","3","4","6","8","10","12","16","20","24","30");
                 comboBox.getSelectionModel().select(run.get(i-1).getSize());
                 runContainer.add(comboBox, 0, 1);
 

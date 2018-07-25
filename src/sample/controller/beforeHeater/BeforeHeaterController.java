@@ -54,7 +54,7 @@ public class BeforeHeaterController extends BaseController{
 //        mmOrInchComboBox.getItems().addAll("1/8", "¼", "3/8", "½", "¾", "1", "1 ¼", "1 ½", "2", "2 ½", "3", "3 ½", "4", "5", "6", "8", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40"
 //                , "42", "44", "46", "48");
         mmOrInchComboBox.getItems().removeAll();
-        mmOrInchComboBox.getItems().addAll( "2","4","6","8","10","12","16","20","24","30");
+        mmOrInchComboBox.getItems().addAll( "2","3","4","6","8","10","12","16","20","24","30");
         mmOrInchComboBox.getSelectionModel().select("8");
 
         //        {"1/8","¼","3/8","½","¾","1","1 ¼","1 ½","2","2 ½","3","3 ½","4","5","6","8","10","12","14","16","18","20","22","24","26","28","30","32","34","36","38","40"
