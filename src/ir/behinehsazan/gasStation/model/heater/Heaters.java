@@ -34,19 +34,26 @@ public class Heaters extends GasConsumer{
         double heaterConsumption  = 0;
         double burnerConsumption = 0;
         if(heaters.size() > 0) {
-            heaterConsumption = getConsumption() / heaters.size();
+            heaterConsumption = super.getConsumption() / heaters.size();
         }
 
+        double heaterConsum = 0.0;
+        double burnerTempComsum = 0.0;
         for(int i = 0; i < heaters.size(); i++){
             if(heaters.get(i).getBurners().size() > 0 && heaterConsumption > 0) {
-                burnerConsumption = heaterConsumption / heaters.get(i).getBurners().size();
+                burnerConsumption = heaterConsumption / heaters.get(i).getBurners().size() / heaters.get(i).getEfficiency();
             }
-            heaters.get(i).setConsumption(heaterConsumption);
+
             for(int j = 0; j < heaters.get(i).getBurners().size(); j++){
                 heaters.get(i).getBurners().get(j).setConsumption(burnerConsumption);
-                double tem = heaters.get(i).getBurners().get(j).getConsumption();
+                burnerTempComsum = burnerTempComsum + heaters.get(i).getBurners().get(j).getConsumption();
+
             }
+
+//            heaters.get(i).setConsumption(burnerTempComsum);
+//            heaterConsum = heaterConsum + heaters.get(i).getConsumption();
         }
+        this.setConsumption(burnerTempComsum);
     }
     public double getConsumption(){
         double cons = 0;
@@ -54,10 +61,12 @@ public class Heaters extends GasConsumer{
             for(int j = 0; j < heaters.get(i).getBurners().size(); j++){
                 cons += heaters.get(i).getBurners().get(j).getConsumption();
             }
+            heaters.get(i).setConsumption(cons);
+            cons = 0;
         }
         if(cons == 0){
           cons = super.getConsumption();
         }
-        return cons;
+        return cons / getEfficiency();
     }
 }

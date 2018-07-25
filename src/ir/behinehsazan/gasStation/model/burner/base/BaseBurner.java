@@ -2,9 +2,11 @@ package ir.behinehsazan.gasStation.model.burner.base;
 
 import ir.behinehsazan.gasStation.model.base.EntityBase;
 import ir.behinehsazan.gasStation.model.gas.Gas;
+import javafx.scene.control.Alert;
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.interpolation.SplineInterpolator;
 import org.apache.commons.math3.analysis.interpolation.UnivariateInterpolator;
+import sample.controller.base.BaseController;
 
 import static ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation.dotProduct;
 import static ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation.matrixDevide;
@@ -167,6 +169,11 @@ public class BaseBurner extends EntityBase {
         if (eff_net>1) eff_net = 1.0;
         if (eff >1)
             eff = 1.0;
+
+        if(eff_net <= 0.0 || eff <= 0.0){
+            BaseController.showAlert("خطا","خطا در اطلاعات آنالیز مشعل","درصد اکسیژن موجود در دودکش بیشتر از حد مجاز است.", Alert.AlertType.ERROR);
+            throw new IllegalArgumentException("O2 percent is not the proper one");
+        }
 
         setEfficiency(eff);
 
