@@ -102,15 +102,11 @@ public class HeaterController extends BaseController{
 
             }
             if(heaterRandeman.getText().equals("")) {
-                if(!(burners.size() < 1)) {
-                    heaterModels.add(new HeaterModel(0.75, burners));
-                }
+                    heaterModels.add(new HeaterModel(0.85, burners));
 
             }
             else{
-                if(!(burners.size() < 1)){
                     heaterModels.add(new HeaterModel(Double.parseDouble(heaterRandeman.getText()) / 100, burners));
-                }
             }
 
 

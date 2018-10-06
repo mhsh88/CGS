@@ -1,6 +1,7 @@
 package ir.behinehsazan.gasStation.model.heater;
 
 import ir.behinehsazan.gasStation.model.base.GasConsumer;
+import ir.behinehsazan.gasStation.model.burner.Burner;
 
 import java.util.ArrayList;
 
@@ -37,36 +38,36 @@ public class Heaters extends GasConsumer{
             heaterConsumption = super.getConsumption() / heaters.size();
         }
 
-        double heaterConsum = 0.0;
-        double burnerTempComsum = 0.0;
-        for(int i = 0; i < heaters.size(); i++){
-            if(heaters.get(i).getBurners().size() > 0 && heaterConsumption > 0) {
-                burnerConsumption = heaterConsumption / heaters.get(i).getBurners().size() / heaters.get(i).getEfficiency();
+        Double heaterConsum = null;
+        Double burnerTempComsum = null;
+        for(Heater heater : heaters){
+            for(Burner burner : heater.getBurners()){
+                burnerConsumption = heaterConsumption / heater.getBurners().size() / heater.getEfficiency();
+                burner.setConsumption(burnerConsumption);
+                burnerTempComsum = burnerTempComsum!=null?burnerTempComsum + burner.getConsumption() : new Double(burner.getConsumption());
             }
+            heater.setConsumption(heaterConsumption);
+            heaterConsum = heaterConsum!=null? heaterConsum + heater.getConsumption(): new Double(heater.getConsumption());
 
-            for(int j = 0; j < heaters.get(i).getBurners().size(); j++){
-                heaters.get(i).getBurners().get(j).setConsumption(burnerConsumption);
-                burnerTempComsum = burnerTempComsum + heaters.get(i).getBurners().get(j).getConsumption();
-
-            }
-
-//            heaters.get(i).setConsumption(burnerTempComsum);
-//            heaterConsum = heaterConsum + heaters.get(i).getConsumption();
         }
-        this.setConsumption(burnerTempComsum);
+
+        this.setConsumption(burnerTempComsum!=null?burnerTempComsum:heaterConsum!=null?heaterConsum:super.getConsumption());
     }
-    public double getConsumption(){
-        double cons = 0;
-        for(int i = 0; i < heaters.size(); i++){
-            for(int j = 0; j < heaters.get(i).getBurners().size(); j++){
-                cons += heaters.get(i).getBurners().get(j).getConsumption();
-            }
-            heaters.get(i).setConsumption(cons);
-            cons = 0;
-        }
-        if(cons == 0){
-          cons = super.getConsumption();
-        }
-        return cons / getEfficiency();
-    }
+//    public double getConsumption(){
+//        double cons = 0;
+//        double totalcons = 0;
+//        for(Heater heater: heaters){
+//            for(Burner burner:heater.getBurners()){
+//                cons += burner.getConsumption();
+//            }
+//            heater.setConsumption(cons);
+//            totalcons += cons;
+//            cons = 0;
+//        }
+//        if(totalcons == 0){
+//         return super.getConsumption();
+//        }
+//        return totalcons / getEfficiency();
+
+//    }
 }
